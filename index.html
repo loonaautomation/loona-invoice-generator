@@ -658,6 +658,41 @@
       </details>
     </section>
 
+    <section class="content" aria-labelledby="hiw-h">
+      <h2 id="hiw-h">How it works</h2>
+      <p>Everything happens on this page, in your browser. As you type in the forms — your business details, your client&rsquo;s details, and the invoice items with quantities and unit prices — the generator rebuilds the invoice in the live preview on every keystroke. Each line amount is quantity &times; unit price, the net total is the sum of all lines, and VAT is calculated on that net amount: at the rate you select in standard mode, or 0% in the reverse-charge and small-business-exemption modes, where the legally required note is added to the invoice automatically. If your client is a business in another EU country, the tool even detects the cross-border sale and suggests the reverse charge for you. The issue date starts as today and the due date as 14 days later, and both can be changed. When you click Download, the PDF is generated locally in your browser as a print-ready A4 document — your data is never uploaded to a server, and nothing is kept when you close the tab.</p>
+      <h3>Worked example</h3>
+      <p>A Berlin web designer invoices a client in Munich for a website project. Both are in Germany, so domestic VAT applies at the standard rate of 19%. She enters three items:</p>
+      <table class="p-items">
+        <tr><th>Description</th><th class="r">Qty</th><th class="r">Unit price</th><th class="r">Amount</th></tr>
+        <tr><td>Website redesign — homepage and 4 subpages</td><td class="r">1</td><td class="r">€1,450.00</td><td class="r">€1,450.00</td></tr>
+        <tr><td>Copywriting (per page)</td><td class="r">5</td><td class="r">€90.00</td><td class="r">€450.00</td></tr>
+        <tr><td>Rush delivery fee</td><td class="r">1</td><td class="r">€100.00</td><td class="r">€100.00</td></tr>
+      </table>
+      <p>The generator adds the lines to a net total of €2,000.00, charges VAT on the whole net amount — €2,000.00 &times; 19% = €380.00 — and shows a total due of €2,000.00 + €380.00 = <strong>€2,380.00</strong>. Those are exactly the figures in the live preview and on the downloaded PDF.</p>
+      <h3>Frequently asked questions</h3>
+      <details>
+        <summary>How exactly are the totals calculated?</summary>
+        <p>Each line amount is quantity &times; unit price. The net total is the sum of all line amounts, VAT is charged on the whole net amount (net &times; rate &divide; 100), and the total due is net + VAT. Amounts are shown rounded to two decimal places in your chosen currency. In reverse-charge and exemption modes the rate is 0%, so the net total and the total due are the same and the required legal note is printed on the invoice instead.</p>
+      </details>
+      <details>
+        <summary>Can I give my client a discount?</summary>
+        <p>There is no separate discount field. The simplest way is to lower the unit price of the item itself. Alternatively, add the discount as its own line — for example the description &ldquo;Project discount&rdquo;, quantity 1 and a negative unit price — and the totals will subtract it before VAT is calculated.</p>
+      </details>
+      <details>
+        <summary>Can I put my own logo on the invoice?</summary>
+        <p>Not at the moment — there is no logo upload. The PDF uses a fixed, clean A4 layout with your business name, address, VAT ID and IBAN shown at the top, which is what clients and accountants need in order to identify and pay the invoice.</p>
+      </details>
+      <details>
+        <summary>Can I invoice a client outside the European Union?</summary>
+        <p>Yes. Choose the client&rsquo;s country (or &ldquo;Other&rdquo;) and any of the 16 currencies, including USD, GBP and CHF. For services supplied from the EU to a recipient outside the EU, VAT is generally not charged in your own country; if you set the rate to 0%, the invoice prints the note &ldquo;Supply of services to a recipient outside the EU — VAT not applicable in the supplier&rsquo;s country.&rdquo; Check your local rules for goods and for your specific service.</p>
+      </details>
+      <details>
+        <summary>I made a mistake on an invoice I already downloaded — what now?</summary>
+        <p>The downloaded PDF itself cannot be edited, and nothing was submitted anywhere, so simply correct the details in the form and download a fresh PDF. If you have already sent the faulty invoice to your client, most accountants recommend issuing a corrected invoice or a credit note under a new invoice number instead of silently replacing the file — ask your accountant which applies in your country.</p>
+      </details>
+    </section>
+
 <div id="loona-embed" style="max-width:780px;margin:30px auto;padding:24px;background:#fdfaf1;border:1px solid #d9c98a;border-radius:14px;text-align:left">
 <h2 style="margin:0 0 10px;color:#062e2a;font-size:1.35rem;line-height:1.3">Embed this tool on your website — free</h2>
 <p style="margin:0 0 12px;line-height:1.6">Add this tool to your own website or blog — it is completely free, needs no sign-up, and always shows the latest version. Copy the code below and paste it into your page where you want the tool to appear. Keeping the small &ldquo;Powered by Loona Automation&rdquo; credit line under the embed helps keep this tool free &mdash; but you are free to style or remove it; the tool works either way.</p>
