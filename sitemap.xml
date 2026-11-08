@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://loonaautomation.github.io/loona-invoice-generator/</loc><lastmod>2026-11-01</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/receipt-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/quote-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/purchase-order-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/credit-note-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/delivery-note-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/packing-slip-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/pay-stub-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/rent-receipt-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/proforma-invoice-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/debit-note-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/sales-order-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/statement-of-account-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/work-order-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/service-agreement-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/business-letter-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/envelope-label-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/expense-report-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/bill-of-lading-generator/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/about/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/contact/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/privacy/</loc><lastmod>2026-11-08</lastmod></url>
+<url><loc>https://loonaautomation.github.io/loona-invoice-generator/terms/</loc><lastmod>2026-11-08</lastmod></url>
 </urlset>
