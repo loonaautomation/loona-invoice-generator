@@ -584,6 +584,8 @@
       <h2 id="docs-h">More free business document generators</h2>
       <p>The Invoice Generator above is the flagship tool. Loona now also offers a complete set of free business document generators — each one runs in your browser, needs no sign-up, and prints a clean A4 PDF:</p>
       <div class="steps" style="grid-template-columns:repeat(auto-fill,minmax(230px,1fr))">
+        <div class="step"><h3><a href="invoice-by-country.html">Invoice Guides by Country &amp; Industry</a></h3><p>Invoice, payslip and receipt guides for 20 countries, 15 industries and 10 payslip systems — with worked examples and the real tax rates.</p></div>
+        
         <div class="step"><h3><a href="receipt-generator/">Receipt Generator</a></h3><p>Payment receipts with amount in words, payment method and signature line.</p></div>
         <div class="step"><h3><a href="quote-generator/">Quote / Estimate Generator</a></h3><p>Professional quotes with items, tax, validity date and terms.</p></div>
         <div class="step"><h3><a href="purchase-order-generator/">Purchase Order Generator</a></h3><p>Numbered POs with buyer, supplier, ship-to address and authorisation.</p></div>
@@ -1009,6 +1011,34 @@
       });
       itemsBox.addEventListener("input", render); // rows added later still update the preview
       render();
+
+      /* =============== URL PARAMS (?tax=&currency=) =============== */
+      // Deep links from the country guides pre-fill the VAT rate and currency.
+      (function(){
+        var q = new URLSearchParams(location.search);
+        var t = parseFloat(q.get("tax"));
+        var cur = (q.get("currency") || "").toUpperCase();
+        var sel = $("currency");
+        // Only currencies the tool knows (the select list) plus AED/SAR/PKR,
+        // which the country guides link to but the select does not list.
+        var curOK = /^[A-Z]{3}$/.test(cur) &&
+          (sel.querySelector('option[value="' + cur + '"]') ||
+           ["AED", "SAR", "PKR"].indexOf(cur) >= 0);
+        if (!isNaN(t) && t >= 0 && t <= 40){
+          setVatMode("standard");
+          userTouchedVat = true;
+          $("vatCustom").value = String(t);
+          if (RATES.indexOf(t) >= 0) rateSel.value = String(t);
+        }
+        if (curOK){
+          if (!sel.querySelector('option[value="' + cur + '"]')){
+            var o = document.createElement("option");
+            o.value = cur; o.textContent = cur; sel.appendChild(o);
+          }
+          sel.value = cur;
+        }
+        if ((!isNaN(t) && t >= 0 && t <= 40) || curOK) render();
+      })();
 
       /* =============== SAMPLE / CLEAR =============== */
       $("sampleBtn").addEventListener("click", function(){
