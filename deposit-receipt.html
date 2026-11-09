@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deposit Receipt — When to Use It &amp; What It Must Show | Loona</title><meta name="description" content="Deposit Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.">
+<link rel="canonical" href="https://loonaautomation.github.io/loona-invoice-generator/deposit-receipt.html"><meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="Deposit Receipt — When to Use It &amp; What It Must Show | Loona"><meta property="og:description" content="Deposit Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words."><meta property="og:image" content="https://loonaautomation.github.io/loona-invoice-generator/og-image.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal-950:#062e2a;--teal-800:#0a4a42;--teal-700:#0d5c4f;--gold:#d4af37;--gold-light:#ffd95e;--cream:#f3e9c8;--ink:#1c2422;--bg:#f7f5ee;--surface:#fffdf6;--muted:#55655f;--line:#ddd3b8;--field:#fff;--field-line:#cfc7a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:16.5px;line-height:1.55}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;line-height:1.2;margin:0}a{color:var(--teal-700)}
+header.site{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.site-inner{max-width:1240px;margin:0 auto;padding:14px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--cream)}.brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold)}
+.bname{font-family:Sora;font-weight:700;font-size:19px;color:#fff}.bsub{font-size:12.5px}
+nav.mainnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}nav.mainnav a{color:var(--cream);text-decoration:none;font-weight:600;font-size:14.5px;padding:7px 12px;border-radius:999px;border:1px solid rgba(243,233,200,.35)}
+.hero{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:#fff}.hero-inner{max-width:1240px;margin:0 auto;padding:30px 20px 26px}.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;max-width:26ch}.hero h1 em{font-style:normal;color:var(--gold-light)}.hero p{max-width:72ch;color:var(--cream)}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px}.tool-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}@media(max-width:980px){.tool-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(6,46,42,.1);padding:20px}.card+.card{margin-top:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:13.5px;font-weight:700}
+input,select,textarea{font:inherit;font-size:15.5px;color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:9px;padding:9px 11px;width:100%}
+legend{font-family:Sora;font-weight:700;font-size:17px;margin-bottom:10px}fieldset{border:0;padding:0;margin:0}
+.item-row{display:grid;grid-template-columns:1fr 70px 105px 34px;gap:8px;margin-bottom:8px}.item-row.no-price{grid-template-columns:1fr 90px 34px}
+.icon-btn{border:1px solid var(--field-line);background:#fff;color:#b3402f;border-radius:9px;height:38px;cursor:pointer}
+.add-btn{border:1.5px dashed var(--teal-700);color:var(--teal-700);background:transparent;font:inherit;font-weight:700;border-radius:9px;padding:9px;width:100%;cursor:pointer}
+.btn{font:inherit;font-weight:700;font-size:16px;cursor:pointer;border-radius:11px;padding:13px 22px;border:0}.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#2a2103}.btn-ghost{background:transparent;color:var(--teal-700);border:1.5px solid var(--teal-700)}
+.paper{background:#fff;color:#1c2422;border-radius:6px;box-shadow:0 14px 40px rgba(6,46,42,.22);padding:38px 40px;font-size:13.5px;line-height:1.5}
+.p-band{height:7px;background:linear-gradient(90deg,var(--teal-950),var(--teal-700),var(--gold));margin:-38px -40px 22px}
+.p-title{font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#0a3d36;text-align:right}.p-bizname{font-family:Georgia,serif;font-weight:700;font-size:18px;color:#0a3d36}
+.mut{color:#5c6663;font-size:12.5px;white-space:pre-line}.lab{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#0d5c4f}
+table.p-items{width:100%;border-collapse:collapse;margin-top:14px}table.p-items th{text-align:left;font-size:11px;text-transform:uppercase;color:#fff;background:#0a4a42;padding:8px 10px}table.p-items th.r,table.p-items td.r{text-align:right}table.p-items td{padding:8px 10px;border-bottom:1px solid #e7e2cf}
+.totals{margin-left:auto;width:min(290px,100%);margin-top:14px}.totals .row{display:flex;justify-content:space-between;padding:4px 2px}.totals .grand{border-top:2.5px solid var(--gold);padding-top:9px;font-weight:700;font-size:17px;color:#0a3d36}
+.sig{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.sig div{border-top:1px solid #999;padding-top:6px;font-size:12.5px;color:#5c6663}
+section.content{max-width:1240px;margin:0 auto;padding:14px 20px}section.content h2{font-size:clamp(22px,3vw,28px);color:var(--teal-950);margin:26px 0 10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:820px){.steps{grid-template-columns:1fr}}.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 17px;margin-bottom:10px;max-width:900px}.faq summary{font-weight:600;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink)}.tool-card h3{margin-bottom:6px;color:var(--teal-950)}
+footer.site{margin-top:34px;background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.foot-inner{max-width:1240px;margin:0 auto;padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap}.foot-links{margin-left:auto;display:flex;flex-direction:column;gap:7px}.foot-links a{color:var(--gold-light);text-decoration:none;font-weight:600}
+@media print{header.site,.hero,.form-col,section.content,footer.site,.no-print{display:none!important}.wrap{padding:0}.tool-grid{display:block}.paper{box-shadow:none}@page{size:A4;margin:12mm}}
+</style>
+<style>
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--teal-800);color:#fff}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.callout{background:#fdf6dd;border:1px solid #eadfae;border-radius:10px;padding:12px 14px;margin:14px 0}
+.guide h2{margin-top:30px}
+.guide ul{margin:6px 0 6px 20px}
+.guide li{margin-bottom:5px}
+.cta{margin:18px 0}
+.src{font-size:13.5px;color:var(--muted)}
+.calc label{display:block;font-weight:700;font-size:13.5px;margin:10px 0 4px}
+.calc input,.calc select{width:100%;max-width:340px}
+.calc .out{font-size:17px;font-weight:700;margin-top:12px}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L43M13ZYT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5L43M13ZYT');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z599jkwoy9");</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Deposit Receipt \u2014 When to Use It & What It Must Show | Loona", "applicationCategory": "BusinessApplication", "operatingSystem": "Any (web browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "Loona Automation"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a deposit refundable?", "acceptedAnswer": {"@type": "Answer", "text": "That depends on your terms and your country\u2019s consumer law. State the position on the receipt itself \u2014 \u201cnon-refundable\u201d or \u201crefundable until 30 days before the date\u201d \u2014 so there is no argument later."}}, {"@type": "Question", "name": "What is the difference between a deposit receipt and an invoice?", "acceptedAnswer": {"@type": "Answer", "text": "A deposit receipt proves that part-payment has been received. An invoice asks for payment. When the work is done, invoice the balance and show the deposit already paid, so the customer is not charged twice."}}, {"@type": "Question", "name": "How much deposit should I ask for?", "acceptedAnswer": {"@type": "Answer", "text": "50% is the usual figure for bookings and custom work. For larger jobs, take staged deposits tied to milestones instead of one large deposit."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Loona Automation", "item": "https://loonaautomation.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Invoice & Business Document Generators", "item": "https://loonaautomation.github.io/loona-invoice-generator/"}, {"@type": "ListItem", "position": 3, "name": "<em>Deposit Receipt</em>", "item": "https://loonaautomation.github.io/loona-invoice-generator/deposit-receipt.html"}]}</script>
+</head><body>
+<header class="site"><div class="site-inner"><a class="brand" href="./"><img src="./icon-192.png" alt="Loona Automation logo" width="46" height="46"><span><span class="bname">Loona Automation</span><br><span class="bsub">by Aurang Zeb Loona</span></span></a><nav class="mainnav"><a href="./">Invoice Generator</a><a href="./#documents">All Document Tools</a><a href="#faq">FAQ</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><h1><em>Deposit Receipt</em></h1><p>Use a deposit receipt when a customer pays part of the price in advance — to book a wedding photographer, reserve a venue, or start a building job. It proves the deposit was received and states what it is for.</p></div></div>
+<section class="content guide">
+<h2>What it must show</h2>
+<ul><li>The business name and address, and the customer’s name</li><li>The date and a receipt number</li><li>The total price of the job and the deposit paid</li><li>The balance still due and when it is due</li><li>Whether the deposit is refundable, and on what terms</li></ul>
+<h2>Worked example</h2>
+<p>A wedding photographer charges 2,000.00 in total. The couple pays a 50% deposit of 1,000.00 at booking. The receipt shows the total (2,000.00), the deposit (1,000.00) and the balance still due (1,000.00).</p>
+<div class="card calc"><h3 style="margin-top:0">Try it: make this receipt</h3>
+<label for="rFrom">Received from</label>
+<input type="text" id="rFrom" value="Sample Customer">
+<label for="rAmount">Amount received</label>
+<input type="number" id="rAmount" min="0" step="any" value="1000.00">
+<label for="rFor">Payment for</label>
+<input type="text" id="rFor" value="As described above">
+<label for="rMethod">Payment method</label>
+<input type="text" id="rMethod" value="Bank transfer">
+<p class="out">Receipt preview</p>
+<div class="paper" style="padding:20px 22px"><div class="p-band" style="margin:-20px -22px 14px"></div>
+<p>Received from <b id="pFrom">Sample Customer</b> the sum of <b><span id="pAmount">1,000.00</span></b></p>
+<p>(<span id="pWords">One Thousand</span> only)</p>
+<p>For: <span id="pFor">As described above</span></p>
+<p>Payment method: <span id="pMethod">Bank transfer</span></p></div>
+<p class="src">Type in the fields above and the preview updates. Print the page or use the full receipt generator for a clean A4 PDF.</p></div>
+<p class="cta"><a class="btn btn-gold" href="receipt-generator/" style="text-decoration:none">Make a full receipt — free receipt generator</a></p>
+
+<h2>More free tools and guides</h2><div class="cards"><a class="tool-card" href="receipt-generator/"><h3>Receipt Generator</h3><p>Payment receipts with amount in words and signature line.</p></a><a class="tool-card" href="invoice-by-country.html"><h3>Invoice Guides by Country</h3><p>All 20 country guides, 15 industries and 10 payslip guides.</p></a><a class="tool-card" href="./"><h3>Free Invoice Generator</h3><p>The flagship Loona invoice tool with EU VAT and reverse charge.</p></a></div>
+<h2>Frequently asked questions</h2>
+<div class="faq" id="faq"><details><summary>Is a deposit refundable?</summary><p>That depends on your terms and your country’s consumer law. State the position on the receipt itself — “non-refundable” or “refundable until 30 days before the date” — so there is no argument later.</p></details><details><summary>What is the difference between a deposit receipt and an invoice?</summary><p>A deposit receipt proves that part-payment has been received. An invoice asks for payment. When the work is done, invoice the balance and show the deposit already paid, so the customer is not charged twice.</p></details><details><summary>How much deposit should I ask for?</summary><p>50% is the usual figure for bookings and custom work. For larger jobs, take staged deposits tied to milestones instead of one large deposit.</p></details></div>
+</section>
+<footer class="site"><div class="foot-inner"><div><div style="font-weight:700;color:#fff;font-size:17px">Loona Automation</div><p>Free business document tools by Aurang Zeb Loona. No sign-up, no watermark — your data stays on your device.</p></div><div class="foot-links"><a href="./">Invoice &amp; Business Documents Hub</a><a href="./about/">About</a><a href="./contact/">Contact</a><a href="./privacy/">Privacy Policy</a><a href="./terms/">Terms of Use</a><a href="mailto:loonaautomation@gmail.com">loonaautomation@gmail.com</a></div></div></footer>
+<script>
+var ONES=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
+var TENS=["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
+function threeWords(n){var s="";if(n>=100){s+=ONES[Math.floor(n/100)]+" Hundred";n%=100;if(n)s+=" ";}if(n>=20){s+=TENS[Math.floor(n/10)];n%=10;if(n)s+=" "+ONES[n];}else if(n>0){s+=ONES[n];}return s;}
+function amountToWords(num){num=Number(num)||0;if(num===0)return "Zero";var neg=num<0;num=Math.abs(num);var intPart=Math.floor(num);var cents=Math.round((num-intPart)*100);var scales=[[1000000000,"Billion"],[1000000,"Million"],[1000,"Thousand"]];var parts=[];var rem=intPart;scales.forEach(function(sc){if(rem>=sc[0]){var q=Math.floor(rem/sc[0]);parts.push(threeWords(q)+" "+sc[1]);rem%=sc[0];}});if(rem>0||parts.length===0)parts.push(threeWords(rem));var w=parts.join(" ");if(cents>0)w+=" and "+threeWords(cents)+" Cents";return (neg?"Minus ":"")+w;}
+
+function fmt2(n){return (Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function upd(){var a=document.getElementById('rAmount').value;document.getElementById('pFrom').textContent=document.getElementById('rFrom').value||'—';document.getElementById('pAmount').textContent=fmt2(a);document.getElementById('pWords').textContent=amountToWords(a);document.getElementById('pFor').textContent=document.getElementById('rFor').value||'—';document.getElementById('pMethod').textContent=document.getElementById('rMethod').value||'—';}
+['rFrom','rAmount','rFor','rMethod'].forEach(function(id){document.getElementById(id).addEventListener('input',upd);});upd();
+</script></body></html>
