@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bulletin de paie en Australie — Exemple chiffré &amp; calculateur | Loona</title><meta name="description" content="Que montre un bulletin de paie en Australie ? Un bulletin de paie détaillé à A$90,000 par an, du brut au net, avec un calculateur gratuit.">
+<link rel="canonical" href="https://loonaautomation.github.io/loona-invoice-generator/fr/payslip-australia.html"><link rel="alternate" hreflang="en" href="https://loonaautomation.github.io/loona-invoice-generator/payslip-australia.html"><link rel="alternate" hreflang="es" href="https://loonaautomation.github.io/loona-invoice-generator/es/payslip-australia.html"><link rel="alternate" hreflang="de" href="https://loonaautomation.github.io/loona-invoice-generator/de/payslip-australia.html"><link rel="alternate" hreflang="fr" href="https://loonaautomation.github.io/loona-invoice-generator/fr/payslip-australia.html"><link rel="alternate" hreflang="pt" href="https://loonaautomation.github.io/loona-invoice-generator/pt/payslip-australia.html"><link rel="alternate" hreflang="it" href="https://loonaautomation.github.io/loona-invoice-generator/it/payslip-australia.html"><link rel="alternate" hreflang="x-default" href="https://loonaautomation.github.io/loona-invoice-generator/payslip-australia.html"><meta property="og:locale" content="fr_FR"><meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="Bulletin de paie en Australie — Exemple chiffré &amp; calculateur | Loona"><meta property="og:description" content="Que montre un bulletin de paie en Australie ? Un bulletin de paie détaillé à A$90,000 par an, du brut au net, avec un calculateur gratuit."><meta property="og:image" content="https://loonaautomation.github.io/loona-invoice-generator/og-image.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal-950:#062e2a;--teal-800:#0a4a42;--teal-700:#0d5c4f;--gold:#d4af37;--gold-light:#ffd95e;--cream:#f3e9c8;--ink:#1c2422;--bg:#f7f5ee;--surface:#fffdf6;--muted:#55655f;--line:#ddd3b8;--field:#fff;--field-line:#cfc7a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:16.5px;line-height:1.55}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;line-height:1.2;margin:0}a{color:var(--teal-700)}
+header.site{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.site-inner{max-width:1240px;margin:0 auto;padding:14px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--cream)}.brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold)}
+.bname{font-family:Sora;font-weight:700;font-size:19px;color:#fff}.bsub{font-size:12.5px}
+nav.mainnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}nav.mainnav a{color:var(--cream);text-decoration:none;font-weight:600;font-size:14.5px;padding:7px 12px;border-radius:999px;border:1px solid rgba(243,233,200,.35)}
+.hero{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:#fff}.hero-inner{max-width:1240px;margin:0 auto;padding:30px 20px 26px}.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;max-width:26ch}.hero h1 em{font-style:normal;color:var(--gold-light)}.hero p{max-width:72ch;color:var(--cream)}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px}.tool-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}@media(max-width:980px){.tool-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(6,46,42,.1);padding:20px}.card+.card{margin-top:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:13.5px;font-weight:700}
+input,select,textarea{font:inherit;font-size:15.5px;color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:9px;padding:9px 11px;width:100%}
+legend{font-family:Sora;font-weight:700;font-size:17px;margin-bottom:10px}fieldset{border:0;padding:0;margin:0}
+.item-row{display:grid;grid-template-columns:1fr 70px 105px 34px;gap:8px;margin-bottom:8px}.item-row.no-price{grid-template-columns:1fr 90px 34px}
+.icon-btn{border:1px solid var(--field-line);background:#fff;color:#b3402f;border-radius:9px;height:38px;cursor:pointer}
+.add-btn{border:1.5px dashed var(--teal-700);color:var(--teal-700);background:transparent;font:inherit;font-weight:700;border-radius:9px;padding:9px;width:100%;cursor:pointer}
+.btn{font:inherit;font-weight:700;font-size:16px;cursor:pointer;border-radius:11px;padding:13px 22px;border:0}.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#2a2103}.btn-ghost{background:transparent;color:var(--teal-700);border:1.5px solid var(--teal-700)}
+.paper{background:#fff;color:#1c2422;border-radius:6px;box-shadow:0 14px 40px rgba(6,46,42,.22);padding:38px 40px;font-size:13.5px;line-height:1.5}
+.p-band{height:7px;background:linear-gradient(90deg,var(--teal-950),var(--teal-700),var(--gold));margin:-38px -40px 22px}
+.p-title{font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#0a3d36;text-align:right}.p-bizname{font-family:Georgia,serif;font-weight:700;font-size:18px;color:#0a3d36}
+.mut{color:#5c6663;font-size:12.5px;white-space:pre-line}.lab{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#0d5c4f}
+table.p-items{width:100%;border-collapse:collapse;margin-top:14px}table.p-items th{text-align:left;font-size:11px;text-transform:uppercase;color:#fff;background:#0a4a42;padding:8px 10px}table.p-items th.r,table.p-items td.r{text-align:right}table.p-items td{padding:8px 10px;border-bottom:1px solid #e7e2cf}
+.totals{margin-left:auto;width:min(290px,100%);margin-top:14px}.totals .row{display:flex;justify-content:space-between;padding:4px 2px}.totals .grand{border-top:2.5px solid var(--gold);padding-top:9px;font-weight:700;font-size:17px;color:#0a3d36}
+.sig{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.sig div{border-top:1px solid #999;padding-top:6px;font-size:12.5px;color:#5c6663}
+section.content{max-width:1240px;margin:0 auto;padding:14px 20px}section.content h2{font-size:clamp(22px,3vw,28px);color:var(--teal-950);margin:26px 0 10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:820px){.steps{grid-template-columns:1fr}}.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 17px;margin-bottom:10px;max-width:900px}.faq summary{font-weight:600;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink)}.tool-card h3{margin-bottom:6px;color:var(--teal-950)}
+footer.site{margin-top:34px;background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.foot-inner{max-width:1240px;margin:0 auto;padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap}.foot-links{margin-left:auto;display:flex;flex-direction:column;gap:7px}.foot-links a{color:var(--gold-light);text-decoration:none;font-weight:600}
+@media print{header.site,.hero,.form-col,section.content,footer.site,.no-print{display:none!important}.wrap{padding:0}.tool-grid{display:block}.paper{box-shadow:none}@page{size:A4;margin:12mm}}
+</style>
+<style>
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--teal-800);color:#fff}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.callout{background:#fdf6dd;border:1px solid #eadfae;border-radius:10px;padding:12px 14px;margin:14px 0}
+.guide h2{margin-top:30px}
+.guide ul{margin:6px 0 6px 20px}
+.guide li{margin-bottom:5px}
+.cta{margin:18px 0}
+.src{font-size:13.5px;color:var(--muted)}
+.calc label{display:block;font-weight:700;font-size:13.5px;margin:10px 0 4px}
+.calc input,.calc select{width:100%;max-width:340px}
+.calc .out{font-size:17px;font-weight:700;margin-top:12px}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L43M13ZYT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5L43M13ZYT');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z599jkwoy9");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Bulletin de paie en Australie — Exemple chiffré et calculateur | Loona","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Loona Automation"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Que contient un bulletin de paie australien ?","acceptedAnswer":{"@type":"Answer","text":"L’ABN de l’employeur, le nom du salarié, la période de paie et les heures, le salaire brut, l’impôt PAYG prélevé, tous montants de sacrifice salarial, la superannuation payée par l’employeur, et le salaire net."}},{"@type":"Question","name":"Qu’est-ce que la cotisation Medicare ?","acceptedAnswer":{"@type":"Answer","text":"Une cotisation de 2% sur le revenu imposable qui finance Medicare. Elle s’ajoute à l’impôt sur le revenu et n’est PAS incluse dans les chiffres de cette page — ajoutez 2% du revenu imposable pour un tableau complet."}},{"@type":"Question","name":"Comment faire un bulletin de paie pour un salarié australien ?","acceptedAnswer":{"@type":"Answer","text":"Utilisez le générateur de bulletins de paie gratuit Loona ci-dessous pour la présentation, et le calculateur de cette page pour le chiffre de l’impôt sur le revenu. Ajoutez la cotisation Medicare et la superannuation de l’employeur selon les taux propres du salarié."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Loona Automation","item":"https://loonaautomation.github.io/"},{"@type":"ListItem","position":2,"name":"Générateurs de factures et de documents commerciaux","item":"https://loonaautomation.github.io/loona-invoice-generator/fr/"},{"@type":"ListItem","position":3,"name":"Bulletin de paie en <em>Australie</em>","item":"https://loonaautomation.github.io/loona-invoice-generator/fr/payslip-australia.html"}]}</script>
+<link rel="manifest" href="../payslip-australia.webmanifest">
+<meta name="theme-color" content="#062e2a">
+</head><body>
+<header class="site"><div class="site-inner"><a class="brand" href="./"><img src="../icon-192.png" alt="Logo Loona Automation" width="46" height="46"><span><span class="bname">Loona Automation</span><br><span class="bsub">par Aurang Zeb Loona</span></span></a><nav class="mainnav"><a href="./">Générateur de factures</a><a href="./#documents">Tous les outils documentaires</a><a href="#faq">FAQ</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><h1>Bulletin de paie en <em>Australie</em></h1><p>Un salaire annuel de A$90,000 en Australie donne un net de <strong>A$72,480</strong> par an après impôt et les cotisations que ce calculateur modélise. Le bulletin de paie détaillé ci-dessous montre chaque ligne — et le calculateur calcule n’importe quel salaire.</p></div></div>
+<section class="content guide">
+<style>.calc{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--gold);border-radius:12px;padding:20px}.result{margin-top:18px;background:#eef6f2;border:1px solid #cfe3da;border-radius:10px;padding:16px;display:none}.result .big{font-size:1.6rem;font-weight:800;color:var(--teal-800)}.calc input{width:100%;max-width:340px;padding:11px 12px;border:1px solid var(--field-line);border-radius:8px;font-size:1rem}</style>
+<p class="lead"><strong>En résumé :</strong> à A$90,000 par an, l’impôt sur le revenu est de A$17,520, les cotisations sociales modélisées sont de A$0, et le salaire net est de A$72,480 par an (A$6,040 par mois).</p>
+<div class="calc"><div class="calc">
+<label for="gross">Australie — salaire annuel brut (AUD)</label>
+<input type="number" id="gross" min="0" step="any" value="90000" inputmode="decimal">
+<p style="font-size:.85rem;color:var(--mut);margin-top:6px">Taux de l’exercice financier 2026-27 (1 July 2026 – 30 June 2027). La cotisation Medicare de 2% est EXCLUE de ces taux. La superannuation (payée par l’employeur, 12% à partir du 1 July 2025) n’est pas une retenue sur le salaire et ne figure pas dans ces chiffres.</p>
+<div class="result" id="result">
+<div>Salaire net par mois</div>
+<div class="big" id="total">—</div>
+<table>
+<tr><td>Salaire annuel brut</td><td id="rGross">—</td></tr>
+<tr><td>Impôt sur le revenu</td><td id="rTax">—</td></tr>
+<tr><td>Cotisations sociales</td><td id="rSocial">—</td></tr>
+<tr><td>Total des retenues</td><td id="rTotal">—</td></tr>
+<tr><td>Taux de retenue effectif</td><td id="rEff">—</td></tr>
+<tr><td>Net par an</td><td id="rYear">—</td></tr>
+<tr><td>Net par mois (÷ 12)</td><td id="rMonth">—</td></tr>
+<tr><td>Net par semaine (÷ 52)</td><td id="rWeek">—</td></tr>
+</table>
+<p id="rNote" style="margin-top:8px;font-size:.88rem;color:var(--mut)"></p>
+</div>
+</div>
+
+</div>
+<h2>Bulletin de paie détaillé — A$90,000 par an</h2>
+<table class="tbl"><tr><th>Ligne</th><th class="r">Montant</th></tr>
+<tr><td>Salaire annuel brut</td><td class="r">A$90,000</td></tr>
+<tr><td>Impôt sur le revenu</td><td class="r">A$17,520</td></tr>
+<tr><td>Cotisations sociales (modélisées)</td><td class="r">A$0</td></tr>
+<tr><td>Total des retenues</td><td class="r">A$17,520</td></tr>
+<tr><td>Taux de retenue effectif</td><td class="r">19.47%</td></tr>
+<tr><td><strong>Salaire net par an</strong></td><td class="r"><strong>A$72,480</strong></td></tr>
+<tr><td>Salaire net par mois (÷ 12)</td><td class="r">A$6,040</td></tr>
+<tr><td>Salaire net par semaine (÷ 52)</td><td class="r">A$1,394</td></tr></table>
+<div class="callout"><strong>Ce qui ne figure pas dans ces chiffres :</strong> Taux de l’exercice financier 2026-27 (1 July 2026 – 30 June 2027). La cotisation Medicare de 2% est EXCLUE de ces taux. La superannuation (payée par l’employeur, 12% à partir du 1 July 2025) n’est pas une retenue sur le salaire et ne figure pas dans ces chiffres.</div>
+<h2>Ce qu’un bulletin de paie en Australie indique généralement</h2>
+<ul><li>Le nom du salarié et la période de paie</li><li>Les heures ordinaires travaillées et le tarif horaire ou le salaire</li><li>Le salaire brut, plus toutes les heures supplémentaires, indemnités ou primes</li><li>Retenues : impôt prélevé PAYG, et tous montants de sacrifice salarial</li><li>La superannuation payée par l’employeur, indiquée pour information</li><li>Le salaire net, et les totaux depuis le début de l’année</li></ul>
+<p class="cta"><a class="btn btn-gold" href="pay-stub-generator/" style="text-decoration:none">Faire un bulletin de paie — générateur de bulletins de paie gratuit</a></p>
+<p class="src">Source : Résidents ; la cotisation Medicare de 2% est EXCLUE de ces taux. 2024 et 2025 identiques (réductions de l’étape 3 à partir du 1 Jul 2024) ; taux le plus bas de 2026 réduit de 16% à 15% à partir du 1 Jul 2026. Source : https://cleartax.com.au/tax/personal-tax/tax-rates-for-australian-residents/. Chiffres vérifiés le 9 November 2026. Cette page est une information générale, et non un conseil fiscal — votre salaire réel dépend de votre propre situation.</p>
+<h2>Plus d’outils et de guides gratuits</h2><div class="cards"><a class="tool-card" href="https://loonaautomation.github.io/loona-salary-calculators/australia-salary-calculator.html"><h3>Calculateur de salaire — Australie</h3><p>Le tableau fiscal 2026 pour l’Australie, détaillé.</p></a><a class="tool-card" href="pay-stub-generator/"><h3>Générateur de bulletins de paie</h3><p>Des bulletins de paie avec les gains, les retenues et le salaire net calculés.</p></a><a class="tool-card" href="invoice-by-country.html"><h3>Guides de factures par pays</h3><p>Les 20 guides par pays, 15 secteurs et 10 guides de bulletins de paie.</p></a></div>
+<h2>Questions fréquemment posées</h2>
+<div class="faq" id="faq"><details><summary>Que contient un bulletin de paie australien ?</summary><p>L’ABN de l’employeur, le nom du salarié, la période de paie et les heures, le salaire brut, l’impôt PAYG prélevé, tous montants de sacrifice salarial, la superannuation payée par l’employeur, et le salaire net.</p></details><details><summary>Qu’est-ce que la cotisation Medicare ?</summary><p>Une cotisation de 2% sur le revenu imposable qui finance Medicare. Elle s’ajoute à l’impôt sur le revenu et n’est PAS incluse dans les chiffres de cette page — ajoutez 2% du revenu imposable pour un tableau complet.</p></details><details><summary>Comment faire un bulletin de paie pour un salarié australien ?</summary><p>Utilisez le générateur de bulletins de paie gratuit Loona ci-dessous pour la présentation, et le calculateur de cette page pour le chiffre de l’impôt sur le revenu. Ajoutez la cotisation Medicare et la superannuation de l’employeur selon les taux propres du salarié.</p></details></div>
+</section>
+<footer class="site"><div class="foot-inner"><div><div style="font-weight:700;color:#fff;font-size:17px">Loona Automation</div><p>Des outils documentaires commerciaux gratuits par Aurang Zeb Loona. Sans inscription, sans filigrane — vos données restent sur votre appareil.</p></div><div class="foot-links"><a href="./">Hub des factures &amp; des documents commerciaux</a><a href="about/">À propos</a><a href="contact/">Contact</a><a href="privacy/">Politique de confidentialité</a><a href="terms/">Conditions d’utilisation</a><a href="mailto:loonaautomation@gmail.com">loonaautomation@gmail.com</a></div></div></footer>
+<script>
+/*CALC-START*/
+/* Australia 2026. Source: Residents; Medicare levy 2% is EXCLUDED from these rates. 2024 and 2025 identical (Stage 3 cuts from 1 Jul 2024); 2026 lowest rate cut 16% to 15% from 1 Jul 2026. Source: https://cleartax.com.au/tax/personal-tax/tax-rates-for-australian-residents/. */
+var BR = [[0.0, 0.0], [18200.0, 0.15], [45000.0, 0.3], [135000.0, 0.37], [190000.0, 0.45]];
+var ALLOW = 0;
+var CREDIT = 0;
+var CESS = 1.0;
+var LOCAL_RT = 0;
+var REBATE = 0;
+var MODE = "std";
+var SURCH = [];
+var SOCIAL = null;
+var SYM = "A$";
+function scaleTaxLB(x, br){
+  var t = 0;
+  for (var i = 0; i < br.length; i++){
+    var lo = br[i][0], rate = br[i][1];
+    var hi = (i + 1 < br.length) ? br[i+1][0] : null;
+    if (x <= lo) break;
+    t += (hi === null ? (x - lo) : (Math.min(x, hi) - lo)) * rate;
+  }
+  return t;
+}
+function socialCalc(gross){
+  if (!SOCIAL) return 0;
+  if (SOCIAL.kind === 'flat') return gross * SOCIAL.rate;
+  if (SOCIAL.kind === 'capped') return Math.min(gross * SOCIAL.rate, SOCIAL.cap);
+  if (SOCIAL.kind === 'flat_capped_base') return Math.min(gross, SOCIAL.cap_base) * SOCIAL.rate;
+  if (SOCIAL.kind === 'banded') {
+    var s = 0;
+    for (var i = 0; i < SOCIAL.bands.length; i++){
+      var b = SOCIAL.bands[i];
+      if (gross > b[0]) s += (b[1] === null ? (gross - b[0]) : (Math.min(gross, b[1]) - b[0])) * b[2];
+    }
+    return s;
+  }
+  return 0;
+}
+function netCalc(gross){
+  var tax = 0, social = 0;
+  if (MODE === 'norway') {
+    var trinn = scaleTaxLB(gross, BR);
+    var ordinary = 0.22 * Math.max(0, gross - 114540 - Math.min(0.46 * gross, 95700));
+    tax = trinn + ordinary;
+    social = gross > 99650 ? 0.076 * gross : 0;
+  } else if (MODE === 'finland') {
+    tax = scaleTaxLB(gross, BR) + 0.0757 * gross;
+    social = 0.0907 * gross;
+  } else if (MODE === 'belgium') {
+    social = 0.1307 * gross;
+    var prof = Math.min(0.30 * (gross - social), 6070);
+    var taxable = Math.max(0, gross - social - prof - 11550);
+    var fed = scaleTaxLB(taxable, BR);
+    tax = fed + 0.07 * fed;
+  } else if (MODE === 'denmark') {
+    var allowances = 54100 + Math.min(0.1275 * gross, 63300);
+    tax = Math.max(0, scaleTaxLB(gross, BR) - 0.389 * allowances);
+  } else {
+    var taxable = Math.max(0, gross - ALLOW);
+    tax = scaleTaxLB(taxable, BR);
+    if (REBATE && gross <= REBATE) tax = 0;
+    
+    tax *= CESS;
+    if (LOCAL_RT) tax += LOCAL_RT * taxable;
+    if (SURCH.length) tax += scaleTaxLB(taxable, SURCH);
+    if (CREDIT) tax = Math.max(0, tax - CREDIT);
+    social = socialCalc(gross);
+  }
+  var total = tax + social, net = gross - total;
+  return {gross: gross, tax: tax, social: social, total: total, net: net,
+    monthly: net / 12, weekly: net / 52, eff: gross > 0 ? total / gross * 100 : 0};
+}
+/*CALC-END*/
+function fmt(n){return SYM + n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calc(){
+  var gross = parseFloat(document.getElementById("gross").value)||0;
+  var box = document.getElementById("result");
+  if(gross<=0){ box.style.display="none"; return; }
+  var r = netCalc(gross);
+  document.getElementById("rGross").textContent = fmt(r.gross);
+  document.getElementById("rTax").textContent = fmt(r.tax);
+  document.getElementById("rSocial").textContent = fmt(r.social);
+  document.getElementById("rTotal").textContent = fmt(r.total);
+  document.getElementById("rEff").textContent = r.eff.toFixed(2) + "%";
+  document.getElementById("rYear").textContent = fmt(r.net);
+  document.getElementById("rMonth").textContent = fmt(r.monthly);
+  document.getElementById("rWeek").textContent = fmt(r.weekly);
+  document.getElementById("total").textContent = fmt(r.monthly) + " par mois";
+  document.getElementById("rNote").textContent = "Taux de l’exercice financier 2026-27 (1 July 2026 \u2013 30 June 2027). La cotisation Medicare de 2% est EXCLUE de ces taux. La superannuation (payée par l’employeur, 12% à partir du 1 July 2025) n’est pas une retenue sur le salaire et ne figure pas dans ces chiffres.";
+  box.style.display = "block";
+}
+["gross"].forEach(function(id){var el=document.getElementById(id); if(el){el.addEventListener("input",calc); el.addEventListener("change",calc);}});
+calc();
+
+</script><script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Installer l’app';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Installez cette application : touchez le bouton Partager, puis choisissez « Ajouter à l’écran d’accueil ».');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+</body></html>
