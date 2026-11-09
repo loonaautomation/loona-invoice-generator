@@ -1,6 +1,6 @@
 {
   "name": "Loona Free Proforma Invoice Generator",
-  "short_name": "Free Proforma Invoice Generator",
+  "short_name": "Free Proforma Invoice",
   "description": "Create a free proforma invoice online with items, tax, validity date and bank details for advance payment or customs. No sign-up, print-ready PDF.",
   "id": "/loona-invoice-generator/proforma-invoice-generator/",
   "start_url": ".",

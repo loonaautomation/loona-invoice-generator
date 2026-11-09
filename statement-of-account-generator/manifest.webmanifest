@@ -1,6 +1,6 @@
 {
   "name": "Loona Free Statement of Account Generator",
-  "short_name": "Free Statement of Account Genera",
+  "short_name": "Free Statement of Account",
   "description": "Create a free statement of account online with opening balance, invoices, payments and a running balance calculated automatically. No sign-up.",
   "id": "/loona-invoice-generator/statement-of-account-generator/",
   "start_url": ".",

@@ -1,6 +1,6 @@
 {
   "name": "Loona Free Quote / Estimate Generator",
-  "short_name": "Free Quote / Estimate Generator",
+  "short_name": "Free Quote / Estimate",
   "description": "Create a free price quote or estimate online with items, tax, validity date and terms. No sign-up, print-ready PDF, works offline on your device.",
   "id": "/loona-invoice-generator/quote-generator/",
   "start_url": ".",

@@ -1,6 +1,6 @@
 {
   "name": "Loona Invoice for Education & Training",
-  "short_name": "Invoice for Education & Training",
+  "short_name": "Invoice for Education &",
   "description": "Invoicing for education & training? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
   "id": "/loona-invoice-generator/education-invoice.html",
   "start_url": "./education-invoice.html",

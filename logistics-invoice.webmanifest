@@ -1,6 +1,6 @@
 {
   "name": "Loona Invoice for Logistics & Transport",
-  "short_name": "Invoice for Logistics & Transpor",
+  "short_name": "Invoice for Logistics &",
   "description": "Invoicing for logistics & transport? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
   "id": "/loona-invoice-generator/logistics-invoice.html",
   "start_url": "./logistics-invoice.html",
