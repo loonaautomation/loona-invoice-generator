@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Factura en Canadá — GST 5% | Loona</title><meta name="description" content="¿Facturas en Canadá? La tasa estándar de GST es del 5%, qué debe mostrar tu factura y un ejemplo desarrollado, además de un generador de facturas gratuito.">
+<link rel="canonical" href="https://loonaautomation.github.io/loona-invoice-generator/es/invoice-canada.html"><link rel="alternate" hreflang="en" href="https://loonaautomation.github.io/loona-invoice-generator/invoice-canada.html"><link rel="alternate" hreflang="es" href="https://loonaautomation.github.io/loona-invoice-generator/es/invoice-canada.html"><link rel="alternate" hreflang="de" href="https://loonaautomation.github.io/loona-invoice-generator/de/invoice-canada.html"><link rel="alternate" hreflang="fr" href="https://loonaautomation.github.io/loona-invoice-generator/fr/invoice-canada.html"><link rel="alternate" hreflang="pt" href="https://loonaautomation.github.io/loona-invoice-generator/pt/invoice-canada.html"><link rel="alternate" hreflang="it" href="https://loonaautomation.github.io/loona-invoice-generator/it/invoice-canada.html"><link rel="alternate" hreflang="x-default" href="https://loonaautomation.github.io/loona-invoice-generator/invoice-canada.html"><meta property="og:locale" content="es_ES"><meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="Factura en Canadá — GST 5% | Loona"><meta property="og:description" content="¿Facturas en Canadá? La tasa estándar de GST es del 5%, qué debe mostrar tu factura y un ejemplo desarrollado, además de un generador de facturas gratuito."><meta property="og:image" content="https://loonaautomation.github.io/loona-invoice-generator/og-image.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal-950:#062e2a;--teal-800:#0a4a42;--teal-700:#0d5c4f;--gold:#d4af37;--gold-light:#ffd95e;--cream:#f3e9c8;--ink:#1c2422;--bg:#f7f5ee;--surface:#fffdf6;--muted:#55655f;--line:#ddd3b8;--field:#fff;--field-line:#cfc7a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:16.5px;line-height:1.55}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;line-height:1.2;margin:0}a{color:var(--teal-700)}
+header.site{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.site-inner{max-width:1240px;margin:0 auto;padding:14px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--cream)}.brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold)}
+.bname{font-family:Sora;font-weight:700;font-size:19px;color:#fff}.bsub{font-size:12.5px}
+nav.mainnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}nav.mainnav a{color:var(--cream);text-decoration:none;font-weight:600;font-size:14.5px;padding:7px 12px;border-radius:999px;border:1px solid rgba(243,233,200,.35)}
+.hero{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:#fff}.hero-inner{max-width:1240px;margin:0 auto;padding:30px 20px 26px}.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;max-width:26ch}.hero h1 em{font-style:normal;color:var(--gold-light)}.hero p{max-width:72ch;color:var(--cream)}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px}.tool-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}@media(max-width:980px){.tool-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(6,46,42,.1);padding:20px}.card+.card{margin-top:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:13.5px;font-weight:700}
+input,select,textarea{font:inherit;font-size:15.5px;color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:9px;padding:9px 11px;width:100%}
+legend{font-family:Sora;font-weight:700;font-size:17px;margin-bottom:10px}fieldset{border:0;padding:0;margin:0}
+.item-row{display:grid;grid-template-columns:1fr 70px 105px 34px;gap:8px;margin-bottom:8px}.item-row.no-price{grid-template-columns:1fr 90px 34px}
+.icon-btn{border:1px solid var(--field-line);background:#fff;color:#b3402f;border-radius:9px;height:38px;cursor:pointer}
+.add-btn{border:1.5px dashed var(--teal-700);color:var(--teal-700);background:transparent;font:inherit;font-weight:700;border-radius:9px;padding:9px;width:100%;cursor:pointer}
+.btn{font:inherit;font-weight:700;font-size:16px;cursor:pointer;border-radius:11px;padding:13px 22px;border:0}.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#2a2103}.btn-ghost{background:transparent;color:var(--teal-700);border:1.5px solid var(--teal-700)}
+.paper{background:#fff;color:#1c2422;border-radius:6px;box-shadow:0 14px 40px rgba(6,46,42,.22);padding:38px 40px;font-size:13.5px;line-height:1.5}
+.p-band{height:7px;background:linear-gradient(90deg,var(--teal-950),var(--teal-700),var(--gold));margin:-38px -40px 22px}
+.p-title{font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#0a3d36;text-align:right}.p-bizname{font-family:Georgia,serif;font-weight:700;font-size:18px;color:#0a3d36}
+.mut{color:#5c6663;font-size:12.5px;white-space:pre-line}.lab{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#0d5c4f}
+table.p-items{width:100%;border-collapse:collapse;margin-top:14px}table.p-items th{text-align:left;font-size:11px;text-transform:uppercase;color:#fff;background:#0a4a42;padding:8px 10px}table.p-items th.r,table.p-items td.r{text-align:right}table.p-items td{padding:8px 10px;border-bottom:1px solid #e7e2cf}
+.totals{margin-left:auto;width:min(290px,100%);margin-top:14px}.totals .row{display:flex;justify-content:space-between;padding:4px 2px}.totals .grand{border-top:2.5px solid var(--gold);padding-top:9px;font-weight:700;font-size:17px;color:#0a3d36}
+.sig{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.sig div{border-top:1px solid #999;padding-top:6px;font-size:12.5px;color:#5c6663}
+section.content{max-width:1240px;margin:0 auto;padding:14px 20px}section.content h2{font-size:clamp(22px,3vw,28px);color:var(--teal-950);margin:26px 0 10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:820px){.steps{grid-template-columns:1fr}}.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 17px;margin-bottom:10px;max-width:900px}.faq summary{font-weight:600;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink)}.tool-card h3{margin-bottom:6px;color:var(--teal-950)}
+footer.site{margin-top:34px;background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.foot-inner{max-width:1240px;margin:0 auto;padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap}.foot-links{margin-left:auto;display:flex;flex-direction:column;gap:7px}.foot-links a{color:var(--gold-light);text-decoration:none;font-weight:600}
+@media print{header.site,.hero,.form-col,section.content,footer.site,.no-print{display:none!important}.wrap{padding:0}.tool-grid{display:block}.paper{box-shadow:none}@page{size:A4;margin:12mm}}
+</style>
+<style>
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--teal-800);color:#fff}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.callout{background:#fdf6dd;border:1px solid #eadfae;border-radius:10px;padding:12px 14px;margin:14px 0}
+.guide h2{margin-top:30px}
+.guide ul{margin:6px 0 6px 20px}
+.guide li{margin-bottom:5px}
+.cta{margin:18px 0}
+.src{font-size:13.5px;color:var(--muted)}
+.calc label{display:block;font-weight:700;font-size:13.5px;margin:10px 0 4px}
+.calc input,.calc select{width:100%;max-width:340px}
+.calc .out{font-size:17px;font-weight:700;margin-top:12px}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L43M13ZYT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5L43M13ZYT');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z599jkwoy9");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Factura en Canadá — GST 5% | Loona","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Loona Automation"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuál es la tasa de GST en Canadá?","acceptedAnswer":{"@type":"Answer","text":"La tasa federal de GST es del 5%. Pero la tasa de tu factura depende de la provincia de prestación: las provincias HST aplican 13% o 15% en su lugar, y Quebec, BC, Saskatchewan y Manitoba añaden sus propios impuestos provinciales. El ejemplo desarrollado de esta página usa la tasa federal del 5%."}},{"@type":"Question","name":"¿Cuál es la diferencia entre GST, HST y PST?","acceptedAnswer":{"@type":"Answer","text":"El GST es el impuesto federal del 5%. El HST es el impuesto armonizado (GST + parte provincial combinados) que se usa en cinco provincias atlánticas y Ontario. PST/QST son impuestos provinciales sobre las ventas separados que se cobran en BC, Saskatchewan, Manitoba y Québec además del GST del 5%."}},{"@type":"Question","name":"¿Cómo creo una factura para un cliente canadiense?","acceptedAnswer":{"@type":"Answer","text":"Usa el generador de facturas gratuito de Loona con la tasa de impuesto al 5% y la moneda en CAD: el botón de abajo lo abre ya completado. Añade tu número GST/HST y la provincia de prestación, y luego descarga el PDF."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Loona Automation","item":"https://loonaautomation.github.io/"},{"@type":"ListItem","position":2,"name":"Generadores de facturas y documentos comerciales","item":"https://loonaautomation.github.io/loona-invoice-generator/es/"},{"@type":"ListItem","position":3,"name":"Factura en <em>Canadá</em>","item":"https://loonaautomation.github.io/loona-invoice-generator/es/invoice-canada.html"}]}</script>
+<link rel="manifest" href="../invoice-canada.webmanifest">
+<meta name="theme-color" content="#062e2a">
+</head><body>
+<header class="site"><div class="site-inner"><a class="brand" href="./"><img src="../icon-192.png" alt="Logotipo de Loona Automation" width="46" height="46"><span><span class="bname">Loona Automation</span><br><span class="bsub">por Aurang Zeb Loona</span></span></a><nav class="mainnav"><a href="./">Generador de facturas</a><a href="./#documents">Todas las herramientas de documentos</a><a href="#faq">FAQ</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><h1>Factura en <em>Canadá</em></h1><p>La tasa estándar de GST en Canadá es <strong>5%</strong>. Esta guía muestra qué debe incluir una factura en Canadá, desarrolla un ejemplo completo y abre el generador de facturas gratuito de Loona con la tasa y la moneda ya configuradas.</p></div></div>
+<section class="content guide">
+<p class="lead"><strong>En resumen:</strong> la tasa estándar de GST en Canadá es del 5%, aplicada en CAD.</p>
+<h2>¿Qué debe mostrar una factura en Canadá?</h2>
+<ul><li>Tu número GST/HST (tu número de empresa + RT0001)</li><li>Un número de factura secuencial y la fecha de emisión</li><li>El nombre y la dirección de tu negocio, y el nombre y la dirección de tu cliente</li><li>Una descripción de los bienes o servicios, con cantidad y precio unitario</li><li>La tasa de GST o HST aplicada, el importe del impuesto en CAD y el total a pagar</li><li>La provincia de prestación, porque la tasa depende de ella</li></ul>
+<h2>Ejemplo desarrollado — GST al 5%</h2>
+<p>Un negocio en Canadá vende servicios por valor de C$1,000.00 antes de impuestos:</p>
+<table class="tbl"><tr><th>Línea</th><th class="r">Importe</th></tr>
+<tr><td>Subtotal (neto)</td><td class="r">C$1,000.00</td></tr>
+<tr><td>GST al 5%</td><td class="r">C$50.00</td></tr>
+<tr><td><strong>Total a pagar</strong></td><td class="r"><strong>C$1,050.00</strong></td></tr></table>
+<div class="card calc"><h3 style="margin-top:0">Pruébalo: calculadora de GST para Canadá</h3>
+<label for="sub">Subtotal (neto) en CAD</label>
+<input type="number" id="sub" min="0" step="any" value="1000">
+<p class="out">GST al 5%: <span id="oTax">C$50.00</span> &nbsp;·&nbsp; Total a pagar: <span id="oTotal">C$1,050.00</span></p>
+<p class="src">Cambia el subtotal y las cifras se actualizan. La tasa está fijada en la tasa estándar de Canadá del 5%.</p></div>
+<p class="cta"><a class="btn btn-gold" href="./?tax=5&amp;currency=CAD" style="text-decoration:none">Crea una factura al 5% en CAD — gratis</a></p>
+<h2>Notas para Canadá</h2>
+<ul><li>El GST federal de Canadá es del 5%. En las provincias HST (Ontario, Nueva Escocia, Nuevo Brunswick, Terranova y Labrador, Isla del Príncipe Eduardo) la tasa armonizada es del 13% o del 15% en lugar del 5%: la cifra del 5% de esta página es solo la tasa federal.</li><li>Quebec aplica su propio QST además, y Columbia Británica, Saskatchewan y Manitoba aplican un impuesto provincial sobre las ventas (PST) separado: esos los añade la provincia, no esta cifra del 5%.</li><li>Las empresas deben registrarse para el GST/HST cuando los suministros imponibles superan C$30,000 en un año; los pequeños proveedores por debajo de ese umbral no necesitan registrarse.</li></ul>
+<p class="src">Fuente: tasa estándar de GST tomada de las páginas de IVA de Loona Salary &amp; Tax Calculators, comprobada el 9 de noviembre de 2026. Esta guía es información general, no asesoramiento fiscal: confirma cualquier cosa inusual con tu contable.</p>
+<h2>Más herramientas y guías gratuitas</h2><div class="cards"><a class="tool-card" href="https://loonaautomation.github.io/loona-salary-calculators/vat-calculator.html"><h3>Calculadora de GST — Canadá</h3><p>Calcula el impuesto sobre cualquier importe a la tasa de Canadá.</p></a><a class="tool-card" href="invoice-by-country.html"><h3>Guías de facturas por país</h3><p>Las 20 guías por país, 15 sectores y 10 guías de nóminas.</p></a><a class="tool-card" href="./"><h3>Generador de facturas gratuito</h3><p>La herramienta insignia de facturas de Loona con IVA de la UE e inversión del sujeto pasivo.</p></a></div>
+<h2>Preguntas frecuentes</h2>
+<div class="faq" id="faq"><details><summary>¿Cuál es la tasa de GST en Canadá?</summary><p>La tasa federal de GST es del 5%. Pero la tasa de tu factura depende de la provincia de prestación: las provincias HST aplican 13% o 15% en su lugar, y Quebec, BC, Saskatchewan y Manitoba añaden sus propios impuestos provinciales. El ejemplo desarrollado de esta página usa la tasa federal del 5%.</p></details><details><summary>¿Cuál es la diferencia entre GST, HST y PST?</summary><p>El GST es el impuesto federal del 5%. El HST es el impuesto armonizado (GST + parte provincial combinados) que se usa en cinco provincias atlánticas y Ontario. PST/QST son impuestos provinciales sobre las ventas separados que se cobran en BC, Saskatchewan, Manitoba y Québec además del GST del 5%.</p></details><details><summary>¿Cómo creo una factura para un cliente canadiense?</summary><p>Usa el generador de facturas gratuito de Loona con la tasa de impuesto al 5% y la moneda en CAD: el botón de abajo lo abre ya completado. Añade tu número GST/HST y la provincia de prestación, y luego descarga el PDF.</p></details></div>
+</section>
+<footer class="site"><div class="foot-inner"><div><div style="font-weight:700;color:#fff;font-size:17px">Loona Automation</div><p>Herramientas gratuitas de documentos comerciales de Aurang Zeb Loona. Sin registro, sin marca de agua: tus datos permanecen en tu dispositivo.</p></div><div class="foot-links"><a href="./">Centro de facturas &amp; documentos comerciales</a><a href="about/">Acerca de</a><a href="contact/">Contacto</a><a href="privacy/">Política de privacidad</a><a href="terms/">Condiciones de uso</a><a href="mailto:loonaautomation@gmail.com">loonaautomation@gmail.com</a></div></div></footer>
+<script>
+var RATE=5;var SYM="C$";
+function fmt2(n){return SYM+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calc(){var s=parseFloat(document.getElementById('sub').value)||0;document.getElementById('oTax').textContent=fmt2(s*RATE/100);document.getElementById('oTotal').textContent=fmt2(s*(1+RATE/100));}
+document.getElementById('sub').addEventListener('input',calc);calc();
+</script><script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Instalar app';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Instala esta app: toca el botón Compartir y luego elige «Añadir a la pantalla de inicio».');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+</body></html>
