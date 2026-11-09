@@ -1,0 +1,29 @@
+{
+  "name": "Loona Privacy Policy",
+  "short_name": "Privacy Policy",
+  "description": "Privacy policy for Loona&#x27;s business document generators: on-device processing, Google AdSense and DoubleClick, Google Analytics 4 and Microsoft Clarity.",
+  "id": "/loona-invoice-generator/privacy/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

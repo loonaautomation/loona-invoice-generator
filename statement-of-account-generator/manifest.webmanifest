@@ -1,0 +1,29 @@
+{
+  "name": "Loona Free Statement of Account Generator",
+  "short_name": "Free Statement of Account Genera",
+  "description": "Create a free statement of account online with opening balance, invoices, payments and a running balance calculated automatically. No sign-up.",
+  "id": "/loona-invoice-generator/statement-of-account-generator/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Loona Free Packing Slip Generator",
+  "short_name": "Free Packing Slip Generator",
+  "description": "Create a free packing slip online with order number, ship-to address and item quantities. Prices hidden by default, with a toggle to show them.",
+  "id": "/loona-invoice-generator/packing-slip-generator/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Loona Payslip in Saudi Arabia",
+  "short_name": "Payslip in Saudi Arabia",
+  "description": "What does a payslip in Saudi Arabia show? A worked payslip at SR 180,000 a year, gross to net, with a free calculator.",
+  "id": "/loona-invoice-generator/payslip-saudi-arabia.html",
+  "start_url": "./payslip-saudi-arabia.html",
+  "scope": "./payslip-saudi-arabia.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

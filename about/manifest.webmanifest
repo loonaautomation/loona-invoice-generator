@@ -1,0 +1,29 @@
+{
+  "name": "Loona About Loona Business Document Generators",
+  "short_name": "About Loona Business Document Ge",
+  "description": "About Loona&#x27;s free invoice and business document generators — who builds them, how they work, and why they are free.",
+  "id": "/loona-invoice-generator/about/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

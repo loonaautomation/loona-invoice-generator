@@ -1,0 +1,29 @@
+{
+  "name": "Loona Sales Receipt",
+  "short_name": "Sales Receipt",
+  "description": "Sales Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
+  "id": "/loona-invoice-generator/sales-receipt.html",
+  "start_url": "./sales-receipt.html",
+  "scope": "./sales-receipt.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Loona Invoice in Italy",
+  "short_name": "Invoice in Italy",
+  "description": "Invoicing in Italy? The standard VAT rate is 22%, what your invoice must show, and a worked example — plus a free invoice generator.",
+  "id": "/loona-invoice-generator/invoice-italy.html",
+  "start_url": "./invoice-italy.html",
+  "scope": "./invoice-italy.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

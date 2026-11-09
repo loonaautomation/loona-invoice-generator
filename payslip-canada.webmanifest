@@ -1,0 +1,29 @@
+{
+  "name": "Loona Payslip in Canada",
+  "short_name": "Payslip in Canada",
+  "description": "What does a payslip in Canada show? A worked payslip at C$75,000 a year, gross to net, with a free calculator.",
+  "id": "/loona-invoice-generator/payslip-canada.html",
+  "start_url": "./payslip-canada.html",
+  "scope": "./payslip-canada.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
