@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lieferquittung — Wann sie zu verwenden ist &amp; was sie zeigen muss | Loona</title><meta name="description" content="Lieferquittung: wann Sie sie verwenden, was sie zeigen muss, und ein durchgerechnetes Beispiel — plus ein kostenloser Quittungsgenerator mit dem Betrag in Worten.">
+<link rel="canonical" href="https://loonaautomation.github.io/loona-invoice-generator/de/delivery-receipt.html"><link rel="alternate" hreflang="en" href="https://loonaautomation.github.io/loona-invoice-generator/delivery-receipt.html"><link rel="alternate" hreflang="es" href="https://loonaautomation.github.io/loona-invoice-generator/es/delivery-receipt.html"><link rel="alternate" hreflang="de" href="https://loonaautomation.github.io/loona-invoice-generator/de/delivery-receipt.html"><link rel="alternate" hreflang="fr" href="https://loonaautomation.github.io/loona-invoice-generator/fr/delivery-receipt.html"><link rel="alternate" hreflang="pt" href="https://loonaautomation.github.io/loona-invoice-generator/pt/delivery-receipt.html"><link rel="alternate" hreflang="it" href="https://loonaautomation.github.io/loona-invoice-generator/it/delivery-receipt.html"><link rel="alternate" hreflang="x-default" href="https://loonaautomation.github.io/loona-invoice-generator/delivery-receipt.html"><meta property="og:locale" content="de_DE"><meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="Lieferquittung — Wann sie zu verwenden ist &amp; was sie zeigen muss | Loona"><meta property="og:description" content="Lieferquittung: wann Sie sie verwenden, was sie zeigen muss, und ein durchgerechnetes Beispiel — plus ein kostenloser Quittungsgenerator mit dem Betrag in Worten."><meta property="og:image" content="https://loonaautomation.github.io/loona-invoice-generator/og-image.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal-950:#062e2a;--teal-800:#0a4a42;--teal-700:#0d5c4f;--gold:#d4af37;--gold-light:#ffd95e;--cream:#f3e9c8;--ink:#1c2422;--bg:#f7f5ee;--surface:#fffdf6;--muted:#55655f;--line:#ddd3b8;--field:#fff;--field-line:#cfc7a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:16.5px;line-height:1.55}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;line-height:1.2;margin:0}a{color:var(--teal-700)}
+header.site{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.site-inner{max-width:1240px;margin:0 auto;padding:14px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--cream)}.brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold)}
+.bname{font-family:Sora;font-weight:700;font-size:19px;color:#fff}.bsub{font-size:12.5px}
+nav.mainnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}nav.mainnav a{color:var(--cream);text-decoration:none;font-weight:600;font-size:14.5px;padding:7px 12px;border-radius:999px;border:1px solid rgba(243,233,200,.35)}
+.hero{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:#fff}.hero-inner{max-width:1240px;margin:0 auto;padding:30px 20px 26px}.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;max-width:26ch}.hero h1 em{font-style:normal;color:var(--gold-light)}.hero p{max-width:72ch;color:var(--cream)}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px}.tool-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}@media(max-width:980px){.tool-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(6,46,42,.1);padding:20px}.card+.card{margin-top:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:13.5px;font-weight:700}
+input,select,textarea{font:inherit;font-size:15.5px;color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:9px;padding:9px 11px;width:100%}
+legend{font-family:Sora;font-weight:700;font-size:17px;margin-bottom:10px}fieldset{border:0;padding:0;margin:0}
+.item-row{display:grid;grid-template-columns:1fr 70px 105px 34px;gap:8px;margin-bottom:8px}.item-row.no-price{grid-template-columns:1fr 90px 34px}
+.icon-btn{border:1px solid var(--field-line);background:#fff;color:#b3402f;border-radius:9px;height:38px;cursor:pointer}
+.add-btn{border:1.5px dashed var(--teal-700);color:var(--teal-700);background:transparent;font:inherit;font-weight:700;border-radius:9px;padding:9px;width:100%;cursor:pointer}
+.btn{font:inherit;font-weight:700;font-size:16px;cursor:pointer;border-radius:11px;padding:13px 22px;border:0}.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#2a2103}.btn-ghost{background:transparent;color:var(--teal-700);border:1.5px solid var(--teal-700)}
+.paper{background:#fff;color:#1c2422;border-radius:6px;box-shadow:0 14px 40px rgba(6,46,42,.22);padding:38px 40px;font-size:13.5px;line-height:1.5}
+.p-band{height:7px;background:linear-gradient(90deg,var(--teal-950),var(--teal-700),var(--gold));margin:-38px -40px 22px}
+.p-title{font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#0a3d36;text-align:right}.p-bizname{font-family:Georgia,serif;font-weight:700;font-size:18px;color:#0a3d36}
+.mut{color:#5c6663;font-size:12.5px;white-space:pre-line}.lab{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#0d5c4f}
+table.p-items{width:100%;border-collapse:collapse;margin-top:14px}table.p-items th{text-align:left;font-size:11px;text-transform:uppercase;color:#fff;background:#0a4a42;padding:8px 10px}table.p-items th.r,table.p-items td.r{text-align:right}table.p-items td{padding:8px 10px;border-bottom:1px solid #e7e2cf}
+.totals{margin-left:auto;width:min(290px,100%);margin-top:14px}.totals .row{display:flex;justify-content:space-between;padding:4px 2px}.totals .grand{border-top:2.5px solid var(--gold);padding-top:9px;font-weight:700;font-size:17px;color:#0a3d36}
+.sig{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.sig div{border-top:1px solid #999;padding-top:6px;font-size:12.5px;color:#5c6663}
+section.content{max-width:1240px;margin:0 auto;padding:14px 20px}section.content h2{font-size:clamp(22px,3vw,28px);color:var(--teal-950);margin:26px 0 10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:820px){.steps{grid-template-columns:1fr}}.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 17px;margin-bottom:10px;max-width:900px}.faq summary{font-weight:600;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink)}.tool-card h3{margin-bottom:6px;color:var(--teal-950)}
+footer.site{margin-top:34px;background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.foot-inner{max-width:1240px;margin:0 auto;padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap}.foot-links{margin-left:auto;display:flex;flex-direction:column;gap:7px}.foot-links a{color:var(--gold-light);text-decoration:none;font-weight:600}
+@media print{header.site,.hero,.form-col,section.content,footer.site,.no-print{display:none!important}.wrap{padding:0}.tool-grid{display:block}.paper{box-shadow:none}@page{size:A4;margin:12mm}}
+</style>
+<style>
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--teal-800);color:#fff}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.callout{background:#fdf6dd;border:1px solid #eadfae;border-radius:10px;padding:12px 14px;margin:14px 0}
+.guide h2{margin-top:30px}
+.guide ul{margin:6px 0 6px 20px}
+.guide li{margin-bottom:5px}
+.cta{margin:18px 0}
+.src{font-size:13.5px;color:var(--muted)}
+.calc label{display:block;font-weight:700;font-size:13.5px;margin:10px 0 4px}
+.calc input,.calc select{width:100%;max-width:340px}
+.calc .out{font-size:17px;font-weight:700;margin-top:12px}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L43M13ZYT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5L43M13ZYT');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z599jkwoy9");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Lieferquittung — Wann sie zu verwenden ist & was sie zeigen muss | Loona","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Loona Automation"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was ist der Unterschied zwischen einer Lieferquittung und einem Lieferschein?","acceptedAnswer":{"@type":"Answer","text":"Ein Lieferschein listet auf, was versandt wurde; eine Lieferquittung beweist, dass es ankam und angenommen wurde, mit der Unterschrift des Empfängers. Verwenden Sie beides: Senden Sie den Schein mit der Ware und behalten Sie die unterschriebene Quittung."}},{"@type":"Question","name":"Was, wenn die Waren beschädigt ankommen?","acceptedAnswer":{"@type":"Answer","text":"Notieren Sie den Schaden auf der Lieferquittung, bevor Sie unterschreiben — „ein Karton eingedellt“ zum Beispiel. Eine saubere Unterschrift macht es sehr schwer, später Schaden geltend zu machen."}},{"@type":"Question","name":"Sollte eine Lieferquittung den Wert der Waren zeigen?","acceptedAnswer":{"@type":"Answer","text":"Ja, wo der Wert bekannt ist — es hilft bei Versicherungsansprüchen und bei den Lagerunterlagen des Kunden. Wenn der Wert nicht bekannt ist, zeigen Sie die Mengen und lassen Sie den Wert weg, statt zu raten."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Loona Automation","item":"https://loonaautomation.github.io/"},{"@type":"ListItem","position":2,"name":"Rechnungs- & Geschäftsdokument-Generatoren","item":"https://loonaautomation.github.io/loona-invoice-generator/de/"},{"@type":"ListItem","position":3,"name":"<em>Lieferquittung</em>","item":"https://loonaautomation.github.io/loona-invoice-generator/de/delivery-receipt.html"}]}</script>
+<link rel="manifest" href="../delivery-receipt.webmanifest">
+<meta name="theme-color" content="#062e2a">
+</head><body>
+<header class="site"><div class="site-inner"><a class="brand" href="./"><img src="../icon-192.png" alt="Loona Automation Logo" width="46" height="46"><span><span class="bname">Loona Automation</span><br><span class="bsub">von Aurang Zeb Loona</span></span></a><nav class="mainnav"><a href="./">Rechnungsgenerator</a><a href="./#documents">Alle Dokument-Tools</a><a href="#faq">FAQ</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><h1><em>Lieferquittung</em></h1><p>Verwenden Sie eine Lieferquittung, wenn Waren den Besitzer wechseln — eine Kurierlieferung, eine Lagerübergabe oder Waren, die vom Kunden abgeholt werden. Sie beweist, dass die Waren empfangen wurden, in welchem Zustand und von wem.</p></div></div>
+<section class="content guide">
+<h2>Was sie zeigen muss</h2>
+<ul><li>Die Namen und Adressen des Absenders und des Empfängers</li><li>Das Datum und die Uhrzeit der Lieferung und eine Quittungsnummer</li><li>Eine Liste der gelieferten Artikel, mit Mengen</li><li>Der Wert der Waren, wo er bekannt ist</li><li>Die Unterschrift des Empfängers und der Zustand der Waren bei Ankunft</li></ul>
+<h2>Durchgerechnetes Beispiel</h2>
+<p>Ein Lieferant liefert Waren im Wert von 640.00 an ein Geschäft. Die Lieferquittung listet die Artikel und Mengen, Datum und Uhrzeit auf, und der Ladeninhaber unterschreibt, um zu bestätigen, dass die Waren in gutem Zustand angekommen sind.</p>
+<div class="card calc"><h3 style="margin-top:0">Probieren Sie es: Diese Quittung erstellen</h3>
+<label for="rFrom">Erhalten von</label>
+<input type="text" id="rFrom" value="Sample Customer">
+<label for="rAmount">Erhaltener Betrag</label>
+<input type="number" id="rAmount" min="0" step="any" value="640.00">
+<label for="rFor">Zahlung für</label>
+<input type="text" id="rFor" value="As described above">
+<label for="rMethod">Zahlungsmethode</label>
+<input type="text" id="rMethod" value="Bank transfer">
+<p class="out">Quittungsvorschau</p>
+<div class="paper" style="padding:20px 22px"><div class="p-band" style="margin:-20px -22px 14px"></div>
+<p>Erhalten von <b id="pFrom">Sample Customer</b> die Summe von <b><span id="pAmount">640.00</span></b></p>
+<p>(<span id="pWords">Sechshundertvierzig</span> nur)</p>
+<p>Für: <span id="pFor">Wie oben beschrieben</span></p>
+<p>Zahlungsmethode: <span id="pMethod">Banküberweisung</span></p></div>
+<p class="src">Tippen Sie in die Felder oben und die Vorschau aktualisiert sich. Drucken Sie die Seite oder verwenden Sie den vollständigen Quittungsgenerator für ein sauberes A4-PDF.</p></div>
+<p class="cta"><a class="btn btn-gold" href="receipt-generator/" style="text-decoration:none">Eine vollständige Quittung erstellen — kostenloser Quittungsgenerator</a></p>
+<p>Für die Waren selbst verwenden Sie die <a href="delivery-note-generator/">Lieferschein-Generator</a> ebenso — senden Sie den Schein mit den Waren und behalten Sie die unterschriebene Quittung.</p>
+<h2>Mehr kostenlose Tools und Leitfäden</h2><div class="cards"><a class="tool-card" href="receipt-generator/"><h3>Quittungsgenerator</h3><p>Zahlungsquittungen mit Betrag in Worten und Unterschriftszeile.</p></a><a class="tool-card" href="invoice-by-country.html"><h3>Rechnungsleitfäden nach Land</h3><p>Alle 20 Länderleitfäden, 15 Branchen und 10 Gehaltsabrechnungs-Leitfäden.</p></a><a class="tool-card" href="./"><h3>Kostenloser Rechnungsgenerator</h3><p>Das Flaggschiff-Rechnungs-Tool von Loona mit EU-Mehrwertsteuer und Reverse Charge.</p></a></div>
+<h2>Häufig gestellte Fragen</h2>
+<div class="faq" id="faq"><details><summary>Was ist der Unterschied zwischen einer Lieferquittung und einem Lieferschein?</summary><p>Ein Lieferschein listet auf, was versandt wurde; eine Lieferquittung beweist, dass es ankam und angenommen wurde, mit der Unterschrift des Empfängers. Verwenden Sie beides: Senden Sie den Schein mit der Ware und behalten Sie die unterschriebene Quittung.</p></details><details><summary>Was, wenn die Waren beschädigt ankommen?</summary><p>Notieren Sie den Schaden auf der Lieferquittung, bevor Sie unterschreiben — „ein Karton eingedellt“ zum Beispiel. Eine saubere Unterschrift macht es sehr schwer, später Schaden geltend zu machen.</p></details><details><summary>Sollte eine Lieferquittung den Wert der Waren zeigen?</summary><p>Ja, wo der Wert bekannt ist — es hilft bei Versicherungsansprüchen und bei den Lagerunterlagen des Kunden. Wenn der Wert nicht bekannt ist, zeigen Sie die Mengen und lassen Sie den Wert weg, statt zu raten.</p></details></div>
+</section>
+<footer class="site"><div class="foot-inner"><div><div style="font-weight:700;color:#fff;font-size:17px">Loona Automation</div><p>Kostenlose Geschäftsdokument-Tools von Aurang Zeb Loona. Ohne Anmeldung, ohne Wasserzeichen — Ihre Daten bleiben auf Ihrem Gerät.</p></div><div class="foot-links"><a href="./">Zentrale für Rechnungs- &amp; Geschäftsdokumente</a><a href="about/">Über uns</a><a href="contact/">Kontakt</a><a href="privacy/">Datenschutzerklärung</a><a href="terms/">Nutzungsbedingungen</a><a href="mailto:loonaautomation@gmail.com">loonaautomation@gmail.com</a></div></div></footer>
+<script>
+var ONES=["Null","Eins","Zwei","Drei","Vier","Fünf","Sechs","Sieben","Eight","Neun","Zehn","Eleven","Zwölf","Dreizehn","Vierzehn","Fünfzehn","Sechzehn","Siebzehn","Eighteen","Neunzehn"];
+var TENS=["","","Zwanzig","Dreißig","Vierzig","Fünfzig","Sechzig","Siebzig","Eighty","Neunzig"];
+function threeWords(n){var s="";if(n>=100){s+=ONES[Math.floor(n/100)]+" Hundert";n%=100;if(n)s+=" ";}if(n>=20){s+=TENS[Math.floor(n/10)];n%=10;if(n)s+=" "+ONES[n];}else if(n>0){s+=ONES[n];}return s;}
+function amountToWords(num){num=Number(num)||0;if(num===0)return "Null";var neg=num<0;num=Math.abs(num);var intPart=Math.floor(num);var cents=Math.round((num-intPart)*100);var scales=[[1000000000,"Milliarde"],[1000000,"Million"],[1000,"Tausend"]];var parts=[];var rem=intPart;scales.forEach(function(sc){if(rem>=sc[0]){var q=Math.floor(rem/sc[0]);parts.push(threeWords(q)+" "+sc[1]);rem%=sc[0];}});if(rem>0||parts.length===0)parts.push(threeWords(rem));var w=parts.join(" ");if(cents>0)w+=" und "+threeWords(cents)+" Cent";return (neg?"Minus ":"")+w;}
+
+function fmt2(n){return (Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function upd(){var a=document.getElementById('rAmount').value;document.getElementById('pFrom').textContent=document.getElementById('rFrom').value||'—';document.getElementById('pAmount').textContent=fmt2(a);document.getElementById('pWords').textContent=amountToWords(a);document.getElementById('pFor').textContent=document.getElementById('rFor').value||'—';document.getElementById('pMethod').textContent=document.getElementById('rMethod').value||'—';}
+['rFrom','rAmount','rFor','rMethod'].forEach(function(id){document.getElementById(id).addEventListener('input',upd);});upd();
+</script><script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' App installieren';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Installieren Sie diese App: Tippen Sie auf die Schaltfläche Teilen und wählen Sie dann „Zum Home-Bildschirm hinzufügen“.');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+</body></html>
