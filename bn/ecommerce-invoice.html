@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ই-কমার্সের জন্য চালান — কী কী অন্তর্ভুক্ত করবেন &amp; উদাহরণ | Loona</title><meta name="description" content="ই-কমার্স-এর জন্য চালান তৈরি করছেন? চালানে রাখার জন্য লাইন আইটেম, পরিশোধের শর্তাবলি ও কর নোট, একটি বাস্তব উদাহরণসহ — পাশাপাশি একটি বিনামূল্যের চালান জেনারেটর।">
+<link rel="canonical" href="https://loonaautomation.github.io/loona-invoice-generator/bn/ecommerce-invoice.html"><link rel="alternate" hreflang="en" href="https://loonaautomation.github.io/loona-invoice-generator/ecommerce-invoice.html"><link rel="alternate" hreflang="es" href="https://loonaautomation.github.io/loona-invoice-generator/es/ecommerce-invoice.html"><link rel="alternate" hreflang="de" href="https://loonaautomation.github.io/loona-invoice-generator/de/ecommerce-invoice.html"><link rel="alternate" hreflang="fr" href="https://loonaautomation.github.io/loona-invoice-generator/fr/ecommerce-invoice.html"><link rel="alternate" hreflang="pt" href="https://loonaautomation.github.io/loona-invoice-generator/pt/ecommerce-invoice.html"><link rel="alternate" hreflang="it" href="https://loonaautomation.github.io/loona-invoice-generator/it/ecommerce-invoice.html"><link rel="alternate" hreflang="nl" href="https://loonaautomation.github.io/loona-invoice-generator/nl/ecommerce-invoice.html"><link rel="alternate" hreflang="ar" href="https://loonaautomation.github.io/loona-invoice-generator/ar/ecommerce-invoice.html"><link rel="alternate" hreflang="ur" href="https://loonaautomation.github.io/loona-invoice-generator/ur/ecommerce-invoice.html"><link rel="alternate" hreflang="tr" href="https://loonaautomation.github.io/loona-invoice-generator/tr/ecommerce-invoice.html"><link rel="alternate" hreflang="ru" href="https://loonaautomation.github.io/loona-invoice-generator/ru/ecommerce-invoice.html"><link rel="alternate" hreflang="bn" href="https://loonaautomation.github.io/loona-invoice-generator/bn/ecommerce-invoice.html"><link rel="alternate" hreflang="x-default" href="https://loonaautomation.github.io/loona-invoice-generator/ecommerce-invoice.html"><meta property="og:locale" content="bn_BD"><meta name="robots" content="index,follow">
+<meta property="og:type" content="website"><meta property="og:title" content="ই-কমার্সের জন্য চালান — কী কী অন্তর্ভুক্ত করবেন &amp; উদাহরণ | Loona"><meta property="og:description" content="ই-কমার্স-এর জন্য চালান তৈরি করছেন? চালানে রাখার জন্য লাইন আইটেম, পরিশোধের শর্তাবলি ও কর নোট, একটি বাস্তব উদাহরণসহ — পাশাপাশি একটি বিনামূল্যের চালান জেনারেটর।"><meta property="og:image" content="https://loonaautomation.github.io/loona-invoice-generator/og-image.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--teal-950:#062e2a;--teal-800:#0a4a42;--teal-700:#0d5c4f;--gold:#d4af37;--gold-light:#ffd95e;--cream:#f3e9c8;--ink:#1c2422;--bg:#f7f5ee;--surface:#fffdf6;--muted:#55655f;--line:#ddd3b8;--field:#fff;--field-line:#cfc7a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:16.5px;line-height:1.55}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;line-height:1.2;margin:0}a{color:var(--teal-700)}
+header.site{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.site-inner{max-width:1240px;margin:0 auto;padding:14px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--cream)}.brand img{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold)}
+.bname{font-family:Sora;font-weight:700;font-size:19px;color:#fff}.bsub{font-size:12.5px}
+nav.mainnav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}nav.mainnav a{color:var(--cream);text-decoration:none;font-weight:600;font-size:14.5px;padding:7px 12px;border-radius:999px;border:1px solid rgba(243,233,200,.35)}
+.hero{background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:#fff}.hero-inner{max-width:1240px;margin:0 auto;padding:30px 20px 26px}.hero h1{font-size:clamp(26px,4.4vw,40px);font-weight:800;max-width:26ch}.hero h1 em{font-style:normal;color:var(--gold-light)}.hero p{max-width:72ch;color:var(--cream)}
+.wrap{max-width:1240px;margin:0 auto;padding:26px 20px}.tool-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:26px;align-items:start}@media(max-width:980px){.tool-grid{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(6,46,42,.1);padding:20px}.card+.card{margin-top:20px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}.field label{font-size:13.5px;font-weight:700}
+input,select,textarea{font:inherit;font-size:15.5px;color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:9px;padding:9px 11px;width:100%}
+legend{font-family:Sora;font-weight:700;font-size:17px;margin-bottom:10px}fieldset{border:0;padding:0;margin:0}
+.item-row{display:grid;grid-template-columns:1fr 70px 105px 34px;gap:8px;margin-bottom:8px}.item-row.no-price{grid-template-columns:1fr 90px 34px}
+.icon-btn{border:1px solid var(--field-line);background:#fff;color:#b3402f;border-radius:9px;height:38px;cursor:pointer}
+.add-btn{border:1.5px dashed var(--teal-700);color:var(--teal-700);background:transparent;font:inherit;font-weight:700;border-radius:9px;padding:9px;width:100%;cursor:pointer}
+.btn{font:inherit;font-weight:700;font-size:16px;cursor:pointer;border-radius:11px;padding:13px 22px;border:0}.btn-gold{background:linear-gradient(180deg,var(--gold-light),var(--gold));color:#2a2103}.btn-ghost{background:transparent;color:var(--teal-700);border:1.5px solid var(--teal-700)}
+.paper{background:#fff;color:#1c2422;border-radius:6px;box-shadow:0 14px 40px rgba(6,46,42,.22);padding:38px 40px;font-size:13.5px;line-height:1.5}
+.p-band{height:7px;background:linear-gradient(90deg,var(--teal-950),var(--teal-700),var(--gold));margin:-38px -40px 22px}
+.p-title{font-family:Georgia,serif;font-size:28px;letter-spacing:2px;color:#0a3d36;text-align:right}.p-bizname{font-family:Georgia,serif;font-weight:700;font-size:18px;color:#0a3d36}
+.mut{color:#5c6663;font-size:12.5px;white-space:pre-line}.lab{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#0d5c4f}
+table.p-items{width:100%;border-collapse:collapse;margin-top:14px}table.p-items th{text-align:left;font-size:11px;text-transform:uppercase;color:#fff;background:#0a4a42;padding:8px 10px}table.p-items th.r,table.p-items td.r{text-align:right}table.p-items td{padding:8px 10px;border-bottom:1px solid #e7e2cf}
+.totals{margin-left:auto;width:min(290px,100%);margin-top:14px}.totals .row{display:flex;justify-content:space-between;padding:4px 2px}.totals .grand{border-top:2.5px solid var(--gold);padding-top:9px;font-weight:700;font-size:17px;color:#0a3d36}
+.sig{margin-top:36px;display:grid;grid-template-columns:1fr 1fr;gap:30px}.sig div{border-top:1px solid #999;padding-top:6px;font-size:12.5px;color:#5c6663}
+section.content{max-width:1240px;margin:0 auto;padding:14px 20px}section.content h2{font-size:clamp(22px,3vw,28px);color:var(--teal-950);margin:26px 0 10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:820px){.steps{grid-template-columns:1fr}}.step{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}
+.faq details{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 17px;margin-bottom:10px;max-width:900px}.faq summary{font-weight:600;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;color:var(--ink)}.tool-card h3{margin-bottom:6px;color:var(--teal-950)}
+footer.site{margin-top:34px;background:linear-gradient(120deg,var(--teal-950),var(--teal-800));color:var(--cream)}.foot-inner{max-width:1240px;margin:0 auto;padding:26px 20px;display:flex;gap:18px;flex-wrap:wrap}.foot-links{margin-left:auto;display:flex;flex-direction:column;gap:7px}.foot-links a{color:var(--gold-light);text-decoration:none;font-weight:600}
+@media print{header.site,.hero,.form-col,section.content,footer.site,.no-print{display:none!important}.wrap{padding:0}.tool-grid{display:block}.paper{box-shadow:none}@page{size:A4;margin:12mm}}
+</style>
+<style>
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:15.5px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.tbl th{background:var(--teal-800);color:#fff}
+.tbl td.r,.tbl th.r{text-align:right;font-variant-numeric:tabular-nums}
+.callout{background:#fdf6dd;border:1px solid #eadfae;border-radius:10px;padding:12px 14px;margin:14px 0}
+.guide h2{margin-top:30px}
+.guide ul{margin:6px 0 6px 20px}
+.guide li{margin-bottom:5px}
+.cta{margin:18px 0}
+.src{font-size:13.5px;color:var(--muted)}
+.calc label{display:block;font-weight:700;font-size:13.5px;margin:10px 0 4px}
+.calc input,.calc select{width:100%;max-width:340px}
+.calc .out{font-size:17px;font-weight:700;margin-top:12px}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L43M13ZYT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-5L43M13ZYT');</script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","z599jkwoy9");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ই-কমার্সের জন্য চালান — কী কী অন্তর্ভুক্ত করবেন এবং উদাহরণ | Loona","applicationCategory":"BusinessApplication","operatingSystem":"Any (web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Loona Automation"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"OSS প্রকল্প কী?","acceptedAnswer":{"@type":"Answer","text":"EU One-Stop Shop একজন অনলাইন বিক্রেতাকে গ্রাহকের দেশের হারে ভ্যাট ধার্য করতে এবং তারা যে প্রতিটি দেশে বিক্রি করেন সেখানে নিবন্ধনের বদলে নিজের দেশে একটি রিটার্নের মাধ্যমে সব জানাতে দেয়।"}},{"@type":"Question","name":"একটি অনলাইন অর্ডারে কি চালান অন্তর্ভুক্ত থাকা উচিত নাকি রসিদ?","acceptedAnswer":{"@type":"Answer","text":"পার্সেলের সঙ্গে একটি রসিদ বা চালান রাখুন, এবং একটি PDF কপি ইমেইল করুন। ব্যবসায়িক গ্রাহকদের আপনার কর নম্বরসহ একটি পূর্ণ চালান প্রয়োজন; অন্য গ্রাহকরা সাধারণত একটি রসিদেই সন্তুষ্ট থাকেন।"}},{"@type":"Question","name":"আমি কীভাবে একটি চালানে ছাড়ের কোড দেখাব?","acceptedAnswer":{"@type":"Answer","text":"পণ্যগুলো পূর্ণ মূল্যে তালিকাভুক্ত করুন, তারপর ছাড়টি কোডসহ একটি আলাদা ঋণাত্মক লাইন হিসেবে দেখান। ছাড়কৃত মোটের উপর কর ধার্য হয়।"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Loona Automation","item":"https://loonaautomation.github.io/"},{"@type":"ListItem","position":2,"name":"চালান ও ব্যবসায়িক নথি জেনারেটর","item":"https://loonaautomation.github.io/loona-invoice-generator/bn/"},{"@type":"ListItem","position":3,"name":"<em>ই-কমার্স</em>-এর জন্য চালান","item":"https://loonaautomation.github.io/loona-invoice-generator/bn/ecommerce-invoice.html"}]}</script>
+<link rel="manifest" href="../ecommerce-invoice.webmanifest">
+<meta name="theme-color" content="#062e2a">
+</head><body>
+<header class="site"><div class="site-inner"><a class="brand" href="./"><img src="../icon-192.png" alt="Loona Automation লোগো" width="46" height="46"><span><span class="bname">Loona Automation</span><br><span class="bsub">Aurang Zeb Loona কর্তৃক</span></span></a><nav class="mainnav"><a href="./">চালান জেনারেটর</a><a href="./#documents">সব নথি টুল</a><a href="#faq">FAQ</a></nav></div></header>
+<div class="hero"><div class="hero-inner"><h1>এর জন্য চালান <em>ই-কমার্স</em></h1><p>ই-কমার্স-এর জন্য চালান তৈরি করা সহজ, একবার জেনে গেলে চালানে কী কী থাকা উচিত। এই নির্দেশিকায় প্রচলিত লাইন আইটেম, এই পেশায় কার্যকর পরিশোধের শর্তাবলি এবং কর নোট তালিকাভুক্ত করা হয়েছে — স্পষ্টভাবে চিহ্নিত উদাহরণ হারে একটি বাস্তব উদাহরণসহ।</p></div></div>
+<section class="content guide">
+<h2>চালানে কী রাখতে হবে</h2>
+<ul><li>অর্ডার করা প্রতিটি পণ্য, তার SKU, পরিমাণ ও একক মূল্যসহ</li><li>পাঠানোর চার্জ, আলাদাভাবে দেখানো হয়</li><li>ব্যবহৃত যেকোনো ছাড়ের কোড, আলাদা লাইন হিসেবে দেখানো হয়</li><li>উপহারের মোড়ক বা একটি ব্যক্তিগত বার্তা, যেখানে ধার্য হয়</li></ul>
+<h2>পরিশোধের শর্তাবলি</h2>
+<p>অনলাইন অর্ডার সাধারণত চেকআউটে পরিশোধ করা হয়, তাই চালানটি পরিশোধের অনুরোধের চেয়ে একটি রেকর্ড। অর্ডার নম্বর, অর্ডারের তারিখ এবং ডেলিভারির ঠিকানা অন্তর্ভুক্ত করুন যাতে গ্রাহক এটিকে তাদের অর্ডারের সঙ্গে মেলাতে পারেন।</p>
+<h2>বাস্তব উদাহরণ — 10% উদাহরণ হারে</h2>
+<div class="callout"><strong>অনুগ্রহ করে লক্ষ্য করুন:</strong> এখানে 10% একটি উদাহরণ হার, যা শুধু হিসাবটি দেখানোর জন্য ব্যবহৃত হয়েছে। এটি কোনো দেশের আসল হার নয়। আসল হারের জন্য আপনার দেশের চালান নির্দেশিকা ব্যবহার করুন।</div>
+<p>করের আগে 1,000.00 মূল্যের একটি ই-কমার্স কাজ:</p>
+<table class="tbl"><tr><th>লাইন</th><th class="r">পরিমাণ</th></tr>
+<tr><td>উপমোট (নিট)</td><td class="r">1,000.00</td></tr>
+<tr><td>10% উদাহরণ হারে কর</td><td class="r">100.00</td></tr>
+<tr><td><strong>মোট পাওনা</strong></td><td class="r"><strong>1,100.00</strong></td></tr></table>
+<div class="card calc"><h3 style="margin-top:0">চেষ্টা করুন: চালান মোট ক্যালকুলেটর</h3>
+<label for="sub">উপমোট (নিট)</label>
+<input type="number" id="sub" min="0" step="any" value="1000">
+<label for="rate">উদাহরণ করের হার (শুধুমাত্র উদাহরণ হার — কোনো আসল দেশের হার নয়)</label>
+<select id="rate"><option value="0">0% — কোনো কর নেই / অব্যাহতিপ্রাপ্ত</option><option value="5">5% — উদাহরণ</option><option value="10" selected>10% — উদাহরণ</option><option value="20">20% — উদাহরণ</option></select>
+<p class="out">কর: <span id="oTax">100.00</span> &nbsp;·&nbsp; মোট পাওনা: <span id="oTotal">1,100.00</span></p></div>
+<p class="cta"><a class="btn btn-gold" href="./" style="text-decoration:none">এই চালানটি তৈরি করুন — বিনামূল্যের চালান জেনারেটর</a></p>
+<h2>কর নোট</h2>
+<p>অনলাইন বিক্রিতে বেশিরভাগ ক্ষেত্রে গ্রাহক যেখানে আছেন সেখানে কর ধার্য হয়: EU-এর ভিতরে OSS প্রকল্প আপনাকে গ্রাহকের দেশের হার ধার্য করতে দেয়; অন্য দেশে বিক্রি সাধারণত শূন্য-হারযুক্ত রপ্তানি। নিচের বাস্তব উদাহরণে স্পষ্টভাবে চিহ্নিত 10% উদাহরণ হার ব্যবহার করা হয়েছে — এটি কোনো দেশের আসল হার নয়।</p>
+<h2>আরও বিনামূল্যের টুল ও নির্দেশিকা</h2><div class="cards"><a class="tool-card" href="packing-slip-generator/"><h3>প্যাকিং স্লিপ জেনারেটর</h3><p>মূল্য ডিফল্টভাবে লুকানো প্যাকিং স্লিপ।</p></a><a class="tool-card" href="invoice-by-country.html"><h3>দেশ অনুযায়ী চালান নির্দেশিকা</h3><p>সব 20টি দেশের নির্দেশিকা, 15টি শিল্প এবং 10টি পেস্লিপ নির্দেশিকা।</p></a><a class="tool-card" href="./"><h3>বিনামূল্যে চালান জেনারেটর</h3><p>EU ভ্যাট ও রিভার্স চার্জসহ প্রধান Loona চালান টুল।</p></a></div>
+<h2>সাধারণ জিজ্ঞাসা</h2>
+<div class="faq" id="faq"><details><summary>OSS প্রকল্প কী?</summary><p>EU One-Stop Shop একজন অনলাইন বিক্রেতাকে গ্রাহকের দেশের হারে ভ্যাট ধার্য করতে এবং তারা যে প্রতিটি দেশে বিক্রি করেন সেখানে নিবন্ধনের বদলে নিজের দেশে একটি রিটার্নের মাধ্যমে সব জানাতে দেয়।</p></details><details><summary>একটি অনলাইন অর্ডারে কি চালান অন্তর্ভুক্ত থাকা উচিত নাকি রসিদ?</summary><p>পার্সেলের সঙ্গে একটি রসিদ বা চালান রাখুন, এবং একটি PDF কপি ইমেইল করুন। ব্যবসায়িক গ্রাহকদের আপনার কর নম্বরসহ একটি পূর্ণ চালান প্রয়োজন; অন্য গ্রাহকরা সাধারণত একটি রসিদেই সন্তুষ্ট থাকেন।</p></details><details><summary>আমি কীভাবে একটি চালানে ছাড়ের কোড দেখাব?</summary><p>পণ্যগুলো পূর্ণ মূল্যে তালিকাভুক্ত করুন, তারপর ছাড়টি কোডসহ একটি আলাদা ঋণাত্মক লাইন হিসেবে দেখান। ছাড়কৃত মোটের উপর কর ধার্য হয়।</p></details></div>
+</section>
+<footer class="site"><div class="foot-inner"><div><div style="font-weight:700;color:#fff;font-size:17px">Loona Automation</div><p>Aurang Zeb Loona-এর বিনামূল্যে ব্যবসায়িক নথি টুল। কোনো সাইন-আপ নয়, কোনো ওয়াটারমার্ক নয় — আপনার ডেটা আপনার ডিভাইসেই থাকে।</p></div><div class="foot-links"><a href="./">চালান &amp; ব্যবসায়িক নথি হাব</a><a href="about/">সম্পর্কে</a><a href="contact/">যোগাযোগ</a><a href="privacy/">গোপনীয়তা নীতি</a><a href="terms/">ব্যবহারের শর্তাবলি</a><a href="mailto:loonaautomation@gmail.com">loonaautomation@gmail.com</a></div></div></footer>
+<script>
+function fmt2(n){return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function calc(){var s=parseFloat(document.getElementById('sub').value)||0;var r=parseFloat(document.getElementById('rate').value)||0;document.getElementById('oTax').textContent=fmt2(s*r/100);document.getElementById('oTotal').textContent=fmt2(s*(1+r/100));}
+document.getElementById('sub').addEventListener('input',calc);document.getElementById('rate').addEventListener('change',calc);calc();
+</script><script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' অ্যাপ ইনস্টল করুন';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('এই অ্যাপটি ইনস্টল করুন: Share বোতামে ট্যাপ করুন, তারপর "Add to Home Screen" বেছে নিন।');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+</body></html>
