@@ -1,0 +1,29 @@
+{
+  "name": "Loona Invoice in Australia",
+  "short_name": "Invoice in Australia",
+  "description": "Invoicing in Australia? The standard GST rate is 10%, what your invoice must show, and a worked example — plus a free invoice generator.",
+  "id": "/loona-invoice-generator/en-us/invoice-australia.html",
+  "start_url": "./invoice-australia.html",
+  "scope": "./invoice-australia.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

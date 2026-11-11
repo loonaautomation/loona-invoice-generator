@@ -1,0 +1,29 @@
+{
+  "name": "Loona Invoice for Logistics & Transport",
+  "short_name": "Invoice for Logistics & Transport",
+  "description": "Invoicing for logistics & transport? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
+  "id": "/loona-invoice-generator/en-us/logistics-invoice.html",
+  "start_url": "./logistics-invoice.html",
+  "scope": "./logistics-invoice.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

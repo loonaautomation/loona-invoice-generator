@@ -1,0 +1,29 @@
+{
+  "name": "Loona Payslip in Japan",
+  "short_name": "Payslip in Japan",
+  "description": "What does a payslip in Japan show? A worked payslip at ¥5,000,000 a year, gross to net, with a free calculator.",
+  "id": "/loona-invoice-generator/en-us/payslip-japan.html",
+  "start_url": "./payslip-japan.html",
+  "scope": "./payslip-japan.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

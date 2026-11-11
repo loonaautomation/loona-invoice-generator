@@ -1,0 +1,29 @@
+{
+  "name": "Loona Free Quote / Estimate Generator",
+  "short_name": "Free Quote / Estimate Generator",
+  "description": "Create a free price quote or estimate online with items, tax, validity date and terms. No sign-up, print-ready PDF, works offline on your device.",
+  "id": "/loona-invoice-generator/en-us/quote-generator/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

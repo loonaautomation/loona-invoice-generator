@@ -1,0 +1,29 @@
+{
+  "name": "Loona Free Commercial Invoice Generator",
+  "short_name": "Free Commercial Invoice Generator",
+  "description": "Create a free commercial invoice for customs and shipping with exporter, importer, HS codes, country of origin, incoterms and freight. No sign-up.",
+  "id": "/loona-invoice-generator/en-us/commercial-invoice-generator/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

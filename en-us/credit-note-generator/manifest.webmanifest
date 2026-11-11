@@ -1,0 +1,29 @@
+{
+  "name": "Loona Free Credit Note Generator",
+  "short_name": "Free Credit Note Generator",
+  "description": "Create a free credit note online against an original invoice, with reason, credited items and tax adjustment calculated automatically. No sign-up.",
+  "id": "/loona-invoice-generator/en-us/credit-note-generator/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

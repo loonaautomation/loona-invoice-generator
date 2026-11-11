@@ -1,0 +1,29 @@
+{
+  "name": "Loona Free Envelope & Address Label Generator",
+  "short_name": "Free Envelope & Address Label Generator",
+  "description": "Create and print a free envelope or address label online with sender and recipient addresses in DL, C5, C4 and label sizes. No sign-up.",
+  "id": "/loona-invoice-generator/en-us/envelope-label-generator/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

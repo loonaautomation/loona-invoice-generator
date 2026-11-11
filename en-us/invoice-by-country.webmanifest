@@ -1,0 +1,29 @@
+{
+  "name": "Loona Invoice Guides by Country, Industry & Payslip",
+  "short_name": "Invoice Guides by Country, Industry & Payslip",
+  "description": "Invoice guides for 20 countries with the real VAT/GST rates, 15 industries, 10 worked payslips and 8 receipt guides — all free, with worked examples.",
+  "id": "/loona-invoice-generator/en-us/invoice-by-country.html",
+  "start_url": "./invoice-by-country.html",
+  "scope": "./invoice-by-country.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Loona Invoice in Saudi Arabia",
+  "short_name": "Invoice in Saudi Arabia",
+  "description": "Invoicing in Saudi Arabia? The standard VAT rate is 15%, what your invoice must show, and a worked example — plus a free invoice generator.",
+  "id": "/loona-invoice-generator/en-us/invoice-saudi-arabia.html",
+  "start_url": "./invoice-saudi-arabia.html",
+  "scope": "./invoice-saudi-arabia.html",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
