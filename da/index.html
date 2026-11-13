@@ -441,7 +441,7 @@
               <legend>1 · Din virksomhed</legend>
               <div class="field">
                 <label for="bizName">Dit navn / virksomhedsnavn</label>
-                <input type="text" id="bizName" placeholder="e.g. Anna Schmidt Design" />
+                <input type="text" id="bizName" placeholder="f.eks. Anna Schmidt Design" />
               </div>
               <div class="grid2">
                 <div class="field">
@@ -450,7 +450,7 @@
                 </div>
                 <div class="field">
                   <label for="bizVat">Dit moms-ID <span class="opt">(valgfrit)</span></label>
-                  <input type="text" id="bizVat" placeholder="e.g. DE123456789" />
+                  <input type="text" id="bizVat" placeholder="f.eks. DE123456789" />
                 </div>
               </div>
               <div class="field">
@@ -475,7 +475,7 @@
               <legend>2 · Din kunde</legend>
               <div class="field">
                 <label for="cliName">Kundens navn / virksomhed</label>
-                <input type="text" id="cliName" placeholder="e.g. Dupont SARL" />
+                <input type="text" id="cliName" placeholder="f.eks. Dupont SARL" />
               </div>
               <div class="grid2">
                 <div class="field">
@@ -484,7 +484,7 @@
                 </div>
                 <div class="field">
                   <label for="cliVat">Kundens momsnummer <span class="opt">(for grænseoverskridende B2B)</span></label>
-                  <input type="text" id="cliVat" placeholder="e.g. FRXX123456789" />
+                  <input type="text" id="cliVat" placeholder="f.eks. FRXX123456789" />
                 </div>
               </div>
               <div class="field">
@@ -1014,7 +1014,7 @@
         $("paper").innerHTML =
           '<div class="p-band"></div>' +
           '<div class="p-top">' +
-            '<div class="p-biz"><img src="icon-192.png" alt="" />' +
+            '<div class="p-biz"><img src="../icon-192.png" alt="" />' +
               '<div><div class="p-bizname">' + esc(d.bizName || "Dit virksomhedsnavn") + '</div>' +
               '<div class="p-addr">' + esc(d.bizAddress || "Din gade, postnummer, by") + '\n' + esc(CNAME[d.bizCountry]) + '</div></div>' +
             '</div>' +
