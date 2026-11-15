@@ -361,7 +361,23 @@
         html{scroll-behavior:auto}
         .toast{transition:none}
       }
-    </style>
+    
+.ls{max-width:640px;margin:22px auto 4px;position:relative;text-align:left}
+.ls-box{display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.28);border:2px solid var(--gold,#d4af37)}
+.ls-box input{flex:1;border:0;outline:0;padding:14px 18px;font-size:1.02rem;min-width:0;color:var(--ink,#12211c);background:#fff}
+.ls-box button{border:0;background:var(--gold,#d4af37);color:#231a00;font-weight:800;padding:0 22px;font-size:1rem;cursor:pointer}
+.ls-box button:hover{background:var(--gold2,#b8912a)}
+.ls-list{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.35);z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.ls-item{display:block;padding:10px 16px;text-decoration:none;border-bottom:1px solid #eee9da}
+.ls-item:last-of-type{border-bottom:0}
+.ls-item:hover,.ls-item.act{background:#fbf6df}
+.ls-nm{font-weight:700;color:var(--ink,#12211c)}
+.ls-badge{display:inline-block;margin-left:8px;background:var(--teal,#062e2a);color:#ffe9a8;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ls-ds{display:block;color:#5a6660;font-size:.85rem;margin-top:1px}
+.ls-none{padding:12px 16px;color:#5a6660;font-size:.92rem}
+@media(max-width:560px){.ls-box button{padding:0 14px}.ls-box input{padding:12px 14px;font-size:.98rem}}
+
+</style>
   
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
@@ -429,6 +445,10 @@
           <span>16 monedas</span>
           <span>Privado: se ejecuta en tu navegador</span>
         </div>
+<div class="ls"><form id="lsForm" role="search" autocomplete="off">
+<div class="ls-box"><input id="lsInput" type="search" placeholder="Busca entre 22 herramientas de facturas&hellip; prueba &lsquo;factura&rsquo;" aria-label="Buscar entre 22 herramientas de facturas" autocomplete="off"><button type="submit">Buscar</button></div>
+<div id="lsList" class="ls-list" role="listbox" hidden></div>
+</form></div>
       </div>
     </div>
 
@@ -1297,6 +1317,235 @@
       });
     })();
     </script>
-  <script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Instalar app';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Instala esta app: toca el botón Compartir y luego elige «Añadir a la pantalla de inicio».');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+  <script>/*loona-invoice-search*/
+/* Loona Invoice Generator search (per-site build of the Loona hub tool search v2) — lazy-loads /search-index.json on first focus/typing.
+   v2 fixes: a failed fetch no longer poisons the session (it retries on the next
+   keystroke/focus), a "Loading tools…" state shows while the index downloads,
+   an embedded popular-tools fallback keeps search alive offline, Roman Urdu
+   aliases, joined-word matching, dedupe and tool-over-guide ranking. */
+(function () {
+  "use strict";
+  var form = document.getElementById('lsForm'),
+      input = document.getElementById('lsInput'),
+      list = document.getElementById('lsList');
+  if (!form || !input || !list) return;
+  var INDEX_URL = '/loona-invoice-generator/es/search-index.json';
+  var STR = {"loading": "Cargando herramientas…", "fb": "Mostrando herramientas populares — el índice completo está en camino…", "zero1": "Sin coincidencia exacta para “", "zero2": "” — prueba estas herramientas populares:"};
+  var FALLBACK = [{"n": "Loona Invoice & Business Documents", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/", "s": "Loona Invoice Generator", "d": "Generadores gratuitos de facturas y documentos comerciales de Loona: facturas con IVA de la UE e inversión del sujeto pasivo, además de recibos, presupuestos, órdenes de compra, notas de crédito, albaranes, albaranes de embalaje, nóminas y recibos de alquiler. Sin registro, PDF listo para imprimir.", "k": "business documents homepage invoice loona site tools website loona invoice business documents generadores gratuitos de facturas y documentos comerciales de loona facturas con iva de la ue e inversion del sujeto pasivo ademas de recibos presupuestos ordenes de compra notas de credito albaranes albaranes de embalaje nominas y recibos de alquiler sin registro pdf listo para imprimir inversión además órdenes crédito nóminas", "p": 0, "c": "Website"}, {"n": "Generador de recibos", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/receipt-generator/", "s": "Loona Invoice Generator", "d": "Recibos de pago con el importe en letras, método de pago y línea de firma.", "k": "receipt generator generador de recibos recibos de pago con el importe en letras metodo de pago y linea de firma método línea", "p": 1, "c": "Tool"}, {"n": "Generador de presupuestos / estimaciones", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/quote-generator/", "s": "Loona Invoice Generator", "d": "Presupuestos profesionales con partidas, impuestos, fecha de validez y condiciones.", "k": "quote generator generador de presupuestos estimaciones presupuestos profesionales con partidas impuestos fecha de validez y condiciones", "p": 2, "c": "Tool"}, {"n": "Generador de órdenes de compra", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/purchase-order-generator/", "s": "Loona Invoice Generator", "d": "OC numeradas con comprador, proveedor, dirección de envío y autorización.", "k": "purchase order generator generador de ordenes de compra oc numeradas con comprador proveedor direccion de envio y autorizacion órdenes dirección envío autorización", "p": 3, "c": "Tool"}, {"n": "Generador de notas de crédito", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/credit-note-generator/", "s": "Loona Invoice Generator", "d": "Notas de crédito contra una factura original, con el ajuste de impuestos calculado.", "k": "credit note generator generador de notas de credito notas de credito contra una factura original con el ajuste de impuestos calculado crédito crédito", "p": 4, "c": "Tool"}, {"n": "Generador de albaranes", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/delivery-note-generator/", "s": "Loona Invoice Generator", "d": "Albaranes con artículos, cantidades y una firma de recibido.", "k": "delivery note generator generador de albaranes albaranes con articulos cantidades y una firma de recibido artículos", "p": 5, "c": "Tool"}, {"n": "Generador de albaranes de embalaje", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/packing-slip-generator/", "s": "Loona Invoice Generator", "d": "Albaranes de embalaje con precios ocultos por defecto y un interruptor opcional de precios.", "k": "packing slip generator generador de albaranes de embalaje albaranes de embalaje con precios ocultos por defecto y un interruptor opcional de precios", "p": 6, "c": "Tool"}, {"n": "Generador de nóminas", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/pay-stub-generator/", "s": "Loona Invoice Generator", "d": "Nóminas con ingresos, deducciones y salario neto calculados automáticamente.", "k": "pay stub generator generador de nominas nominas con ingresos deducciones y salario neto calculados automaticamente nóminas nóminas automáticamente", "p": 7, "c": "Tool"}, {"n": "Generador de recibos de alquiler", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/rent-receipt-generator/", "s": "Loona Invoice Generator", "d": "Recibos de alquiler con inquilino, arrendador, propiedad, mes e importe en letras.", "k": "rent receipt generator generador de recibos de alquiler recibos de alquiler con inquilino arrendador propiedad mes e importe en letras", "p": 8, "c": "Tool"}, {"n": "Generador de facturas proforma", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/proforma-invoice-generator/", "s": "Loona Invoice Generator", "d": "Facturas preliminares para pago anticipado y aduanas, con fecha de validez.", "k": "proforma invoice generator generador de facturas proforma facturas preliminares para pago anticipado y aduanas con fecha de validez", "p": 9, "c": "Tool"}, {"n": "Generador de notas de débito", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/debit-note-generator/", "s": "Loona Invoice Generator", "d": "Notas de débito para devoluciones de compra y correcciones de cargos insuficientes, con ajuste de impuestos.", "k": "debit note generator generador de notas de debito notas de debito para devoluciones de compra y correcciones de cargos insuficientes con ajuste de impuestos débito débito", "p": 10, "c": "Tool"}, {"n": "Generador de órdenes de venta", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/sales-order-generator/", "s": "Loona Invoice Generator", "d": "Confirmaciones de pedido del vendedor que hacen referencia a la OC del cliente, con fecha de entrega.", "k": "sales order generator generador de ordenes de venta confirmaciones de pedido del vendedor que hacen referencia a la oc del cliente con fecha de entrega órdenes", "p": 11, "c": "Tool"}, {"n": "Generador de extractos de cuenta", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/statement-of-account-generator/", "s": "Loona Invoice Generator", "d": "Extractos de clientes con saldo inicial y saldo corriente.", "k": "statement of account generator generador de extractos de cuenta extractos de clientes con saldo inicial y saldo corriente", "p": 12, "c": "Tool"}, {"n": "Generador de órdenes de trabajo", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/work-order-generator/", "s": "Loona Invoice Generator", "d": "Órdenes de trabajo con horas de mano de obra, piezas y aprobación del cliente.", "k": "work order generator generador de ordenes de trabajo ordenes de trabajo con horas de mano de obra piezas y aprobacion del cliente órdenes órdenes aprobación", "p": 13, "c": "Tool"}, {"n": "Generador de contratos de servicios", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/service-agreement-generator/", "s": "Loona Invoice Generator", "d": "Plantillas de contratos de servicios en lenguaje sencillo con la tarifa en letras y firmas.", "k": "service agreement generator generador de contratos de servicios plantillas de contratos de servicios en lenguaje sencillo con la tarifa en letras y firmas", "p": 14, "c": "Tool"}, {"n": "Generador de cartas comerciales", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/business-letter-generator/", "s": "Loona Invoice Generator", "d": "Cartas comerciales formales en un membrete limpio: ahora con plantillas de recordatorios de pago 1, 2 y final incorporadas.", "k": "business letter generator generador de cartas comerciales cartas comerciales formales en un membrete limpio ahora con plantillas de recordatorios de pago 1 2 y final incorporadas", "p": 15, "c": "Tool"}, {"n": "Generador de sobres & etiquetas de dirección", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/envelope-label-generator/", "s": "Loona Invoice Generator", "d": "Imprime direcciones directamente en sobres DL, C5 y C4 o en etiquetas.", "k": "envelope label generator generador de sobres etiquetas de direccion imprime direcciones directamente en sobres dl c5 y c4 o en etiquetas dirección", "p": 16, "c": "Tool"}, {"n": "Generador de informes de gastos", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/expense-report-generator/", "s": "Loona Invoice Generator", "d": "Reclamaciones de gastos con anticipos deducidos e importe debido calculado.", "k": "expense report generator generador de informes de gastos reclamaciones de gastos con anticipos deducidos e importe debido calculado", "p": 17, "c": "Tool"}, {"n": "Generador de conocimiento de embarque", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/bill-of-lading-generator/", "s": "Loona Invoice Generator", "d": "Documentación de flete con remitente, transportista, destinatario y totales de piezas y peso.", "k": "bill of lading generator generador de conocimiento de embarque documentacion de flete con remitente transportista destinatario y totales de piezas y peso documentación", "p": 18, "c": "Tool"}, {"n": "Generador de facturas comerciales", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/commercial-invoice-generator/", "s": "Loona Invoice Generator", "d": "Facturas aduaneras con códigos HS, país de origen, incoterms y flete.", "k": "commercial invoice generator generador de facturas comerciales facturas aduaneras con codigos hs pais de origen incoterms y flete códigos país", "p": 19, "c": "Tool"}, {"n": "Generador de registros de kilometraje", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/mileage-log-generator/", "s": "Loona Invoice Generator", "d": "Registros de kilometraje con lecturas del cuentakilómetros, millas totales y reembolso calculado.", "k": "mileage log generator generador de registros de kilometraje registros de kilometraje con lecturas del cuentakilometros millas totales y reembolso calculado cuentakilómetros", "p": 20, "c": "Tool"}, {"n": "Generador de recibos de donación", "u": "https://loonaautomation.github.io/loona-invoice-generator/es/donation-receipt-generator/", "s": "Loona Invoice Generator", "d": "Recibos de donación benéfica con el importe en letras y donaciones en especie.", "k": "donation receipt generator generador de recibos de donacion recibos de donacion benefica con el importe en letras y donaciones en especie donación donación benéfica", "p": 21, "c": "Tool"}];
+  var data = null, loading = null, usingFallback = false, active = -1, current = [];
+
+  /*CORE-START*/
+/* Loona search core v2 — shared by the homepage dropdown and the /search/ page.
+   Adds over v1: Roman Urdu alias layer, joined-word matching, keyword prefix match,
+   URL+name dedupe, tool-over-guide boost. `data` is supplied by the page glue. */
+var ALIASES = {
+  "khat": "letter",
+  "rasid": "receipt"
+};
+function norm(s) { s = (s || '').toLowerCase().replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/ł/g, 'l').replace(/đ/g, 'd'); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) {} return s.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function lev(a, b) {
+  if (a === b) return 0;
+  var la = a.length, lb = b.length, i, j;
+  if (Math.abs(la - lb) > 1) return 2;
+  var prev = [], cur = [];
+  for (j = 0; j <= lb; j++) prev[j] = j;
+  for (i = 1; i <= la; i++) {
+    cur[0] = i; var best = 99;
+    for (j = 1; j <= lb; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+      cur[j] = v; if (v < best) best = v;
+    }
+    if (best > 1) return 2;
+    var t = prev; prev = cur; cur = t;
+  }
+  return prev[lb];
+}
+function wordLevel(w, nameWords, hayWords, nameJoined) {
+  var i;
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i] === w) return 30;
+  for (i = 0; i < nameWords.length; i++) if (w.length >= 3 && nameWords[i].indexOf(w) === 0) return 24;
+  for (i = 0; i < hayWords.length; i++) if (hayWords[i] === w) return 20;
+  for (i = 0; i < hayWords.length; i++) if (w.length >= 3 && hayWords[i].indexOf(w) === 0) return 18;
+  if (w.length >= 4 && nameJoined.indexOf(w) >= 0) return 22;
+  if (w.length >= 4) {
+    for (i = 0; i < nameWords.length; i++) if (lev(w, nameWords[i]) <= 1) return 17;
+    for (i = 0; i < hayWords.length; i++) if (lev(w, hayWords[i]) <= 1) return 12;
+  }
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i].indexOf(w) >= 0) return 14;
+  return 0;
+}
+function expandWords(qw) {
+  /* variants tried (best score wins): the words themselves; each Roman Urdu
+     word swapped for the FIRST word of its English meaning; the full meaning;
+     and — for multi-word queries — the words joined into one ("wi fi"→"wifi"). */
+  var prim = [], full = [], changed = false;
+  for (var i = 0; i < qw.length; i++) {
+    var a = ALIASES[qw[i]];
+    if (a) {
+      changed = true;
+      var parts = a.split(' ');
+      prim.push(parts[0]);
+      for (var j = 0; j < parts.length; j++) full.push(parts[j]);
+    } else { prim.push(qw[i]); full.push(qw[i]); }
+  }
+  var out = [qw];
+  if (changed) { out.push(prim); if (full.join(' ') !== prim.join(' ')) out.push(full); }
+  if (qw.length > 1) out.push([qw.join('')]);
+  return out;
+}
+function runSearch(q, limit) {
+  var query = norm(q);
+  if (!query || !data) return [];
+  var variants = expandWords(query.split(' ')), out = [];
+  for (var e = 0; e < data.length; e++) {
+    var it = data[e], name = norm(it.n),
+        hay = name + ' ' + norm(it.s) + ' ' + (it.k || ''),
+        nameWords = name.split(' '), hayWords = hay.split(' '),
+        nameJoined = name.replace(/ /g, ''), best = -1;
+    for (var v = 0; v < variants.length; v++) {
+      var qw = variants[v], sum = 0, ok = true;
+      for (var i = 0; i < qw.length; i++) {
+        var lv = wordLevel(qw[i], nameWords, hayWords, nameJoined);
+        if (lv === 0) { ok = false; break; }
+        sum += lv;
+      }
+      if (!ok) continue;
+      var score = sum * 10, qs = qw.join(' '), qJoined = qs.replace(/ /g, '');
+      if (name === qs) score += 100000;
+      else if (name.indexOf(qs) === 0) score += 5000;
+      else if (name.indexOf(qs) >= 0) score += 2000;
+      if (nameJoined === qJoined) score += 9000;
+      else if (qJoined.length >= 4 && nameJoined.indexOf(qJoined) >= 0) score += 2500;
+      if (qw.length > 1) {
+        var allN = true;
+        for (var k = 0; k < qw.length; k++) if (nameWords.indexOf(qw[k]) < 0) allN = false;
+        if (allN) score += 800;
+      }
+      /* tool whose name carries the searched word beats a guide about it */
+      if (it.c !== 'Guide') {
+        for (var m = 0; m < qw.length; m++) if (nameWords.indexOf(qw[m]) >= 0) { score += 350; break; }
+      }
+      score -= (typeof it.p === 'number' ? it.p : 400) * 0.6;
+      score -= name.length * 0.3;
+      if (score > best) best = score;
+    }
+    if (best >= 0) out.push({ it: it, score: best });
+  }
+  out.sort(function (a, b) { return b.score - a.score; });
+  /* dedupe: same URL once, same tool name once (keep the better-ranked copy) */
+  var seenU = {}, seenN = {}, res = [];
+  for (var r = 0; r < out.length; r++) {
+    var en = out[r].it, key = norm(en.n);
+    if (seenU[en.u] || seenN[key]) continue;
+    seenU[en.u] = 1; seenN[key] = 1; res.push(en);
+    if (res.length >= limit) break;
+  }
+  return res;
+}
+function popular(n) {
+  if (!data) return [];
+  return data.filter(function (e) { return (typeof e.p === 'number' ? e.p : 400) < 30; })
+             .sort(function (a, b) { return a.p - b.p; }).slice(0, n);
+}
+/*CORE-END*/
+
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function badge(e) { return e.c === 'Website' ? 'Website' : (e.c === 'Guide' ? 'Guide' : e.s.replace(/^Loona /, '')); }
+  function itemHtml(e, i) {
+    return '<a class="ls-item" role="option" data-i="' + i + '" href="' + esc(e.u) + '">' +
+           '<span class="ls-nm">' + esc(e.n) + '</span><span class="ls-badge">' + esc(badge(e)) + '</span>' +
+           '<span class="ls-ds">' + esc(e.d) + '</span></a>';
+  }
+  function bindItems() {
+    var links = list.querySelectorAll('.ls-item');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseenter', function () { setActive(parseInt(this.getAttribute('data-i'), 10)); });
+    }
+  }
+  function render(items, q) {
+    active = -1; current = items;
+    var h = '';
+    if (usingFallback) h += '<div class="ls-none">' + STR.fb + '</div>';
+    h += items.map(itemHtml).join('');
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderZero(q) {
+    var pop = popular(6);
+    active = -1; current = pop;
+    var h = '<div class="ls-none">' + STR.zero1 + esc(q) + STR.zero2 + '</div>' +
+            pop.map(itemHtml).join('') +
+            '';
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderLoading() {
+    list.innerHTML = '<div class="ls-none">' + STR.loading + '</div>';
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function refresh() {
+    var q = input.value;
+    if (!data) { renderLoading(); return; }
+    if (!norm(q)) { render(popular(6), ''); return; }
+    var res = runSearch(q, 8);
+    if (res.length) render(res, q); else renderZero(q);
+  }
+  function hide() { list.hidden = true; active = -1; input.setAttribute('aria-expanded', 'false'); }
+  function setActive(i) {
+    active = i;
+    var links = list.querySelectorAll('.ls-item');
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('act', j === i);
+    if (i >= 0 && links[i]) links[i].scrollIntoView({ block: 'nearest' });
+  }
+  function ensureIndex() {
+    if (data && !usingFallback) return;
+    if (loading) return;
+    loading = fetch(INDEX_URL).then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      data = j; usingFallback = false; loading = null; refresh();
+    }).catch(function () {
+      loading = null;                 /* not poisoned: next keystroke/focus retries */
+      if (!data) { data = FALLBACK; usingFallback = true; }
+      refresh();
+    });
+  }
+  var timer = null;
+  function onType() { ensureIndex(); refresh(); }
+  input.addEventListener('focus', onType);
+  input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(onType, 70); });
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault();
+      if (list.hidden) { onType(); return; }
+      var n = current.length; if (!n) return;
+      setActive(ev.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n);
+    } else if (ev.key === 'Escape') { hide(); }
+  });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var q = input.value;
+    if (active >= 0 && current[active]) { window.location.href = current[active].u; return; }
+    ensureIndex();
+    if (data) {
+      var best = runSearch(q, 1);
+      if (best.length) { window.location.href = best[0].u; return; }
+    }
+    if (norm(q)) renderZero(q);
+  });
+  document.addEventListener('click', function (ev) { if (!form.contains(ev.target)) hide(); });
+})();
+
+</script>
+<script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Instalar app';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Instala esta app: toca el botón Compartir y luego elige «Añadir a la pantalla de inicio».');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
 </body>
 </html>

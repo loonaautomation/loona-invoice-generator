@@ -361,7 +361,23 @@
         html{scroll-behavior:auto}
         .toast{transition:none}
       }
-    </style>
+    
+.ls{max-width:640px;margin:22px auto 4px;position:relative;text-align:left}
+.ls-box{display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.28);border:2px solid var(--gold,#d4af37)}
+.ls-box input{flex:1;border:0;outline:0;padding:14px 18px;font-size:1.02rem;min-width:0;color:var(--ink,#12211c);background:#fff}
+.ls-box button{border:0;background:var(--gold,#d4af37);color:#231a00;font-weight:800;padding:0 22px;font-size:1rem;cursor:pointer}
+.ls-box button:hover{background:var(--gold2,#b8912a)}
+.ls-list{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.35);z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.ls-item{display:block;padding:10px 16px;text-decoration:none;border-bottom:1px solid #eee9da}
+.ls-item:last-of-type{border-bottom:0}
+.ls-item:hover,.ls-item.act{background:#fbf6df}
+.ls-nm{font-weight:700;color:var(--ink,#12211c)}
+.ls-badge{display:inline-block;margin-left:8px;background:var(--teal,#062e2a);color:#ffe9a8;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ls-ds{display:block;color:#5a6660;font-size:.85rem;margin-top:1px}
+.ls-none{padding:12px 16px;color:#5a6660;font-size:.92rem}
+@media(max-width:560px){.ls-box button{padding:0 14px}.ls-box input{padding:12px 14px;font-size:.98rem}}
+
+</style>
   
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
@@ -429,6 +445,10 @@
           <span>16 currencies</span>
           <span>Private — runs in your browser</span>
         </div>
+<div class="ls"><form id="lsForm" role="search" autocomplete="off">
+<div class="ls-box"><input id="lsInput" type="search" placeholder="Search 22 tools&hellip; try &lsquo;invoice&rsquo;" aria-label="Search 22 tools" autocomplete="off"><button type="submit">Search</button></div>
+<div id="lsList" class="ls-list" role="listbox" hidden></div>
+</form></div>
       </div>
     </div>
 
@@ -1297,6 +1317,235 @@
       });
     })();
     </script>
-  <script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Install App';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Install this app: tap the Share button, then choose "Add to Home Screen".');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+  <script>/*loona-invoice-search*/
+/* Loona Invoice Generator search (per-site build of the Loona hub tool search v2) — lazy-loads /search-index.json on first focus/typing.
+   v2 fixes: a failed fetch no longer poisons the session (it retries on the next
+   keystroke/focus), a "Loading tools…" state shows while the index downloads,
+   an embedded popular-tools fallback keeps search alive offline, Roman Urdu
+   aliases, joined-word matching, dedupe and tool-over-guide ranking. */
+(function () {
+  "use strict";
+  var form = document.getElementById('lsForm'),
+      input = document.getElementById('lsInput'),
+      list = document.getElementById('lsList');
+  if (!form || !input || !list) return;
+  var INDEX_URL = '/loona-invoice-generator/en-gb/search-index.json';
+  var STR = {"loading": "Loading tools…", "fb": "Showing popular tools — the full index is on its way…", "zero1": "No exact match for “", "zero2": "” — try these popular tools:"};
+  var FALLBACK = [{"n": "Loona Invoice & Business Documents", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/", "s": "Loona Invoice Generator", "d": "Free invoice and business document generators by Loona: invoices with EU VAT & reverse charge, plus receipts, quotes, purchase orders, credit notes, delivery notes, packing slips, pay stubs and rent receipts. No sign-up, print-ready PDF.", "k": "business documents homepage invoice loona site tools website loona invoice business documents free invoice and business document generators by loona invoices with eu vat reverse charge plus receipts quotes purchase orders credit notes delivery notes packing slips pay stubs and rent receipts no sign up print ready pdf", "p": 0, "c": "Website"}, {"n": "Receipt Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/receipt-generator/", "s": "Loona Invoice Generator", "d": "Payment receipts with amount in words, payment method and signature line.", "k": "receipt generator receipt generator payment receipts with amount in words payment method and signature line", "p": 1, "c": "Tool"}, {"n": "Quote / Estimate Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/quote-generator/", "s": "Loona Invoice Generator", "d": "Professional quotes with items, tax, validity date and terms.", "k": "quote generator quote estimate generator professional quotes with items tax validity date and terms", "p": 2, "c": "Tool"}, {"n": "Purchase Order Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/purchase-order-generator/", "s": "Loona Invoice Generator", "d": "Numbered POs with buyer, supplier, ship-to address and authorisation.", "k": "purchase order generator purchase order generator numbered pos with buyer supplier ship to address and authorisation", "p": 3, "c": "Tool"}, {"n": "Credit Note Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/credit-note-generator/", "s": "Loona Invoice Generator", "d": "Credit notes against an original invoice, with tax adjustment calculated.", "k": "credit note generator credit note generator credit notes against an original invoice with tax adjustment calculated", "p": 4, "c": "Tool"}, {"n": "Delivery Note Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/delivery-note-generator/", "s": "Loona Invoice Generator", "d": "Delivery slips with items, quantities and a received-by signature.", "k": "delivery note generator delivery note generator delivery slips with items quantities and a received by signature", "p": 5, "c": "Tool"}, {"n": "Packing Slip Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/packing-slip-generator/", "s": "Loona Invoice Generator", "d": "Packing slips with prices hidden by default and an optional price toggle.", "k": "packing slip generator packing slip generator packing slips with prices hidden by default and an optional price toggle", "p": 6, "c": "Tool"}, {"n": "Pay Stub Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/pay-stub-generator/", "s": "Loona Invoice Generator", "d": "Pay stubs with earnings, deductions and net pay calculated automatically.", "k": "pay stub generator pay stub generator pay stubs with earnings deductions and net pay calculated automatically", "p": 7, "c": "Tool"}, {"n": "Rent Receipt Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/rent-receipt-generator/", "s": "Loona Invoice Generator", "d": "Rent receipts with tenant, landlord, property, month and amount in words.", "k": "rent receipt generator rent receipt generator rent receipts with tenant landlord property month and amount in words", "p": 8, "c": "Tool"}, {"n": "Proforma Invoice Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/proforma-invoice-generator/", "s": "Loona Invoice Generator", "d": "Preliminary invoices for advance payment and customs, with validity date.", "k": "proforma invoice generator proforma invoice generator preliminary invoices for advance payment and customs with validity date", "p": 9, "c": "Tool"}, {"n": "Debit Note Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/debit-note-generator/", "s": "Loona Invoice Generator", "d": "Debit notes for purchase returns and undercharge corrections, with tax adjustment.", "k": "debit note generator debit note generator debit notes for purchase returns and undercharge corrections with tax adjustment", "p": 10, "c": "Tool"}, {"n": "Sales Order Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/sales-order-generator/", "s": "Loona Invoice Generator", "d": "Seller order confirmations referencing the customer PO, with delivery date.", "k": "sales order generator sales order generator seller order confirmations referencing the customer po with delivery date", "p": 11, "c": "Tool"}, {"n": "Statement of Account Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/statement-of-account-generator/", "s": "Loona Invoice Generator", "d": "Customer statements with opening balance and a running balance.", "k": "statement of account generator statement of account generator customer statements with opening balance and a running balance", "p": 12, "c": "Tool"}, {"n": "Work Order Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/work-order-generator/", "s": "Loona Invoice Generator", "d": "Work orders with labour hours, parts and customer sign-off.", "k": "work order generator work order generator work orders with labour hours parts and customer sign off", "p": 13, "c": "Tool"}, {"n": "Service Agreement Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/service-agreement-generator/", "s": "Loona Invoice Generator", "d": "Plain-language service agreement templates with fee in words and signatures.", "k": "service agreement generator service agreement generator plain language service agreement templates with fee in words and signatures", "p": 14, "c": "Tool"}, {"n": "Business Letter Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/business-letter-generator/", "s": "Loona Invoice Generator", "d": "Formal business letters on a clean letterhead layout — now with 1st, 2nd and final payment reminder templates built in.", "k": "business letter generator business letter generator formal business letters on a clean letterhead layout now with 1st 2nd and final payment reminder templates built in", "p": 15, "c": "Tool"}, {"n": "Envelope & Address Label Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/envelope-label-generator/", "s": "Loona Invoice Generator", "d": "Print addresses directly onto DL, C5 and C4 envelopes or labels.", "k": "envelope label generator envelope address label generator print addresses directly onto dl c5 and c4 envelopes or labels", "p": 16, "c": "Tool"}, {"n": "Expense Report Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/expense-report-generator/", "s": "Loona Invoice Generator", "d": "Expense claims with advances deducted and amount due calculated.", "k": "expense report generator expense report generator expense claims with advances deducted and amount due calculated", "p": 17, "c": "Tool"}, {"n": "Bill of Lading Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/bill-of-lading-generator/", "s": "Loona Invoice Generator", "d": "Freight paperwork with shipper, carrier, consignee, pieces and weight totals.", "k": "bill of lading generator bill of lading generator freight paperwork with shipper carrier consignee pieces and weight totals", "p": 18, "c": "Tool"}, {"n": "Commercial Invoice Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/commercial-invoice-generator/", "s": "Loona Invoice Generator", "d": "Customs invoices with HS codes, country of origin, incoterms and freight.", "k": "commercial invoice generator commercial invoice generator customs invoices with hs codes country of origin incoterms and freight", "p": 19, "c": "Tool"}, {"n": "Mileage Log Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/mileage-log-generator/", "s": "Loona Invoice Generator", "d": "Mileage logs with odometer readings, total miles and reimbursement calculated.", "k": "mileage log generator mileage log generator mileage logs with odometer readings total miles and reimbursement calculated", "p": 20, "c": "Tool"}, {"n": "Donation Receipt Generator", "u": "https://loonaautomation.github.io/loona-invoice-generator/en-gb/donation-receipt-generator/", "s": "Loona Invoice Generator", "d": "Charity donation receipts with amount in words and in-kind gifts.", "k": "donation receipt generator donation receipt generator charity donation receipts with amount in words and in kind gifts", "p": 21, "c": "Tool"}];
+  var data = null, loading = null, usingFallback = false, active = -1, current = [];
+
+  /*CORE-START*/
+/* Loona search core v2 — shared by the homepage dropdown and the /search/ page.
+   Adds over v1: Roman Urdu alias layer, joined-word matching, keyword prefix match,
+   URL+name dedupe, tool-over-guide boost. `data` is supplied by the page glue. */
+var ALIASES = {
+  "khat": "letter",
+  "rasid": "receipt"
+};
+function norm(s) { s = (s || '').toLowerCase().replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/ł/g, 'l').replace(/đ/g, 'd'); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) {} return s.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function lev(a, b) {
+  if (a === b) return 0;
+  var la = a.length, lb = b.length, i, j;
+  if (Math.abs(la - lb) > 1) return 2;
+  var prev = [], cur = [];
+  for (j = 0; j <= lb; j++) prev[j] = j;
+  for (i = 1; i <= la; i++) {
+    cur[0] = i; var best = 99;
+    for (j = 1; j <= lb; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+      cur[j] = v; if (v < best) best = v;
+    }
+    if (best > 1) return 2;
+    var t = prev; prev = cur; cur = t;
+  }
+  return prev[lb];
+}
+function wordLevel(w, nameWords, hayWords, nameJoined) {
+  var i;
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i] === w) return 30;
+  for (i = 0; i < nameWords.length; i++) if (w.length >= 3 && nameWords[i].indexOf(w) === 0) return 24;
+  for (i = 0; i < hayWords.length; i++) if (hayWords[i] === w) return 20;
+  for (i = 0; i < hayWords.length; i++) if (w.length >= 3 && hayWords[i].indexOf(w) === 0) return 18;
+  if (w.length >= 4 && nameJoined.indexOf(w) >= 0) return 22;
+  if (w.length >= 4) {
+    for (i = 0; i < nameWords.length; i++) if (lev(w, nameWords[i]) <= 1) return 17;
+    for (i = 0; i < hayWords.length; i++) if (lev(w, hayWords[i]) <= 1) return 12;
+  }
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i].indexOf(w) >= 0) return 14;
+  return 0;
+}
+function expandWords(qw) {
+  /* variants tried (best score wins): the words themselves; each Roman Urdu
+     word swapped for the FIRST word of its English meaning; the full meaning;
+     and — for multi-word queries — the words joined into one ("wi fi"→"wifi"). */
+  var prim = [], full = [], changed = false;
+  for (var i = 0; i < qw.length; i++) {
+    var a = ALIASES[qw[i]];
+    if (a) {
+      changed = true;
+      var parts = a.split(' ');
+      prim.push(parts[0]);
+      for (var j = 0; j < parts.length; j++) full.push(parts[j]);
+    } else { prim.push(qw[i]); full.push(qw[i]); }
+  }
+  var out = [qw];
+  if (changed) { out.push(prim); if (full.join(' ') !== prim.join(' ')) out.push(full); }
+  if (qw.length > 1) out.push([qw.join('')]);
+  return out;
+}
+function runSearch(q, limit) {
+  var query = norm(q);
+  if (!query || !data) return [];
+  var variants = expandWords(query.split(' ')), out = [];
+  for (var e = 0; e < data.length; e++) {
+    var it = data[e], name = norm(it.n),
+        hay = name + ' ' + norm(it.s) + ' ' + (it.k || ''),
+        nameWords = name.split(' '), hayWords = hay.split(' '),
+        nameJoined = name.replace(/ /g, ''), best = -1;
+    for (var v = 0; v < variants.length; v++) {
+      var qw = variants[v], sum = 0, ok = true;
+      for (var i = 0; i < qw.length; i++) {
+        var lv = wordLevel(qw[i], nameWords, hayWords, nameJoined);
+        if (lv === 0) { ok = false; break; }
+        sum += lv;
+      }
+      if (!ok) continue;
+      var score = sum * 10, qs = qw.join(' '), qJoined = qs.replace(/ /g, '');
+      if (name === qs) score += 100000;
+      else if (name.indexOf(qs) === 0) score += 5000;
+      else if (name.indexOf(qs) >= 0) score += 2000;
+      if (nameJoined === qJoined) score += 9000;
+      else if (qJoined.length >= 4 && nameJoined.indexOf(qJoined) >= 0) score += 2500;
+      if (qw.length > 1) {
+        var allN = true;
+        for (var k = 0; k < qw.length; k++) if (nameWords.indexOf(qw[k]) < 0) allN = false;
+        if (allN) score += 800;
+      }
+      /* tool whose name carries the searched word beats a guide about it */
+      if (it.c !== 'Guide') {
+        for (var m = 0; m < qw.length; m++) if (nameWords.indexOf(qw[m]) >= 0) { score += 350; break; }
+      }
+      score -= (typeof it.p === 'number' ? it.p : 400) * 0.6;
+      score -= name.length * 0.3;
+      if (score > best) best = score;
+    }
+    if (best >= 0) out.push({ it: it, score: best });
+  }
+  out.sort(function (a, b) { return b.score - a.score; });
+  /* dedupe: same URL once, same tool name once (keep the better-ranked copy) */
+  var seenU = {}, seenN = {}, res = [];
+  for (var r = 0; r < out.length; r++) {
+    var en = out[r].it, key = norm(en.n);
+    if (seenU[en.u] || seenN[key]) continue;
+    seenU[en.u] = 1; seenN[key] = 1; res.push(en);
+    if (res.length >= limit) break;
+  }
+  return res;
+}
+function popular(n) {
+  if (!data) return [];
+  return data.filter(function (e) { return (typeof e.p === 'number' ? e.p : 400) < 30; })
+             .sort(function (a, b) { return a.p - b.p; }).slice(0, n);
+}
+/*CORE-END*/
+
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function badge(e) { return e.c === 'Website' ? 'Website' : (e.c === 'Guide' ? 'Guide' : e.s.replace(/^Loona /, '')); }
+  function itemHtml(e, i) {
+    return '<a class="ls-item" role="option" data-i="' + i + '" href="' + esc(e.u) + '">' +
+           '<span class="ls-nm">' + esc(e.n) + '</span><span class="ls-badge">' + esc(badge(e)) + '</span>' +
+           '<span class="ls-ds">' + esc(e.d) + '</span></a>';
+  }
+  function bindItems() {
+    var links = list.querySelectorAll('.ls-item');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseenter', function () { setActive(parseInt(this.getAttribute('data-i'), 10)); });
+    }
+  }
+  function render(items, q) {
+    active = -1; current = items;
+    var h = '';
+    if (usingFallback) h += '<div class="ls-none">' + STR.fb + '</div>';
+    h += items.map(itemHtml).join('');
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderZero(q) {
+    var pop = popular(6);
+    active = -1; current = pop;
+    var h = '<div class="ls-none">' + STR.zero1 + esc(q) + STR.zero2 + '</div>' +
+            pop.map(itemHtml).join('') +
+            '';
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderLoading() {
+    list.innerHTML = '<div class="ls-none">' + STR.loading + '</div>';
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function refresh() {
+    var q = input.value;
+    if (!data) { renderLoading(); return; }
+    if (!norm(q)) { render(popular(6), ''); return; }
+    var res = runSearch(q, 8);
+    if (res.length) render(res, q); else renderZero(q);
+  }
+  function hide() { list.hidden = true; active = -1; input.setAttribute('aria-expanded', 'false'); }
+  function setActive(i) {
+    active = i;
+    var links = list.querySelectorAll('.ls-item');
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('act', j === i);
+    if (i >= 0 && links[i]) links[i].scrollIntoView({ block: 'nearest' });
+  }
+  function ensureIndex() {
+    if (data && !usingFallback) return;
+    if (loading) return;
+    loading = fetch(INDEX_URL).then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      data = j; usingFallback = false; loading = null; refresh();
+    }).catch(function () {
+      loading = null;                 /* not poisoned: next keystroke/focus retries */
+      if (!data) { data = FALLBACK; usingFallback = true; }
+      refresh();
+    });
+  }
+  var timer = null;
+  function onType() { ensureIndex(); refresh(); }
+  input.addEventListener('focus', onType);
+  input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(onType, 70); });
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault();
+      if (list.hidden) { onType(); return; }
+      var n = current.length; if (!n) return;
+      setActive(ev.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n);
+    } else if (ev.key === 'Escape') { hide(); }
+  });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var q = input.value;
+    if (active >= 0 && current[active]) { window.location.href = current[active].u; return; }
+    ensureIndex();
+    if (data) {
+      var best = runSearch(q, 1);
+      if (best.length) { window.location.href = best[0].u; return; }
+    }
+    if (norm(q)) renderZero(q);
+  });
+  document.addEventListener('click', function (ev) { if (!form.contains(ev.target)) hide(); });
+})();
+
+</script>
+<script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Install App';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Install this app: tap the Share button, then choose "Add to Home Screen".');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
 </body>
 </html>
