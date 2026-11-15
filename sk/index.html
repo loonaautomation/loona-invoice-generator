@@ -361,7 +361,23 @@
         html{scroll-behavior:auto}
         .toast{transition:none}
       }
-    </style>
+    
+.ls{max-width:640px;margin:22px auto 4px;position:relative;text-align:left}
+.ls-box{display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.28);border:2px solid var(--gold,#d4af37)}
+.ls-box input{flex:1;border:0;outline:0;padding:14px 18px;font-size:1.02rem;min-width:0;color:var(--ink,#12211c);background:#fff}
+.ls-box button{border:0;background:var(--gold,#d4af37);color:#231a00;font-weight:800;padding:0 22px;font-size:1rem;cursor:pointer}
+.ls-box button:hover{background:var(--gold2,#b8912a)}
+.ls-list{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.35);z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.ls-item{display:block;padding:10px 16px;text-decoration:none;border-bottom:1px solid #eee9da}
+.ls-item:last-of-type{border-bottom:0}
+.ls-item:hover,.ls-item.act{background:#fbf6df}
+.ls-nm{font-weight:700;color:var(--ink,#12211c)}
+.ls-badge{display:inline-block;margin-left:8px;background:var(--teal,#062e2a);color:#ffe9a8;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ls-ds{display:block;color:#5a6660;font-size:.85rem;margin-top:1px}
+.ls-none{padding:12px 16px;color:#5a6660;font-size:.92rem}
+@media(max-width:560px){.ls-box button{padding:0 14px}.ls-box input{padding:12px 14px;font-size:.98rem}}
+
+</style>
   
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
@@ -429,6 +445,10 @@
           <span>16 mien</span>
           <span>Súkromné — beží vo vašom prehliadači</span>
         </div>
+<div class="ls"><form id="lsForm" role="search" autocomplete="off">
+<div class="ls-box"><input id="lsInput" type="search" placeholder="Vyhľadávanie v 22 nástrojoch pre faktúry&hellip; skúste &lsquo;faktúra&rsquo;" aria-label="Vyhľadávanie v 22 nástrojoch pre faktúry" autocomplete="off"><button type="submit">Hľadať</button></div>
+<div id="lsList" class="ls-list" role="listbox" hidden></div>
+</form></div>
       </div>
     </div>
 
@@ -1297,6 +1317,235 @@
       });
     })();
     </script>
-  <script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Inštalovať aplikáciu';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Nainštalujte túto aplikáciu: ťuknite na tlačidlo Zdieľať a potom zvoľte „Pridať na domovskú obrazovku“.');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+  <script>/*loona-invoice-search*/
+/* Loona Invoice Generator search (per-site build of the Loona hub tool search v2) — lazy-loads /search-index.json on first focus/typing.
+   v2 fixes: a failed fetch no longer poisons the session (it retries on the next
+   keystroke/focus), a "Loading tools…" state shows while the index downloads,
+   an embedded popular-tools fallback keeps search alive offline, Roman Urdu
+   aliases, joined-word matching, dedupe and tool-over-guide ranking. */
+(function () {
+  "use strict";
+  var form = document.getElementById('lsForm'),
+      input = document.getElementById('lsInput'),
+      list = document.getElementById('lsList');
+  if (!form || !input || !list) return;
+  var INDEX_URL = '/loona-invoice-generator/sk/search-index.json';
+  var STR = {"loading": "Načítavajú sa nástroje…", "fb": "Zobrazujú sa obľúbené nástroje — úplný index je na ceste…", "zero1": "Žiadna presná zhoda pre “", "zero2": "” — vyskúšajte tieto obľúbené nástroje:"};
+  var FALLBACK = [{"n": "Loona Invoice & Business Documents", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/", "s": "Loona Invoice Generator", "d": "Generátor faktúr online zadarmo od Loona: faktúra s DPH aj s prenesenou daňovou povinnosťou, cenová ponuka, potvrdenie a dodací list. Bez registrácie.", "k": "business documents homepage invoice loona site tools website loona invoice business documents generator faktur online zadarmo od loona faktura s dph aj s prenesenou danovou povinnostou cenova ponuka potvrdenie a dodaci list bez registracie generátor faktúr faktúra daňovou povinnosťou cenová dodací registrácie", "p": 0, "c": "Website"}, {"n": "Generátor potvrdení", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/receipt-generator/", "s": "Loona Invoice Generator", "d": "Potvrdenia o platbe so sumou slovami, spôsobom platby a podpisovým riadkom.", "k": "receipt generator generator potvrdeni potvrdenia o platbe so sumou slovami sposobom platby a podpisovym riadkom generátor potvrdení spôsobom podpisovým", "p": 1, "c": "Tool"}, {"n": "Generátor ponúk / odhadov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/quote-generator/", "s": "Loona Invoice Generator", "d": "Profesionálne ponuky s položkami, daňou, dátumom platnosti a podmienkami.", "k": "quote generator generator ponuk odhadov profesionalne ponuky s polozkami danou datumom platnosti a podmienkami generátor ponúk profesionálne položkami daňou dátumom", "p": 2, "c": "Tool"}, {"n": "Generátor objednávok", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/purchase-order-generator/", "s": "Loona Invoice Generator", "d": "Číslované objednávky s kupujúcim, dodávateľom, dodacou adresou a autorizáciou.", "k": "purchase order generator generator objednavok cislovane objednavky s kupujucim dodavatelom dodacou adresou a autorizaciou generátor objednávok číslované objednávky kupujúcim dodávateľom autorizáciou", "p": 3, "c": "Tool"}, {"n": "Generátor dobropisov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/credit-note-generator/", "s": "Loona Invoice Generator", "d": "Dobropisy k pôvodnej faktúre, s vypočítanou úpravou dane.", "k": "credit note generator generator dobropisov dobropisy k povodnej fakture s vypocitanou upravou dane generátor pôvodnej faktúre vypočítanou úpravou", "p": 4, "c": "Tool"}, {"n": "Generátor dodacích listov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/delivery-note-generator/", "s": "Loona Invoice Generator", "d": "Dodacie listy s položkami, množstvami a podpisom pri prevzatí.", "k": "delivery note generator generator dodacich listov dodacie listy s polozkami mnozstvami a podpisom pri prevzati generátor dodacích položkami množstvami prevzatí", "p": 5, "c": "Tool"}, {"n": "Generátor baliacich listov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/packing-slip-generator/", "s": "Loona Invoice Generator", "d": "Baliace listy s cenami v predvolenom nastavení skrytými a voliteľným prepínačom cien.", "k": "packing slip generator generator baliacich listov baliace listy s cenami v predvolenom nastaveni skrytymi a volitelnym prepinacom cien generátor nastavení skrytými voliteľným prepínačom", "p": 6, "c": "Tool"}, {"n": "Generátor výplatných pások", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/pay-stub-generator/", "s": "Loona Invoice Generator", "d": "Výplatné pásky s príjmami, zrážkami a čistou mzdou počítanými automaticky.", "k": "pay stub generator generator vyplatnych pasok vyplatne pasky s prijmami zrazkami a cistou mzdou pocitanymi automaticky generátor výplatných pások výplatné pásky príjmami zrážkami čistou počítanými", "p": 7, "c": "Tool"}, {"n": "Generátor potvrdení o nájme", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/rent-receipt-generator/", "s": "Loona Invoice Generator", "d": "Potvrdenia o nájme s nájomcom, prenajímateľom, nehnuteľnosťou, mesiacom a sumou slovami.", "k": "rent receipt generator generator potvrdeni o najme potvrdenia o najme s najomcom prenajimatelom nehnutelnostou mesiacom a sumou slovami generátor potvrdení nájme nájme nájomcom prenajímateľom nehnuteľnosťou", "p": 8, "c": "Tool"}, {"n": "Generátor proforma faktúr", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/proforma-invoice-generator/", "s": "Loona Invoice Generator", "d": "Predbežné faktúry pre zálohovú platbu a colné účely, s dátumom platnosti.", "k": "proforma invoice generator generator proforma faktur predbezne faktury pre zalohovu platbu a colne ucely s datumom platnosti generátor faktúr predbežné faktúry zálohovú colné účely dátumom", "p": 9, "c": "Tool"}, {"n": "Generátor ťarchopisov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/debit-note-generator/", "s": "Loona Invoice Generator", "d": "Ťarchopisy na vrátenie nákupov a opravy podúčtovania, s úpravou dane.", "k": "debit note generator generator tarchopisov tarchopisy na vratenie nakupov a opravy poductovania s upravou dane generátor ťarchopisov ťarchopisy vrátenie nákupov podúčtovania úpravou", "p": 10, "c": "Tool"}, {"n": "Generátor predajných objednávok", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/sales-order-generator/", "s": "Loona Invoice Generator", "d": "Potvrdenia objednávok predávajúceho s odkazom na objednávku zákazníka, s dátumom dodania.", "k": "sales order generator generator predajnych objednavok potvrdenia objednavok predavajuceho s odkazom na objednavku zakaznika s datumom dodania generátor predajných objednávok objednávok predávajúceho objednávku zákazníka dátumom", "p": 11, "c": "Tool"}, {"n": "Generátor výpisov z účtu", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/statement-of-account-generator/", "s": "Loona Invoice Generator", "d": "Výpisy zákazníkom s počiatočným zostatkom a priebežným zostatkom.", "k": "statement of account generator generator vypisov z uctu vypisy zakaznikom s pociatocnym zostatkom a priebeznym zostatkom generátor výpisov účtu výpisy zákazníkom počiatočným priebežným", "p": 12, "c": "Tool"}, {"n": "Generátor pracovných príkazov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/work-order-generator/", "s": "Loona Invoice Generator", "d": "Pracovné príkazy s hodinami práce, dielmi a schválením zákazníkom.", "k": "work order generator generator pracovnych prikazov pracovne prikazy s hodinami prace dielmi a schvalenim zakaznikom generátor pracovných príkazov pracovné príkazy práce schválením zákazníkom", "p": 13, "c": "Tool"}, {"n": "Generátor zmlúv o poskytovaní služieb", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/service-agreement-generator/", "s": "Loona Invoice Generator", "d": "Šablóny zmlúv o poskytovaní služieb v zrozumiteľnom jazyku s poplatkom slovami a podpismi.", "k": "service agreement generator generator zmluv o poskytovani sluzieb sablony zmluv o poskytovani sluzieb v zrozumitelnom jazyku s poplatkom slovami a podpismi generátor zmlúv poskytovaní služieb šablóny zmlúv poskytovaní služieb zrozumiteľnom", "p": 14, "c": "Tool"}, {"n": "Generátor obchodných listov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/business-letter-generator/", "s": "Loona Invoice Generator", "d": "Formálne obchodné listy na čistom hlavičkovom rozložení — teraz so zabudovanými šablónami 1., 2. a poslednej upomienky k platbe.", "k": "business letter generator generator obchodnych listov formalne obchodne listy na cistom hlavickovom rozlozeni teraz so zabudovanymi sablonami 1 2 a poslednej upomienky k platbe generátor obchodných formálne obchodné čistom hlavičkovom rozložení zabudovanými šablónami", "p": 15, "c": "Tool"}, {"n": "Generátor obálok a adresných štítkov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/envelope-label-generator/", "s": "Loona Invoice Generator", "d": "Tlačte adresy priamo na obálky DL, C5 a C4 alebo na štítky.", "k": "envelope label generator generator obalok a adresnych stitkov tlacte adresy priamo na obalky dl c5 a c4 alebo na stitky generátor obálok adresných štítkov tlačte obálky štítky", "p": 16, "c": "Tool"}, {"n": "Generátor vyúčtovaní výdavkov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/expense-report-generator/", "s": "Loona Invoice Generator", "d": "Vyúčtovania výdavkov s odpočítanými zálohami a vypočítanou dlžnou sumou.", "k": "expense report generator generator vyuctovani vydavkov vyuctovania vydavkov s odpocitanymi zalohami a vypocitanou dlznou sumou generátor vyúčtovaní výdavkov vyúčtovania výdavkov odpočítanými zálohami vypočítanou dlžnou", "p": 17, "c": "Tool"}, {"n": "Generátor nákladných listov", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/bill-of-lading-generator/", "s": "Loona Invoice Generator", "d": "Prepravné doklady s odosielateľom, dopravcom, príjemcom a súčtami kusov a hmotnosti.", "k": "bill of lading generator generator nakladnych listov prepravne doklady s odosielatelom dopravcom prijemcom a suctami kusov a hmotnosti generátor nákladných prepravné odosielateľom príjemcom súčtami", "p": 18, "c": "Tool"}, {"n": "Generátor obchodných faktúr", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/commercial-invoice-generator/", "s": "Loona Invoice Generator", "d": "Colné faktúry s kódmi HS, krajinou pôvodu, Incoterms a prepravným.", "k": "commercial invoice generator generator obchodnych faktur colne faktury s kodmi hs krajinou povodu incoterms a prepravnym generátor obchodných faktúr colné faktúry kódmi pôvodu prepravným", "p": 19, "c": "Tool"}, {"n": "Generátor knihy jázd", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/mileage-log-generator/", "s": "Loona Invoice Generator", "d": "Knihy jázd so stavmi tachometra, celkovými míľami a vypočítanou náhradou.", "k": "mileage log generator generator knihy jazd knihy jazd so stavmi tachometra celkovymi milami a vypocitanou nahradou generátor jázd jázd celkovými míľami vypočítanou náhradou", "p": 20, "c": "Tool"}, {"n": "Generátor potvrdení o dare", "u": "https://loonaautomation.github.io/loona-invoice-generator/sk/donation-receipt-generator/", "s": "Loona Invoice Generator", "d": "Potvrdenia o dare pre charity so sumou slovom a vecnými darmi.", "k": "donation receipt generator generator potvrdeni o dare potvrdenia o dare pre charity so sumou slovom a vecnymi darmi generátor potvrdení vecnými", "p": 21, "c": "Tool"}];
+  var data = null, loading = null, usingFallback = false, active = -1, current = [];
+
+  /*CORE-START*/
+/* Loona search core v2 — shared by the homepage dropdown and the /search/ page.
+   Adds over v1: Roman Urdu alias layer, joined-word matching, keyword prefix match,
+   URL+name dedupe, tool-over-guide boost. `data` is supplied by the page glue. */
+var ALIASES = {
+  "khat": "letter",
+  "rasid": "receipt"
+};
+function norm(s) { s = (s || '').toLowerCase().replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/ł/g, 'l').replace(/đ/g, 'd'); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) {} return s.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function lev(a, b) {
+  if (a === b) return 0;
+  var la = a.length, lb = b.length, i, j;
+  if (Math.abs(la - lb) > 1) return 2;
+  var prev = [], cur = [];
+  for (j = 0; j <= lb; j++) prev[j] = j;
+  for (i = 1; i <= la; i++) {
+    cur[0] = i; var best = 99;
+    for (j = 1; j <= lb; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+      cur[j] = v; if (v < best) best = v;
+    }
+    if (best > 1) return 2;
+    var t = prev; prev = cur; cur = t;
+  }
+  return prev[lb];
+}
+function wordLevel(w, nameWords, hayWords, nameJoined) {
+  var i;
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i] === w) return 30;
+  for (i = 0; i < nameWords.length; i++) if (w.length >= 3 && nameWords[i].indexOf(w) === 0) return 24;
+  for (i = 0; i < hayWords.length; i++) if (hayWords[i] === w) return 20;
+  for (i = 0; i < hayWords.length; i++) if (w.length >= 3 && hayWords[i].indexOf(w) === 0) return 18;
+  if (w.length >= 4 && nameJoined.indexOf(w) >= 0) return 22;
+  if (w.length >= 4) {
+    for (i = 0; i < nameWords.length; i++) if (lev(w, nameWords[i]) <= 1) return 17;
+    for (i = 0; i < hayWords.length; i++) if (lev(w, hayWords[i]) <= 1) return 12;
+  }
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i].indexOf(w) >= 0) return 14;
+  return 0;
+}
+function expandWords(qw) {
+  /* variants tried (best score wins): the words themselves; each Roman Urdu
+     word swapped for the FIRST word of its English meaning; the full meaning;
+     and — for multi-word queries — the words joined into one ("wi fi"→"wifi"). */
+  var prim = [], full = [], changed = false;
+  for (var i = 0; i < qw.length; i++) {
+    var a = ALIASES[qw[i]];
+    if (a) {
+      changed = true;
+      var parts = a.split(' ');
+      prim.push(parts[0]);
+      for (var j = 0; j < parts.length; j++) full.push(parts[j]);
+    } else { prim.push(qw[i]); full.push(qw[i]); }
+  }
+  var out = [qw];
+  if (changed) { out.push(prim); if (full.join(' ') !== prim.join(' ')) out.push(full); }
+  if (qw.length > 1) out.push([qw.join('')]);
+  return out;
+}
+function runSearch(q, limit) {
+  var query = norm(q);
+  if (!query || !data) return [];
+  var variants = expandWords(query.split(' ')), out = [];
+  for (var e = 0; e < data.length; e++) {
+    var it = data[e], name = norm(it.n),
+        hay = name + ' ' + norm(it.s) + ' ' + (it.k || ''),
+        nameWords = name.split(' '), hayWords = hay.split(' '),
+        nameJoined = name.replace(/ /g, ''), best = -1;
+    for (var v = 0; v < variants.length; v++) {
+      var qw = variants[v], sum = 0, ok = true;
+      for (var i = 0; i < qw.length; i++) {
+        var lv = wordLevel(qw[i], nameWords, hayWords, nameJoined);
+        if (lv === 0) { ok = false; break; }
+        sum += lv;
+      }
+      if (!ok) continue;
+      var score = sum * 10, qs = qw.join(' '), qJoined = qs.replace(/ /g, '');
+      if (name === qs) score += 100000;
+      else if (name.indexOf(qs) === 0) score += 5000;
+      else if (name.indexOf(qs) >= 0) score += 2000;
+      if (nameJoined === qJoined) score += 9000;
+      else if (qJoined.length >= 4 && nameJoined.indexOf(qJoined) >= 0) score += 2500;
+      if (qw.length > 1) {
+        var allN = true;
+        for (var k = 0; k < qw.length; k++) if (nameWords.indexOf(qw[k]) < 0) allN = false;
+        if (allN) score += 800;
+      }
+      /* tool whose name carries the searched word beats a guide about it */
+      if (it.c !== 'Guide') {
+        for (var m = 0; m < qw.length; m++) if (nameWords.indexOf(qw[m]) >= 0) { score += 350; break; }
+      }
+      score -= (typeof it.p === 'number' ? it.p : 400) * 0.6;
+      score -= name.length * 0.3;
+      if (score > best) best = score;
+    }
+    if (best >= 0) out.push({ it: it, score: best });
+  }
+  out.sort(function (a, b) { return b.score - a.score; });
+  /* dedupe: same URL once, same tool name once (keep the better-ranked copy) */
+  var seenU = {}, seenN = {}, res = [];
+  for (var r = 0; r < out.length; r++) {
+    var en = out[r].it, key = norm(en.n);
+    if (seenU[en.u] || seenN[key]) continue;
+    seenU[en.u] = 1; seenN[key] = 1; res.push(en);
+    if (res.length >= limit) break;
+  }
+  return res;
+}
+function popular(n) {
+  if (!data) return [];
+  return data.filter(function (e) { return (typeof e.p === 'number' ? e.p : 400) < 30; })
+             .sort(function (a, b) { return a.p - b.p; }).slice(0, n);
+}
+/*CORE-END*/
+
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function badge(e) { return e.c === 'Website' ? 'Website' : (e.c === 'Guide' ? 'Guide' : e.s.replace(/^Loona /, '')); }
+  function itemHtml(e, i) {
+    return '<a class="ls-item" role="option" data-i="' + i + '" href="' + esc(e.u) + '">' +
+           '<span class="ls-nm">' + esc(e.n) + '</span><span class="ls-badge">' + esc(badge(e)) + '</span>' +
+           '<span class="ls-ds">' + esc(e.d) + '</span></a>';
+  }
+  function bindItems() {
+    var links = list.querySelectorAll('.ls-item');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseenter', function () { setActive(parseInt(this.getAttribute('data-i'), 10)); });
+    }
+  }
+  function render(items, q) {
+    active = -1; current = items;
+    var h = '';
+    if (usingFallback) h += '<div class="ls-none">' + STR.fb + '</div>';
+    h += items.map(itemHtml).join('');
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderZero(q) {
+    var pop = popular(6);
+    active = -1; current = pop;
+    var h = '<div class="ls-none">' + STR.zero1 + esc(q) + STR.zero2 + '</div>' +
+            pop.map(itemHtml).join('') +
+            '';
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderLoading() {
+    list.innerHTML = '<div class="ls-none">' + STR.loading + '</div>';
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function refresh() {
+    var q = input.value;
+    if (!data) { renderLoading(); return; }
+    if (!norm(q)) { render(popular(6), ''); return; }
+    var res = runSearch(q, 8);
+    if (res.length) render(res, q); else renderZero(q);
+  }
+  function hide() { list.hidden = true; active = -1; input.setAttribute('aria-expanded', 'false'); }
+  function setActive(i) {
+    active = i;
+    var links = list.querySelectorAll('.ls-item');
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('act', j === i);
+    if (i >= 0 && links[i]) links[i].scrollIntoView({ block: 'nearest' });
+  }
+  function ensureIndex() {
+    if (data && !usingFallback) return;
+    if (loading) return;
+    loading = fetch(INDEX_URL).then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      data = j; usingFallback = false; loading = null; refresh();
+    }).catch(function () {
+      loading = null;                 /* not poisoned: next keystroke/focus retries */
+      if (!data) { data = FALLBACK; usingFallback = true; }
+      refresh();
+    });
+  }
+  var timer = null;
+  function onType() { ensureIndex(); refresh(); }
+  input.addEventListener('focus', onType);
+  input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(onType, 70); });
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault();
+      if (list.hidden) { onType(); return; }
+      var n = current.length; if (!n) return;
+      setActive(ev.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n);
+    } else if (ev.key === 'Escape') { hide(); }
+  });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var q = input.value;
+    if (active >= 0 && current[active]) { window.location.href = current[active].u; return; }
+    ensureIndex();
+    if (data) {
+      var best = runSearch(q, 1);
+      if (best.length) { window.location.href = best[0].u; return; }
+    }
+    if (norm(q)) renderZero(q);
+  });
+  document.addEventListener('click', function (ev) { if (!form.contains(ev.target)) hide(); });
+})();
+
+</script>
+<script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' Inštalovať aplikáciu';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('Nainštalujte túto aplikáciu: ťuknite na tlačidlo Zdieľať a potom zvoľte „Pridať na domovskú obrazovku“.');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
 </body>
 </html>

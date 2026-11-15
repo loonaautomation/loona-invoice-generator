@@ -361,7 +361,23 @@
         html{scroll-behavior:auto}
         .toast{transition:none}
       }
-    </style>
+    
+.ls{max-width:640px;margin:22px auto 4px;position:relative;text-align:left}
+.ls-box{display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.28);border:2px solid var(--gold,#d4af37)}
+.ls-box input{flex:1;border:0;outline:0;padding:14px 18px;font-size:1.02rem;min-width:0;color:var(--ink,#12211c);background:#fff}
+.ls-box button{border:0;background:var(--gold,#d4af37);color:#231a00;font-weight:800;padding:0 22px;font-size:1rem;cursor:pointer}
+.ls-box button:hover{background:var(--gold2,#b8912a)}
+.ls-list{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.35);z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.ls-item{display:block;padding:10px 16px;text-decoration:none;border-bottom:1px solid #eee9da}
+.ls-item:last-of-type{border-bottom:0}
+.ls-item:hover,.ls-item.act{background:#fbf6df}
+.ls-nm{font-weight:700;color:var(--ink,#12211c)}
+.ls-badge{display:inline-block;margin-left:8px;background:var(--teal,#062e2a);color:#ffe9a8;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ls-ds{display:block;color:#5a6660;font-size:.85rem;margin-top:1px}
+.ls-none{padding:12px 16px;color:#5a6660;font-size:.92rem}
+@media(max-width:560px){.ls-box button{padding:0 14px}.ls-box input{padding:12px 14px;font-size:.98rem}}
+
+</style>
   
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
@@ -429,6 +445,10 @@
           <span>16通貨</span>
           <span>プライベート — ブラウザで動作します</span>
         </div>
+<div class="ls"><form id="lsForm" role="search" autocomplete="off">
+<div class="ls-box"><input id="lsInput" type="search" placeholder="請求書ツール22件を検索&hellip; &lsquo;invoice&rsquo;と試してみてください" aria-label="請求書ツール22件を検索" autocomplete="off"><button type="submit">検索</button></div>
+<div id="lsList" class="ls-list" role="listbox" hidden></div>
+</form></div>
       </div>
     </div>
 
@@ -1297,6 +1317,235 @@
       });
     })();
     </script>
-  <script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' アプリをインストール';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('このアプリをインストール：共有ボタンをタップし、「ホーム画面に追加」を選んでください。');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+  <script>/*loona-invoice-search*/
+/* Loona Invoice Generator search (per-site build of the Loona hub tool search v2) — lazy-loads /search-index.json on first focus/typing.
+   v2 fixes: a failed fetch no longer poisons the session (it retries on the next
+   keystroke/focus), a "Loading tools…" state shows while the index downloads,
+   an embedded popular-tools fallback keeps search alive offline, Roman Urdu
+   aliases, joined-word matching, dedupe and tool-over-guide ranking. */
+(function () {
+  "use strict";
+  var form = document.getElementById('lsForm'),
+      input = document.getElementById('lsInput'),
+      list = document.getElementById('lsList');
+  if (!form || !input || !list) return;
+  var INDEX_URL = '/loona-invoice-generator/ja/search-index.json';
+  var STR = {"loading": "ツールを読み込んでいます…", "fb": "人気のツールを表示しています ― 完全な索引はまもなく届きます…", "zero1": "完全一致がありません： “", "zero2": "” ― 人気のツールを試してみてください："};
+  var FALLBACK = [{"n": "Loona Invoice & Business Documents", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/", "s": "Loona Invoice Generator", "d": "Loonaによる無料の請求書・ビジネス文書ジェネレーター:EU VATとリバースチャージ付きの請求書に加え、領収書、見積書、発注書、クレジットノート、納品書、梱包明細書、給与明細、家賃領収書。登録不要、印刷可能なPDF。", "k": "business documents homepage invoice loona site tools website loona invoice business documents loona eu vat pdf loonaによる無料の請求書 ビジネス文書ジェネレーター vatとリバースチャージ付きの請求書に加え 領収書 見積書 発注書 クレジットノート 納品書 梱包明細書 給与明細 家賃領収書 登録不要 印刷可能なpdf", "p": 0, "c": "Website"}, {"n": "領収書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/receipt-generator/", "s": "Loona Invoice Generator", "d": "金額の文字表記、支払方法、署名欄のある支払い領収書。", "k": "receipt generator  領収書ジェネレーター 金額の文字表記 支払方法 署名欄のある支払い領収書", "p": 1, "c": "Tool"}, {"n": "見積書 / 概算ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/quote-generator/", "s": "Loona Invoice Generator", "d": "品目、税、有効期限、条件を備えたプロフェッショナルな見積書。", "k": "quote generator  見積書 概算ジェネレーター 品目 税 有効期限 条件を備えたプロフェッショナルな見積書", "p": 2, "c": "Tool"}, {"n": "発注書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/purchase-order-generator/", "s": "Loona Invoice Generator", "d": "買い手、供給者、配送先住所、承認を備えた番号付き発注書。", "k": "purchase order generator  発注書ジェネレーター 買い手 供給者 配送先住所 承認を備えた番号付き発注書", "p": 3, "c": "Tool"}, {"n": "クレジットノートジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/credit-note-generator/", "s": "Loona Invoice Generator", "d": "元の請求書に対するクレジットノート（税額調整が計算されます）。", "k": "credit note generator  クレジットノートジェネレーター 元の請求書に対するクレジットノート 税額調整が計算されます", "p": 4, "c": "Tool"}, {"n": "納品書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/delivery-note-generator/", "s": "Loona Invoice Generator", "d": "品目、数量、受領署名欄のある納品伝票。", "k": "delivery note generator  納品書ジェネレーター 品目 数量 受領署名欄のある納品伝票", "p": 5, "c": "Tool"}, {"n": "梱包明細書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/packing-slip-generator/", "s": "Loona Invoice Generator", "d": "価格は初期設定で非表示、任意の価格切り替え付きの梱包明細書。", "k": "packing slip generator  梱包明細書ジェネレーター 価格は初期設定で非表示 任意の価格切り替え付きの梱包明細書", "p": 6, "c": "Tool"}, {"n": "給与明細ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/pay-stub-generator/", "s": "Loona Invoice Generator", "d": "支給、控除、手取りが自動計算される給与明細。", "k": "pay stub generator  給与明細ジェネレーター 支給 控除 手取りが自動計算される給与明細", "p": 7, "c": "Tool"}, {"n": "家賃領収書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/rent-receipt-generator/", "s": "Loona Invoice Generator", "d": "借主、貸主、物件、月、文字表記の金額を備えた家賃領収書。", "k": "rent receipt generator  家賃領収書ジェネレーター 借主 貸主 物件 月 文字表記の金額を備えた家賃領収書", "p": 8, "c": "Tool"}, {"n": "プロフォーマ請求書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/proforma-invoice-generator/", "s": "Loona Invoice Generator", "d": "有効期限のある、前払いと税関のための仮請求書。", "k": "proforma invoice generator  プロフォーマ請求書ジェネレーター 有効期限のある 前払いと税関のための仮請求書", "p": 9, "c": "Tool"}, {"n": "デビットノートジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/debit-note-generator/", "s": "Loona Invoice Generator", "d": "購入返品や過少請求の訂正のためのデビットノート（税額調整付き）。", "k": "debit note generator  デビットノートジェネレーター 購入返品や過少請求の訂正のためのデビットノート 税額調整付き", "p": 10, "c": "Tool"}, {"n": "受注書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/sales-order-generator/", "s": "Loona Invoice Generator", "d": "顧客の発注番号を参照し、納期を備えた売り手の受注確認書。", "k": "sales order generator  受注書ジェネレーター 顧客の発注番号を参照し 納期を備えた売り手の受注確認書", "p": 11, "c": "Tool"}, {"n": "取引明細書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/statement-of-account-generator/", "s": "Loona Invoice Generator", "d": "期首残高と累計残高のある顧客明細書。", "k": "statement of account generator  取引明細書ジェネレーター 期首残高と累計残高のある顧客明細書", "p": 12, "c": "Tool"}, {"n": "作業指示書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/work-order-generator/", "s": "Loona Invoice Generator", "d": "作業時間、部品、顧客の承認を備えた作業指示書。", "k": "work order generator  作業指示書ジェネレーター 作業時間 部品 顧客の承認を備えた作業指示書", "p": 13, "c": "Tool"}, {"n": "サービス契約書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/service-agreement-generator/", "s": "Loona Invoice Generator", "d": "料金を文字で表記し、署名のある平易なサービス契約書テンプレート。", "k": "service agreement generator  サービス契約書ジェネレーター 料金を文字で表記し 署名のある平易なサービス契約書テンプレート", "p": 14, "c": "Tool"}, {"n": "ビジネスレタージェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/business-letter-generator/", "s": "Loona Invoice Generator", "d": "きれいなレターヘッドレイアウトの正式なビジネスレター — 1回目、2回目、最終の支払いリマインダーテンプレートが組み込まれました。", "k": "business letter generator 1 2 ビジネスレタージェネレーター きれいなレターヘッドレイアウトの正式なビジネスレター 1回目 2回目 最終の支払いリマインダーテンプレートが組み込まれました", "p": 15, "c": "Tool"}, {"n": "封筒・宛名ラベルジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/envelope-label-generator/", "s": "Loona Invoice Generator", "d": "DL、C5、C4封筒やラベルに住所を直接印刷します。", "k": "envelope label generator dl c5 c4 封筒 宛名ラベルジェネレーター c4封筒やラベルに住所を直接印刷します", "p": 16, "c": "Tool"}, {"n": "経費精算書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/expense-report-generator/", "s": "Loona Invoice Generator", "d": "前金が控除され、支払額が計算される経費請求。", "k": "expense report generator  経費精算書ジェネレーター 前金が控除され 支払額が計算される経費請求", "p": 17, "c": "Tool"}, {"n": "船荷証券ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/bill-of-lading-generator/", "s": "Loona Invoice Generator", "d": "荷送人、運送人、荷受人、個数と重量の合計を備えた貨物書類。", "k": "bill of lading generator  船荷証券ジェネレーター 荷送人 運送人 荷受人 個数と重量の合計を備えた貨物書類", "p": 18, "c": "Tool"}, {"n": "商業送り状ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/commercial-invoice-generator/", "s": "Loona Invoice Generator", "d": "HSコード、原産国、インコタームズ、運賃を備えた税関送り状。", "k": "commercial invoice generator hs 商業送り状ジェネレーター hsコード 原産国 インコタームズ 運賃を備えた税関送り状", "p": 19, "c": "Tool"}, {"n": "走行距離記録ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/mileage-log-generator/", "s": "Loona Invoice Generator", "d": "走行距離計の数値、総走行距離、精算額が計算される走行距離記録。", "k": "mileage log generator  走行距離記録ジェネレーター 走行距離計の数値 総走行距離 精算額が計算される走行距離記録", "p": 20, "c": "Tool"}, {"n": "寄付金受領書ジェネレーター", "u": "https://loonaautomation.github.io/loona-invoice-generator/ja/donation-receipt-generator/", "s": "Loona Invoice Generator", "d": "金額の文字表記と現物寄付に対応した慈善寄付領収書。", "k": "donation receipt generator  寄付金受領書ジェネレーター 金額の文字表記と現物寄付に対応した慈善寄付領収書", "p": 21, "c": "Tool"}];
+  var data = null, loading = null, usingFallback = false, active = -1, current = [];
+
+  /*CORE-START*/
+/* Loona search core v2 — shared by the homepage dropdown and the /search/ page.
+   Adds over v1: Roman Urdu alias layer, joined-word matching, keyword prefix match,
+   URL+name dedupe, tool-over-guide boost. `data` is supplied by the page glue. */
+var ALIASES = {
+  "khat": "letter",
+  "rasid": "receipt"
+};
+function norm(s) { s = (s || '').toLowerCase().replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/ł/g, 'l').replace(/đ/g, 'd'); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) {} return s.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function lev(a, b) {
+  if (a === b) return 0;
+  var la = a.length, lb = b.length, i, j;
+  if (Math.abs(la - lb) > 1) return 2;
+  var prev = [], cur = [];
+  for (j = 0; j <= lb; j++) prev[j] = j;
+  for (i = 1; i <= la; i++) {
+    cur[0] = i; var best = 99;
+    for (j = 1; j <= lb; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+      cur[j] = v; if (v < best) best = v;
+    }
+    if (best > 1) return 2;
+    var t = prev; prev = cur; cur = t;
+  }
+  return prev[lb];
+}
+function wordLevel(w, nameWords, hayWords, nameJoined) {
+  var i;
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i] === w) return 30;
+  for (i = 0; i < nameWords.length; i++) if (w.length >= 3 && nameWords[i].indexOf(w) === 0) return 24;
+  for (i = 0; i < hayWords.length; i++) if (hayWords[i] === w) return 20;
+  for (i = 0; i < hayWords.length; i++) if (w.length >= 3 && hayWords[i].indexOf(w) === 0) return 18;
+  if (w.length >= 4 && nameJoined.indexOf(w) >= 0) return 22;
+  if (w.length >= 4) {
+    for (i = 0; i < nameWords.length; i++) if (lev(w, nameWords[i]) <= 1) return 17;
+    for (i = 0; i < hayWords.length; i++) if (lev(w, hayWords[i]) <= 1) return 12;
+  }
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i].indexOf(w) >= 0) return 14;
+  return 0;
+}
+function expandWords(qw) {
+  /* variants tried (best score wins): the words themselves; each Roman Urdu
+     word swapped for the FIRST word of its English meaning; the full meaning;
+     and — for multi-word queries — the words joined into one ("wi fi"→"wifi"). */
+  var prim = [], full = [], changed = false;
+  for (var i = 0; i < qw.length; i++) {
+    var a = ALIASES[qw[i]];
+    if (a) {
+      changed = true;
+      var parts = a.split(' ');
+      prim.push(parts[0]);
+      for (var j = 0; j < parts.length; j++) full.push(parts[j]);
+    } else { prim.push(qw[i]); full.push(qw[i]); }
+  }
+  var out = [qw];
+  if (changed) { out.push(prim); if (full.join(' ') !== prim.join(' ')) out.push(full); }
+  if (qw.length > 1) out.push([qw.join('')]);
+  return out;
+}
+function runSearch(q, limit) {
+  var query = norm(q);
+  if (!query || !data) return [];
+  var variants = expandWords(query.split(' ')), out = [];
+  for (var e = 0; e < data.length; e++) {
+    var it = data[e], name = norm(it.n),
+        hay = name + ' ' + norm(it.s) + ' ' + (it.k || ''),
+        nameWords = name.split(' '), hayWords = hay.split(' '),
+        nameJoined = name.replace(/ /g, ''), best = -1;
+    for (var v = 0; v < variants.length; v++) {
+      var qw = variants[v], sum = 0, ok = true;
+      for (var i = 0; i < qw.length; i++) {
+        var lv = wordLevel(qw[i], nameWords, hayWords, nameJoined);
+        if (lv === 0) { ok = false; break; }
+        sum += lv;
+      }
+      if (!ok) continue;
+      var score = sum * 10, qs = qw.join(' '), qJoined = qs.replace(/ /g, '');
+      if (name === qs) score += 100000;
+      else if (name.indexOf(qs) === 0) score += 5000;
+      else if (name.indexOf(qs) >= 0) score += 2000;
+      if (nameJoined === qJoined) score += 9000;
+      else if (qJoined.length >= 4 && nameJoined.indexOf(qJoined) >= 0) score += 2500;
+      if (qw.length > 1) {
+        var allN = true;
+        for (var k = 0; k < qw.length; k++) if (nameWords.indexOf(qw[k]) < 0) allN = false;
+        if (allN) score += 800;
+      }
+      /* tool whose name carries the searched word beats a guide about it */
+      if (it.c !== 'Guide') {
+        for (var m = 0; m < qw.length; m++) if (nameWords.indexOf(qw[m]) >= 0) { score += 350; break; }
+      }
+      score -= (typeof it.p === 'number' ? it.p : 400) * 0.6;
+      score -= name.length * 0.3;
+      if (score > best) best = score;
+    }
+    if (best >= 0) out.push({ it: it, score: best });
+  }
+  out.sort(function (a, b) { return b.score - a.score; });
+  /* dedupe: same URL once, same tool name once (keep the better-ranked copy) */
+  var seenU = {}, seenN = {}, res = [];
+  for (var r = 0; r < out.length; r++) {
+    var en = out[r].it, key = norm(en.n);
+    if (seenU[en.u] || seenN[key]) continue;
+    seenU[en.u] = 1; seenN[key] = 1; res.push(en);
+    if (res.length >= limit) break;
+  }
+  return res;
+}
+function popular(n) {
+  if (!data) return [];
+  return data.filter(function (e) { return (typeof e.p === 'number' ? e.p : 400) < 30; })
+             .sort(function (a, b) { return a.p - b.p; }).slice(0, n);
+}
+/*CORE-END*/
+
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function badge(e) { return e.c === 'Website' ? 'Website' : (e.c === 'Guide' ? 'Guide' : e.s.replace(/^Loona /, '')); }
+  function itemHtml(e, i) {
+    return '<a class="ls-item" role="option" data-i="' + i + '" href="' + esc(e.u) + '">' +
+           '<span class="ls-nm">' + esc(e.n) + '</span><span class="ls-badge">' + esc(badge(e)) + '</span>' +
+           '<span class="ls-ds">' + esc(e.d) + '</span></a>';
+  }
+  function bindItems() {
+    var links = list.querySelectorAll('.ls-item');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseenter', function () { setActive(parseInt(this.getAttribute('data-i'), 10)); });
+    }
+  }
+  function render(items, q) {
+    active = -1; current = items;
+    var h = '';
+    if (usingFallback) h += '<div class="ls-none">' + STR.fb + '</div>';
+    h += items.map(itemHtml).join('');
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderZero(q) {
+    var pop = popular(6);
+    active = -1; current = pop;
+    var h = '<div class="ls-none">' + STR.zero1 + esc(q) + STR.zero2 + '</div>' +
+            pop.map(itemHtml).join('') +
+            '';
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderLoading() {
+    list.innerHTML = '<div class="ls-none">' + STR.loading + '</div>';
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function refresh() {
+    var q = input.value;
+    if (!data) { renderLoading(); return; }
+    if (!norm(q)) { render(popular(6), ''); return; }
+    var res = runSearch(q, 8);
+    if (res.length) render(res, q); else renderZero(q);
+  }
+  function hide() { list.hidden = true; active = -1; input.setAttribute('aria-expanded', 'false'); }
+  function setActive(i) {
+    active = i;
+    var links = list.querySelectorAll('.ls-item');
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('act', j === i);
+    if (i >= 0 && links[i]) links[i].scrollIntoView({ block: 'nearest' });
+  }
+  function ensureIndex() {
+    if (data && !usingFallback) return;
+    if (loading) return;
+    loading = fetch(INDEX_URL).then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      data = j; usingFallback = false; loading = null; refresh();
+    }).catch(function () {
+      loading = null;                 /* not poisoned: next keystroke/focus retries */
+      if (!data) { data = FALLBACK; usingFallback = true; }
+      refresh();
+    });
+  }
+  var timer = null;
+  function onType() { ensureIndex(); refresh(); }
+  input.addEventListener('focus', onType);
+  input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(onType, 70); });
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault();
+      if (list.hidden) { onType(); return; }
+      var n = current.length; if (!n) return;
+      setActive(ev.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n);
+    } else if (ev.key === 'Escape') { hide(); }
+  });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var q = input.value;
+    if (active >= 0 && current[active]) { window.location.href = current[active].u; return; }
+    ensureIndex();
+    if (data) {
+      var best = runSearch(q, 1);
+      if (best.length) { window.location.href = best[0].u; return; }
+    }
+    if (norm(q)) renderZero(q);
+  });
+  document.addEventListener('click', function (ev) { if (!form.contains(ev.target)) hide(); });
+})();
+
+</script>
+<script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' アプリをインストール';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('このアプリをインストール：共有ボタンをタップし、「ホーム画面に追加」を選んでください。');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
 </body>
 </html>

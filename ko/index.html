@@ -361,7 +361,23 @@
         html{scroll-behavior:auto}
         .toast{transition:none}
       }
-    </style>
+    
+.ls{max-width:640px;margin:22px auto 4px;position:relative;text-align:left}
+.ls-box{display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.28);border:2px solid var(--gold,#d4af37)}
+.ls-box input{flex:1;border:0;outline:0;padding:14px 18px;font-size:1.02rem;min-width:0;color:var(--ink,#12211c);background:#fff}
+.ls-box button{border:0;background:var(--gold,#d4af37);color:#231a00;font-weight:800;padding:0 22px;font-size:1rem;cursor:pointer}
+.ls-box button:hover{background:var(--gold2,#b8912a)}
+.ls-list{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.35);z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.ls-item{display:block;padding:10px 16px;text-decoration:none;border-bottom:1px solid #eee9da}
+.ls-item:last-of-type{border-bottom:0}
+.ls-item:hover,.ls-item.act{background:#fbf6df}
+.ls-nm{font-weight:700;color:var(--ink,#12211c)}
+.ls-badge{display:inline-block;margin-left:8px;background:var(--teal,#062e2a);color:#ffe9a8;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ls-ds{display:block;color:#5a6660;font-size:.85rem;margin-top:1px}
+.ls-none{padding:12px 16px;color:#5a6660;font-size:.92rem}
+@media(max-width:560px){.ls-box button{padding:0 14px}.ls-box input{padding:12px 14px;font-size:.98rem}}
+
+</style>
   
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
@@ -429,6 +445,10 @@
           <span>16개 통화</span>
           <span>비공개 — 브라우저에서 실행돼요</span>
         </div>
+<div class="ls"><form id="lsForm" role="search" autocomplete="off">
+<div class="ls-box"><input id="lsInput" type="search" placeholder="인보이스 도구 22개 검색&hellip; &lsquo;invoice&rsquo;를 시도해 보세요" aria-label="인보이스 도구 22개 검색" autocomplete="off"><button type="submit">검색</button></div>
+<div id="lsList" class="ls-list" role="listbox" hidden></div>
+</form></div>
       </div>
     </div>
 
@@ -1297,6 +1317,235 @@
       });
     })();
     </script>
-  <script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' 앱 설치';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('이 앱을 설치하세요: 공유 버튼을 누른 뒤 "홈 화면에 추가"를 선택하세요.');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+  <script>/*loona-invoice-search*/
+/* Loona Invoice Generator search (per-site build of the Loona hub tool search v2) — lazy-loads /search-index.json on first focus/typing.
+   v2 fixes: a failed fetch no longer poisons the session (it retries on the next
+   keystroke/focus), a "Loading tools…" state shows while the index downloads,
+   an embedded popular-tools fallback keeps search alive offline, Roman Urdu
+   aliases, joined-word matching, dedupe and tool-over-guide ranking. */
+(function () {
+  "use strict";
+  var form = document.getElementById('lsForm'),
+      input = document.getElementById('lsInput'),
+      list = document.getElementById('lsList');
+  if (!form || !input || !list) return;
+  var INDEX_URL = '/loona-invoice-generator/ko/search-index.json';
+  var STR = {"loading": "도구를 불러오는 중…", "fb": "인기 도구를 표시하고 있어요 — 전체 색인이 오는 중이에요…", "zero1": "다음에 대한 정확한 일치가 없어요: “", "zero2": "” — 인기 도구를 시도해 보세요:"};
+  var FALLBACK = [{"n": "Loona Invoice & Business Documents", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/", "s": "Loona Invoice Generator", "d": "Loona의 무료 인보이스 및 비즈니스 문서 생성기: EU VAT와 리버스 차지를 지원하는 인보이스, 그리고 영수증, 견적서, 구매 주문서, 대변 전표, 배송 전표, 포장 명세서, 급여 명세서, 임대료 영수증. 회원가입 없이, 인쇄 준비 PDF.", "k": "business documents homepage invoice loona site tools website loona invoice business documents loona eu vat pdf loona의 무료 인보이스 및 비즈니스 문서 생성기 vat와 리버스 차지를 지원하는 인보이스 그리고 영수증 견적서 구매 주문서 대변 전표 배송 전표 포장 명세서 급여 명세서 임대료 영수증 회원가입 없이 인쇄 준비", "p": 0, "c": "Website"}, {"n": "영수증 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/receipt-generator/", "s": "Loona Invoice Generator", "d": "금액(문자 표기), 결제 수단, 서명란이 있는 결제 영수증.", "k": "receipt generator  영수증 생성기 금액 문자 표기 결제 수단 서명란이 있는 결제 영수증", "p": 1, "c": "Tool"}, {"n": "견적서 / 가견적서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/quote-generator/", "s": "Loona Invoice Generator", "d": "품목, 세금, 유효 날짜, 조건이 있는 전문 견적서.", "k": "quote generator  견적서 가견적서 생성기 품목 세금 유효 날짜 조건이 있는 전문 견적서", "p": 2, "c": "Tool"}, {"n": "구매 주문서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/purchase-order-generator/", "s": "Loona Invoice Generator", "d": "구매자, 공급자, 배송지 주소, 승인이 있는 번호 매겨진 PO.", "k": "purchase order generator po 구매 주문서 생성기 구매자 공급자 배송지 주소 승인이 있는 번호 매겨진", "p": 3, "c": "Tool"}, {"n": "대변 전표 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/credit-note-generator/", "s": "Loona Invoice Generator", "d": "원본 인보이스에 대한 대변 전표, 세금 조정액이 계산돼요.", "k": "credit note generator  대변 전표 생성기 원본 인보이스에 대한 대변 전표 세금 조정액이 계산돼요", "p": 4, "c": "Tool"}, {"n": "배송 전표 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/delivery-note-generator/", "s": "Loona Invoice Generator", "d": "품목, 수량, 수령 서명란이 있는 배송 전표.", "k": "delivery note generator  배송 전표 생성기 품목 수량 수령 서명란이 있는 배송 전표", "p": 5, "c": "Tool"}, {"n": "포장 명세서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/packing-slip-generator/", "s": "Loona Invoice Generator", "d": "가격이 기본적으로 숨겨지고 선택적 가격 토글이 있는 포장 명세서.", "k": "packing slip generator  포장 명세서 생성기 가격이 기본적으로 숨겨지고 선택적 가격 토글이 있는 포장 명세서", "p": 6, "c": "Tool"}, {"n": "급여 명세서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/pay-stub-generator/", "s": "Loona Invoice Generator", "d": "소득, 공제, 실수령액이 자동으로 계산되는 급여 명세서.", "k": "pay stub generator  급여 명세서 생성기 소득 공제 실수령액이 자동으로 계산되는 급여 명세서", "p": 7, "c": "Tool"}, {"n": "임대료 영수증 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/rent-receipt-generator/", "s": "Loona Invoice Generator", "d": "임차인, 임대인, 부동산, 월, 금액(문자 표기)이 있는 임대료 영수증.", "k": "rent receipt generator  임대료 영수증 생성기 임차인 임대인 부동산 월 금액 문자 표기 이 있는 임대료 영수증", "p": 8, "c": "Tool"}, {"n": "견적 인보이스 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/proforma-invoice-generator/", "s": "Loona Invoice Generator", "d": "유효 날짜가 있는, 선급금과 세관을 위한 예비 인보이스.", "k": "proforma invoice generator  견적 인보이스 생성기 유효 날짜가 있는 선급금과 세관을 위한 예비 인보이스", "p": 9, "c": "Tool"}, {"n": "차변 전표 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/debit-note-generator/", "s": "Loona Invoice Generator", "d": "구매 반품과 과소 청구 정정을 위한 차변 전표, 세금 조정액 포함.", "k": "debit note generator  차변 전표 생성기 구매 반품과 과소 청구 정정을 위한 차변 전표 세금 조정액 포함", "p": 10, "c": "Tool"}, {"n": "판매 주문서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/sales-order-generator/", "s": "Loona Invoice Generator", "d": "배송 날짜와 함께 고객 PO를 참조하는 판매자 주문 확인서.", "k": "sales order generator po 판매 주문서 생성기 배송 날짜와 함께 고객 po를 참조하는 판매자 주문 확인서", "p": 11, "c": "Tool"}, {"n": "거래 명세서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/statement-of-account-generator/", "s": "Loona Invoice Generator", "d": "기초 잔액과 누적 잔액이 있는 고객 명세서.", "k": "statement of account generator  거래 명세서 생성기 기초 잔액과 누적 잔액이 있는 고객 명세서", "p": 12, "c": "Tool"}, {"n": "작업 지시서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/work-order-generator/", "s": "Loona Invoice Generator", "d": "인건 시간, 부품, 고객 서명이 있는 작업 지시서.", "k": "work order generator  작업 지시서 생성기 인건 시간 부품 고객 서명이 있는 작업 지시서", "p": 13, "c": "Tool"}, {"n": "서비스 계약서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/service-agreement-generator/", "s": "Loona Invoice Generator", "d": "수수료가 문자로 표기되고 서명이 있는, 쉬운 말로 쓴 서비스 계약서 템플릿.", "k": "service agreement generator  서비스 계약서 생성기 수수료가 문자로 표기되고 서명이 있는 쉬운 말로 쓴 서비스 계약서 템플릿", "p": 14, "c": "Tool"}, {"n": "비즈니스 레터 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/business-letter-generator/", "s": "Loona Invoice Generator", "d": "깔끔한 레터헤드 레이아웃의 정식 비즈니스 레터 — 이제 1차, 2차, 최종 결제 알림 템플릿이 내장되어 있어요.", "k": "business letter generator 1 2 비즈니스 레터 생성기 깔끔한 레터헤드 레이아웃의 정식 비즈니스 레터 이제 1차 2차 최종 결제 알림 템플릿이 내장되어 있어요", "p": 15, "c": "Tool"}, {"n": "봉투 & 주소 라벨 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/envelope-label-generator/", "s": "Loona Invoice Generator", "d": "DL, C5, C4 봉투나 라벨에 주소를 직접 인쇄하세요.", "k": "envelope label generator dl c5 c4 봉투 주소 라벨 생성기 봉투나 라벨에 주소를 직접 인쇄하세요", "p": 16, "c": "Tool"}, {"n": "경비 보고서 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/expense-report-generator/", "s": "Loona Invoice Generator", "d": "선급금이 차감되고 지불할 금액이 계산되는 경비 청구.", "k": "expense report generator  경비 보고서 생성기 선급금이 차감되고 지불할 금액이 계산되는 경비 청구", "p": 17, "c": "Tool"}, {"n": "선하증권 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/bill-of-lading-generator/", "s": "Loona Invoice Generator", "d": "송하인, 운송인, 수하인, 개수와 무게 합계가 있는 화물 서류.", "k": "bill of lading generator  선하증권 생성기 송하인 운송인 수하인 개수와 무게 합계가 있는 화물 서류", "p": 18, "c": "Tool"}, {"n": "상업 인보이스 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/commercial-invoice-generator/", "s": "Loona Invoice Generator", "d": "HS 코드, 원산지 국가, 인코텀즈, 운송비가 포함된 세관 인보이스.", "k": "commercial invoice generator hs 상업 인보이스 생성기 코드 원산지 국가 인코텀즈 운송비가 포함된 세관 인보이스", "p": 19, "c": "Tool"}, {"n": "주행 거리 기록 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/mileage-log-generator/", "s": "Loona Invoice Generator", "d": "주행거리계 수치, 총 거리, 상환액이 계산되는 주행 거리 기록.", "k": "mileage log generator  주행 거리 기록 생성기 주행거리계 수치 총 거리 상환액이 계산되는 주행 거리 기록", "p": 20, "c": "Tool"}, {"n": "기부 영수증 생성기", "u": "https://loonaautomation.github.io/loona-invoice-generator/ko/donation-receipt-generator/", "s": "Loona Invoice Generator", "d": "금액을 문자로 쓴 자선 기부 영수증과 현물 기부.", "k": "donation receipt generator  기부 영수증 생성기 금액을 문자로 쓴 자선 기부 영수증과 현물 기부", "p": 21, "c": "Tool"}];
+  var data = null, loading = null, usingFallback = false, active = -1, current = [];
+
+  /*CORE-START*/
+/* Loona search core v2 — shared by the homepage dropdown and the /search/ page.
+   Adds over v1: Roman Urdu alias layer, joined-word matching, keyword prefix match,
+   URL+name dedupe, tool-over-guide boost. `data` is supplied by the page glue. */
+var ALIASES = {
+  "khat": "letter",
+  "rasid": "receipt"
+};
+function norm(s) { s = (s || '').toLowerCase().replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/ł/g, 'l').replace(/đ/g, 'd'); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) {} return s.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function lev(a, b) {
+  if (a === b) return 0;
+  var la = a.length, lb = b.length, i, j;
+  if (Math.abs(la - lb) > 1) return 2;
+  var prev = [], cur = [];
+  for (j = 0; j <= lb; j++) prev[j] = j;
+  for (i = 1; i <= la; i++) {
+    cur[0] = i; var best = 99;
+    for (j = 1; j <= lb; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+      cur[j] = v; if (v < best) best = v;
+    }
+    if (best > 1) return 2;
+    var t = prev; prev = cur; cur = t;
+  }
+  return prev[lb];
+}
+function wordLevel(w, nameWords, hayWords, nameJoined) {
+  var i;
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i] === w) return 30;
+  for (i = 0; i < nameWords.length; i++) if (w.length >= 3 && nameWords[i].indexOf(w) === 0) return 24;
+  for (i = 0; i < hayWords.length; i++) if (hayWords[i] === w) return 20;
+  for (i = 0; i < hayWords.length; i++) if (w.length >= 3 && hayWords[i].indexOf(w) === 0) return 18;
+  if (w.length >= 4 && nameJoined.indexOf(w) >= 0) return 22;
+  if (w.length >= 4) {
+    for (i = 0; i < nameWords.length; i++) if (lev(w, nameWords[i]) <= 1) return 17;
+    for (i = 0; i < hayWords.length; i++) if (lev(w, hayWords[i]) <= 1) return 12;
+  }
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i].indexOf(w) >= 0) return 14;
+  return 0;
+}
+function expandWords(qw) {
+  /* variants tried (best score wins): the words themselves; each Roman Urdu
+     word swapped for the FIRST word of its English meaning; the full meaning;
+     and — for multi-word queries — the words joined into one ("wi fi"→"wifi"). */
+  var prim = [], full = [], changed = false;
+  for (var i = 0; i < qw.length; i++) {
+    var a = ALIASES[qw[i]];
+    if (a) {
+      changed = true;
+      var parts = a.split(' ');
+      prim.push(parts[0]);
+      for (var j = 0; j < parts.length; j++) full.push(parts[j]);
+    } else { prim.push(qw[i]); full.push(qw[i]); }
+  }
+  var out = [qw];
+  if (changed) { out.push(prim); if (full.join(' ') !== prim.join(' ')) out.push(full); }
+  if (qw.length > 1) out.push([qw.join('')]);
+  return out;
+}
+function runSearch(q, limit) {
+  var query = norm(q);
+  if (!query || !data) return [];
+  var variants = expandWords(query.split(' ')), out = [];
+  for (var e = 0; e < data.length; e++) {
+    var it = data[e], name = norm(it.n),
+        hay = name + ' ' + norm(it.s) + ' ' + (it.k || ''),
+        nameWords = name.split(' '), hayWords = hay.split(' '),
+        nameJoined = name.replace(/ /g, ''), best = -1;
+    for (var v = 0; v < variants.length; v++) {
+      var qw = variants[v], sum = 0, ok = true;
+      for (var i = 0; i < qw.length; i++) {
+        var lv = wordLevel(qw[i], nameWords, hayWords, nameJoined);
+        if (lv === 0) { ok = false; break; }
+        sum += lv;
+      }
+      if (!ok) continue;
+      var score = sum * 10, qs = qw.join(' '), qJoined = qs.replace(/ /g, '');
+      if (name === qs) score += 100000;
+      else if (name.indexOf(qs) === 0) score += 5000;
+      else if (name.indexOf(qs) >= 0) score += 2000;
+      if (nameJoined === qJoined) score += 9000;
+      else if (qJoined.length >= 4 && nameJoined.indexOf(qJoined) >= 0) score += 2500;
+      if (qw.length > 1) {
+        var allN = true;
+        for (var k = 0; k < qw.length; k++) if (nameWords.indexOf(qw[k]) < 0) allN = false;
+        if (allN) score += 800;
+      }
+      /* tool whose name carries the searched word beats a guide about it */
+      if (it.c !== 'Guide') {
+        for (var m = 0; m < qw.length; m++) if (nameWords.indexOf(qw[m]) >= 0) { score += 350; break; }
+      }
+      score -= (typeof it.p === 'number' ? it.p : 400) * 0.6;
+      score -= name.length * 0.3;
+      if (score > best) best = score;
+    }
+    if (best >= 0) out.push({ it: it, score: best });
+  }
+  out.sort(function (a, b) { return b.score - a.score; });
+  /* dedupe: same URL once, same tool name once (keep the better-ranked copy) */
+  var seenU = {}, seenN = {}, res = [];
+  for (var r = 0; r < out.length; r++) {
+    var en = out[r].it, key = norm(en.n);
+    if (seenU[en.u] || seenN[key]) continue;
+    seenU[en.u] = 1; seenN[key] = 1; res.push(en);
+    if (res.length >= limit) break;
+  }
+  return res;
+}
+function popular(n) {
+  if (!data) return [];
+  return data.filter(function (e) { return (typeof e.p === 'number' ? e.p : 400) < 30; })
+             .sort(function (a, b) { return a.p - b.p; }).slice(0, n);
+}
+/*CORE-END*/
+
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function badge(e) { return e.c === 'Website' ? 'Website' : (e.c === 'Guide' ? 'Guide' : e.s.replace(/^Loona /, '')); }
+  function itemHtml(e, i) {
+    return '<a class="ls-item" role="option" data-i="' + i + '" href="' + esc(e.u) + '">' +
+           '<span class="ls-nm">' + esc(e.n) + '</span><span class="ls-badge">' + esc(badge(e)) + '</span>' +
+           '<span class="ls-ds">' + esc(e.d) + '</span></a>';
+  }
+  function bindItems() {
+    var links = list.querySelectorAll('.ls-item');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseenter', function () { setActive(parseInt(this.getAttribute('data-i'), 10)); });
+    }
+  }
+  function render(items, q) {
+    active = -1; current = items;
+    var h = '';
+    if (usingFallback) h += '<div class="ls-none">' + STR.fb + '</div>';
+    h += items.map(itemHtml).join('');
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderZero(q) {
+    var pop = popular(6);
+    active = -1; current = pop;
+    var h = '<div class="ls-none">' + STR.zero1 + esc(q) + STR.zero2 + '</div>' +
+            pop.map(itemHtml).join('') +
+            '';
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderLoading() {
+    list.innerHTML = '<div class="ls-none">' + STR.loading + '</div>';
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function refresh() {
+    var q = input.value;
+    if (!data) { renderLoading(); return; }
+    if (!norm(q)) { render(popular(6), ''); return; }
+    var res = runSearch(q, 8);
+    if (res.length) render(res, q); else renderZero(q);
+  }
+  function hide() { list.hidden = true; active = -1; input.setAttribute('aria-expanded', 'false'); }
+  function setActive(i) {
+    active = i;
+    var links = list.querySelectorAll('.ls-item');
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('act', j === i);
+    if (i >= 0 && links[i]) links[i].scrollIntoView({ block: 'nearest' });
+  }
+  function ensureIndex() {
+    if (data && !usingFallback) return;
+    if (loading) return;
+    loading = fetch(INDEX_URL).then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      data = j; usingFallback = false; loading = null; refresh();
+    }).catch(function () {
+      loading = null;                 /* not poisoned: next keystroke/focus retries */
+      if (!data) { data = FALLBACK; usingFallback = true; }
+      refresh();
+    });
+  }
+  var timer = null;
+  function onType() { ensureIndex(); refresh(); }
+  input.addEventListener('focus', onType);
+  input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(onType, 70); });
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault();
+      if (list.hidden) { onType(); return; }
+      var n = current.length; if (!n) return;
+      setActive(ev.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n);
+    } else if (ev.key === 'Escape') { hide(); }
+  });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var q = input.value;
+    if (active >= 0 && current[active]) { window.location.href = current[active].u; return; }
+    ensureIndex();
+    if (data) {
+      var best = runSearch(q, 1);
+      if (best.length) { window.location.href = best[0].u; return; }
+    }
+    if (norm(q)) renderZero(q);
+  });
+  document.addEventListener('click', function (ev) { if (!form.contains(ev.target)) hide(); });
+})();
+
+</script>
+<script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' 앱 설치';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('이 앱을 설치하세요: 공유 버튼을 누른 뒤 "홈 화면에 추가"를 선택하세요.');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
 </body>
 </html>

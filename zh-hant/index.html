@@ -361,7 +361,23 @@
         html{scroll-behavior:auto}
         .toast{transition:none}
       }
-    </style>
+    
+.ls{max-width:640px;margin:22px auto 4px;position:relative;text-align:left}
+.ls-box{display:flex;background:#fff;border-radius:999px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.28);border:2px solid var(--gold,#d4af37)}
+.ls-box input{flex:1;border:0;outline:0;padding:14px 18px;font-size:1.02rem;min-width:0;color:var(--ink,#12211c);background:#fff}
+.ls-box button{border:0;background:var(--gold,#d4af37);color:#231a00;font-weight:800;padding:0 22px;font-size:1rem;cursor:pointer}
+.ls-box button:hover{background:var(--gold2,#b8912a)}
+.ls-list{position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border-radius:14px;box-shadow:0 18px 44px rgba(0,0,0,.35);z-index:60;max-height:70vh;overflow-y:auto;text-align:left}
+.ls-item{display:block;padding:10px 16px;text-decoration:none;border-bottom:1px solid #eee9da}
+.ls-item:last-of-type{border-bottom:0}
+.ls-item:hover,.ls-item.act{background:#fbf6df}
+.ls-nm{font-weight:700;color:var(--ink,#12211c)}
+.ls-badge{display:inline-block;margin-left:8px;background:var(--teal,#062e2a);color:#ffe9a8;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;vertical-align:2px;white-space:nowrap}
+.ls-ds{display:block;color:#5a6660;font-size:.85rem;margin-top:1px}
+.ls-none{padding:12px 16px;color:#5a6660;font-size:.92rem}
+@media(max-width:560px){.ls-box button{padding:0 14px}.ls-box input{padding:12px 14px;font-size:.98rem}}
+
+</style>
   
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1566440962454692" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
@@ -429,6 +445,10 @@
           <span>16 種貨幣</span>
           <span>私密 — 在您的瀏覽器中執行</span>
         </div>
+<div class="ls"><form id="lsForm" role="search" autocomplete="off">
+<div class="ls-box"><input id="lsInput" type="search" placeholder="搜尋 22 個發票工具&hellip; 試試 &lsquo;invoice&rsquo;" aria-label="搜尋 22 個發票工具" autocomplete="off"><button type="submit">搜尋</button></div>
+<div id="lsList" class="ls-list" role="listbox" hidden></div>
+</form></div>
       </div>
     </div>
 
@@ -1297,6 +1317,235 @@
       });
     })();
     </script>
-  <script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' 安裝應用';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('安裝此應用：點選分享按鈕，然後選擇“新增到主螢幕”。');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
+  <script>/*loona-invoice-search*/
+/* Loona Invoice Generator search (per-site build of the Loona hub tool search v2) — lazy-loads /search-index.json on first focus/typing.
+   v2 fixes: a failed fetch no longer poisons the session (it retries on the next
+   keystroke/focus), a "Loading tools…" state shows while the index downloads,
+   an embedded popular-tools fallback keeps search alive offline, Roman Urdu
+   aliases, joined-word matching, dedupe and tool-over-guide ranking. */
+(function () {
+  "use strict";
+  var form = document.getElementById('lsForm'),
+      input = document.getElementById('lsInput'),
+      list = document.getElementById('lsList');
+  if (!form || !input || !list) return;
+  var INDEX_URL = '/loona-invoice-generator/zh-hant/search-index.json';
+  var STR = {"loading": "正在載入工具…", "fb": "正在顯示熱門工具 — 完整索引即將到來…", "zero1": "沒有與以下內容完全匹配的結果：“", "zero2": "” — 試試這些熱門工具："};
+  var FALLBACK = [{"n": "Loona Invoice & Business Documents", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/", "s": "Loona Invoice Generator", "d": "Loona 的免費發票和商務單據生成器：具有歐盟增值稅和反向徵稅的發票，以及收據、報價、採購訂單、貸項通知單、送貨單、裝箱單、工資條和租金收據。無需註冊，可列印的 PDF。", "k": "business documents homepage invoice loona site tools website loona invoice business documents loona pdf 的免費發票和商務單據生成器 具有歐盟增值稅和反向徵稅的發票 以及收據 報價 採購訂單 貸項通知單 送貨單 裝箱單 工資條和租金收據 無需註冊 可列印的", "p": 0, "c": "Website"}, {"n": "收據生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/receipt-generator/", "s": "Loona Invoice Generator", "d": "帶有大寫金額、付款方式和簽名行的付款收據。", "k": "receipt generator  收據生成器 帶有大寫金額 付款方式和簽名行的付款收據", "p": 1, "c": "Tool"}, {"n": "報價 / 估價生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/quote-generator/", "s": "Loona Invoice Generator", "d": "帶有專案、稅費、有效期和條款的專業報價。", "k": "quote generator  報價 估價生成器 帶有專案 稅費 有效期和條款的專業報價", "p": 2, "c": "Tool"}, {"n": "採購訂單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/purchase-order-generator/", "s": "Loona Invoice Generator", "d": "帶編號的採購訂單，包含買方、供應商、收貨地址和授權。", "k": "purchase order generator  採購訂單生成器 帶編號的採購訂單 包含買方 供應商 收貨地址和授權", "p": 3, "c": "Tool"}, {"n": "貸項通知單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/credit-note-generator/", "s": "Loona Invoice Generator", "d": "針對原始發票的貸項通知單，並計算稅額調整。", "k": "credit note generator  貸項通知單生成器 針對原始發票的貸項通知單 並計算稅額調整", "p": 4, "c": "Tool"}, {"n": "送貨單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/delivery-note-generator/", "s": "Loona Invoice Generator", "d": "帶有專案、數量和簽收簽名的送貨單據。", "k": "delivery note generator  送貨單生成器 帶有專案 數量和簽收簽名的送貨單據", "p": 5, "c": "Tool"}, {"n": "裝箱單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/packing-slip-generator/", "s": "Loona Invoice Generator", "d": "價格預設隱藏並帶有可選價格開關的裝箱單。", "k": "packing slip generator  裝箱單生成器 價格預設隱藏並帶有可選價格開關的裝箱單", "p": 6, "c": "Tool"}, {"n": "工資條生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/pay-stub-generator/", "s": "Loona Invoice Generator", "d": "自動計算收入、扣除和實發工資的工資條。", "k": "pay stub generator  工資條生成器 自動計算收入 扣除和實發工資的工資條", "p": 7, "c": "Tool"}, {"n": "租金收據生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/rent-receipt-generator/", "s": "Loona Invoice Generator", "d": "帶有租戶、房東、房產、月份和大寫金額的租金收據。", "k": "rent receipt generator  租金收據生成器 帶有租戶 房東 房產 月份和大寫金額的租金收據", "p": 8, "c": "Tool"}, {"n": "形式發票生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/proforma-invoice-generator/", "s": "Loona Invoice Generator", "d": "用於預付款和報關的初步發票，並註明有效期。", "k": "proforma invoice generator  形式發票生成器 用於預付款和報關的初步發票 並註明有效期", "p": 9, "c": "Tool"}, {"n": "借項通知單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/debit-note-generator/", "s": "Loona Invoice Generator", "d": "用於採購退貨和少收費更正的借項通知單，並計算稅額調整。", "k": "debit note generator  借項通知單生成器 用於採購退貨和少收費更正的借項通知單 並計算稅額調整", "p": 10, "c": "Tool"}, {"n": "銷售訂單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/sales-order-generator/", "s": "Loona Invoice Generator", "d": "引用客戶採購訂單並註明交付日期的賣方訂單確認。", "k": "sales order generator  銷售訂單生成器 引用客戶採購訂單並註明交付日期的賣方訂單確認", "p": 11, "c": "Tool"}, {"n": "對賬單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/statement-of-account-generator/", "s": "Loona Invoice Generator", "d": "帶有期初餘額和滾動餘額的客戶對賬單。", "k": "statement of account generator  對賬單生成器 帶有期初餘額和滾動餘額的客戶對賬單", "p": 12, "c": "Tool"}, {"n": "工單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/work-order-generator/", "s": "Loona Invoice Generator", "d": "帶有工時、零件和客戶簽收的工單。", "k": "work order generator  工單生成器 帶有工時 零件和客戶簽收的工單", "p": 13, "c": "Tool"}, {"n": "服務協議生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/service-agreement-generator/", "s": "Loona Invoice Generator", "d": "帶有大寫費用和簽名的通俗語言服務協議模板。", "k": "service agreement generator  服務協議生成器 帶有大寫費用和簽名的通俗語言服務協議模板", "p": 14, "c": "Tool"}, {"n": "商務信函生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/business-letter-generator/", "s": "Loona Invoice Generator", "d": "採用整潔信頭佈局的正式商務信函——現已內建第 1 次、第 2 次和最後付款提醒模板。", "k": "business letter generator 1 2 商務信函生成器 採用整潔信頭佈局的正式商務信函 現已內建第 次 第 次和最後付款提醒模板", "p": 15, "c": "Tool"}, {"n": "信封 & 地址標籤生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/envelope-label-generator/", "s": "Loona Invoice Generator", "d": "將地址直接列印到 DL、C5 和 C4 信封或標籤上。", "k": "envelope label generator dl c5 c4 信封 地址標籤生成器 將地址直接列印到 和 信封或標籤上", "p": 16, "c": "Tool"}, {"n": "費用報告生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/expense-report-generator/", "s": "Loona Invoice Generator", "d": "扣除預付款並計算應付金額的費用報銷。", "k": "expense report generator  費用報告生成器 扣除預付款並計算應付金額的費用報銷", "p": 17, "c": "Tool"}, {"n": "提單生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/bill-of-lading-generator/", "s": "Loona Invoice Generator", "d": "帶有託運人、承運人、收貨人、件數和重量總計的貨運文書。", "k": "bill of lading generator  提單生成器 帶有託運人 承運人 收貨人 件數和重量總計的貨運文書", "p": 18, "c": "Tool"}, {"n": "商業發票生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/commercial-invoice-generator/", "s": "Loona Invoice Generator", "d": "帶有 HS 編碼、原產國、國際貿易術語和運費的報關發票。", "k": "commercial invoice generator hs 商業發票生成器 帶有 編碼 原產國 國際貿易術語和運費的報關發票", "p": 19, "c": "Tool"}, {"n": "里程記錄生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/mileage-log-generator/", "s": "Loona Invoice Generator", "d": "帶有里程錶讀數、總里程和計算報銷的里程記錄。", "k": "mileage log generator  里程記錄生成器 帶有里程錶讀數 總里程和計算報銷的里程記錄", "p": 20, "c": "Tool"}, {"n": "捐贈收據生成器", "u": "https://loonaautomation.github.io/loona-invoice-generator/zh-hant/donation-receipt-generator/", "s": "Loona Invoice Generator", "d": "附有大寫金額和實物禮物的慈善捐贈收據。", "k": "donation receipt generator  捐贈收據生成器 附有大寫金額和實物禮物的慈善捐贈收據", "p": 21, "c": "Tool"}];
+  var data = null, loading = null, usingFallback = false, active = -1, current = [];
+
+  /*CORE-START*/
+/* Loona search core v2 — shared by the homepage dropdown and the /search/ page.
+   Adds over v1: Roman Urdu alias layer, joined-word matching, keyword prefix match,
+   URL+name dedupe, tool-over-guide boost. `data` is supplied by the page glue. */
+var ALIASES = {
+  "khat": "letter",
+  "rasid": "receipt"
+};
+function norm(s) { s = (s || '').toLowerCase().replace(/ß/g, 'ss').replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/ł/g, 'l').replace(/đ/g, 'd'); try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) {} return s.replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function lev(a, b) {
+  if (a === b) return 0;
+  var la = a.length, lb = b.length, i, j;
+  if (Math.abs(la - lb) > 1) return 2;
+  var prev = [], cur = [];
+  for (j = 0; j <= lb; j++) prev[j] = j;
+  for (i = 1; i <= la; i++) {
+    cur[0] = i; var best = 99;
+    for (j = 1; j <= lb; j++) {
+      var v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1));
+      cur[j] = v; if (v < best) best = v;
+    }
+    if (best > 1) return 2;
+    var t = prev; prev = cur; cur = t;
+  }
+  return prev[lb];
+}
+function wordLevel(w, nameWords, hayWords, nameJoined) {
+  var i;
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i] === w) return 30;
+  for (i = 0; i < nameWords.length; i++) if (w.length >= 3 && nameWords[i].indexOf(w) === 0) return 24;
+  for (i = 0; i < hayWords.length; i++) if (hayWords[i] === w) return 20;
+  for (i = 0; i < hayWords.length; i++) if (w.length >= 3 && hayWords[i].indexOf(w) === 0) return 18;
+  if (w.length >= 4 && nameJoined.indexOf(w) >= 0) return 22;
+  if (w.length >= 4) {
+    for (i = 0; i < nameWords.length; i++) if (lev(w, nameWords[i]) <= 1) return 17;
+    for (i = 0; i < hayWords.length; i++) if (lev(w, hayWords[i]) <= 1) return 12;
+  }
+  for (i = 0; i < nameWords.length; i++) if (nameWords[i].indexOf(w) >= 0) return 14;
+  return 0;
+}
+function expandWords(qw) {
+  /* variants tried (best score wins): the words themselves; each Roman Urdu
+     word swapped for the FIRST word of its English meaning; the full meaning;
+     and — for multi-word queries — the words joined into one ("wi fi"→"wifi"). */
+  var prim = [], full = [], changed = false;
+  for (var i = 0; i < qw.length; i++) {
+    var a = ALIASES[qw[i]];
+    if (a) {
+      changed = true;
+      var parts = a.split(' ');
+      prim.push(parts[0]);
+      for (var j = 0; j < parts.length; j++) full.push(parts[j]);
+    } else { prim.push(qw[i]); full.push(qw[i]); }
+  }
+  var out = [qw];
+  if (changed) { out.push(prim); if (full.join(' ') !== prim.join(' ')) out.push(full); }
+  if (qw.length > 1) out.push([qw.join('')]);
+  return out;
+}
+function runSearch(q, limit) {
+  var query = norm(q);
+  if (!query || !data) return [];
+  var variants = expandWords(query.split(' ')), out = [];
+  for (var e = 0; e < data.length; e++) {
+    var it = data[e], name = norm(it.n),
+        hay = name + ' ' + norm(it.s) + ' ' + (it.k || ''),
+        nameWords = name.split(' '), hayWords = hay.split(' '),
+        nameJoined = name.replace(/ /g, ''), best = -1;
+    for (var v = 0; v < variants.length; v++) {
+      var qw = variants[v], sum = 0, ok = true;
+      for (var i = 0; i < qw.length; i++) {
+        var lv = wordLevel(qw[i], nameWords, hayWords, nameJoined);
+        if (lv === 0) { ok = false; break; }
+        sum += lv;
+      }
+      if (!ok) continue;
+      var score = sum * 10, qs = qw.join(' '), qJoined = qs.replace(/ /g, '');
+      if (name === qs) score += 100000;
+      else if (name.indexOf(qs) === 0) score += 5000;
+      else if (name.indexOf(qs) >= 0) score += 2000;
+      if (nameJoined === qJoined) score += 9000;
+      else if (qJoined.length >= 4 && nameJoined.indexOf(qJoined) >= 0) score += 2500;
+      if (qw.length > 1) {
+        var allN = true;
+        for (var k = 0; k < qw.length; k++) if (nameWords.indexOf(qw[k]) < 0) allN = false;
+        if (allN) score += 800;
+      }
+      /* tool whose name carries the searched word beats a guide about it */
+      if (it.c !== 'Guide') {
+        for (var m = 0; m < qw.length; m++) if (nameWords.indexOf(qw[m]) >= 0) { score += 350; break; }
+      }
+      score -= (typeof it.p === 'number' ? it.p : 400) * 0.6;
+      score -= name.length * 0.3;
+      if (score > best) best = score;
+    }
+    if (best >= 0) out.push({ it: it, score: best });
+  }
+  out.sort(function (a, b) { return b.score - a.score; });
+  /* dedupe: same URL once, same tool name once (keep the better-ranked copy) */
+  var seenU = {}, seenN = {}, res = [];
+  for (var r = 0; r < out.length; r++) {
+    var en = out[r].it, key = norm(en.n);
+    if (seenU[en.u] || seenN[key]) continue;
+    seenU[en.u] = 1; seenN[key] = 1; res.push(en);
+    if (res.length >= limit) break;
+  }
+  return res;
+}
+function popular(n) {
+  if (!data) return [];
+  return data.filter(function (e) { return (typeof e.p === 'number' ? e.p : 400) < 30; })
+             .sort(function (a, b) { return a.p - b.p; }).slice(0, n);
+}
+/*CORE-END*/
+
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function badge(e) { return e.c === 'Website' ? 'Website' : (e.c === 'Guide' ? 'Guide' : e.s.replace(/^Loona /, '')); }
+  function itemHtml(e, i) {
+    return '<a class="ls-item" role="option" data-i="' + i + '" href="' + esc(e.u) + '">' +
+           '<span class="ls-nm">' + esc(e.n) + '</span><span class="ls-badge">' + esc(badge(e)) + '</span>' +
+           '<span class="ls-ds">' + esc(e.d) + '</span></a>';
+  }
+  function bindItems() {
+    var links = list.querySelectorAll('.ls-item');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('mouseenter', function () { setActive(parseInt(this.getAttribute('data-i'), 10)); });
+    }
+  }
+  function render(items, q) {
+    active = -1; current = items;
+    var h = '';
+    if (usingFallback) h += '<div class="ls-none">' + STR.fb + '</div>';
+    h += items.map(itemHtml).join('');
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderZero(q) {
+    var pop = popular(6);
+    active = -1; current = pop;
+    var h = '<div class="ls-none">' + STR.zero1 + esc(q) + STR.zero2 + '</div>' +
+            pop.map(itemHtml).join('') +
+            '';
+    list.innerHTML = h;
+    bindItems();
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function renderLoading() {
+    list.innerHTML = '<div class="ls-none">' + STR.loading + '</div>';
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  }
+  function refresh() {
+    var q = input.value;
+    if (!data) { renderLoading(); return; }
+    if (!norm(q)) { render(popular(6), ''); return; }
+    var res = runSearch(q, 8);
+    if (res.length) render(res, q); else renderZero(q);
+  }
+  function hide() { list.hidden = true; active = -1; input.setAttribute('aria-expanded', 'false'); }
+  function setActive(i) {
+    active = i;
+    var links = list.querySelectorAll('.ls-item');
+    for (var j = 0; j < links.length; j++) links[j].classList.toggle('act', j === i);
+    if (i >= 0 && links[i]) links[i].scrollIntoView({ block: 'nearest' });
+  }
+  function ensureIndex() {
+    if (data && !usingFallback) return;
+    if (loading) return;
+    loading = fetch(INDEX_URL).then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      data = j; usingFallback = false; loading = null; refresh();
+    }).catch(function () {
+      loading = null;                 /* not poisoned: next keystroke/focus retries */
+      if (!data) { data = FALLBACK; usingFallback = true; }
+      refresh();
+    });
+  }
+  var timer = null;
+  function onType() { ensureIndex(); refresh(); }
+  input.addEventListener('focus', onType);
+  input.addEventListener('input', function () { clearTimeout(timer); timer = setTimeout(onType, 70); });
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+      ev.preventDefault();
+      if (list.hidden) { onType(); return; }
+      var n = current.length; if (!n) return;
+      setActive(ev.key === 'ArrowDown' ? (active + 1) % n : (active - 1 + n) % n);
+    } else if (ev.key === 'Escape') { hide(); }
+  });
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var q = input.value;
+    if (active >= 0 && current[active]) { window.location.href = current[active].u; return; }
+    ensureIndex();
+    if (data) {
+      var best = runSearch(q, 1);
+      if (best.length) { window.location.href = best[0].u; return; }
+    }
+    if (norm(q)) renderZero(q);
+  });
+  document.addEventListener('click', function (ev) { if (!form.contains(ev.target)) hide(); });
+})();
+
+</script>
+<script>/*loona-pwa*/(function(){if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}var D=null;function S(){return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;}function B(m){if(S()||document.getElementById('loona-install-btn'))return;var b=document.createElement('button');b.id='loona-install-btn';b.type='button';b.textContent=String.fromCodePoint(0x1F4F2)+' 安裝應用';b.setAttribute('style','position:fixed;right:16px;bottom:16px;z-index:2147483000;background:#062e2a;color:#fff;border:1px solid #c9a227;border-radius:999px;padding:11px 18px;font:600 14px/1.2 system-ui,-apple-system,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.35);cursor:pointer');b.addEventListener('click',function(){if(m==='p'&&D){D.prompt();D.userChoice.then(function(){D=null;b.remove();});}else{alert('安裝此應用：點選分享按鈕，然後選擇“新增到主螢幕”。');}});document.body.appendChild(b);}window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();D=e;B('p');});window.addEventListener('appinstalled',function(){var b=document.getElementById('loona-install-btn');if(b)b.remove();});if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!S()){window.addEventListener('load',function(){B('i');});}})();</script>
 </body>
 </html>
