@@ -1,0 +1,29 @@
+{
+  "name": "Loona Feedback & Error Reports | Loona Invoice Generator",
+  "short_name": "Feedback & Error Reports",
+  "description": "Send feedback or report an error in the Loona Invoice Generator. Tell us the tool name, what happened, and your device and browser, and we will check it.",
+  "id": "/loona-invoice-generator/feedback/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

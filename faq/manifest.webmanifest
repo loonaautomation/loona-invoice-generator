@@ -1,0 +1,29 @@
+{
+  "name": "Loona Frequently Asked Questions | Loona Invoice Generator",
+  "short_name": "Frequently Asked Questions",
+  "description": "Frequently asked questions about the Loona Invoice Generator: is it free, do you need an account, where does your business data go, and how to report an error.",
+  "id": "/loona-invoice-generator/faq/",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#062e2a",
+  "theme_color": "#062e2a",
+  "icons": [
+    {
+      "src": "/loona-invoice-generator/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/loona-invoice-generator/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
