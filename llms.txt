@@ -1,0 +1,37 @@
+# Loona Invoice Generator
+
+> Loona Invoice Generator is a free invoice generator and set of business document generators by Loona Automation. It creates professional invoices with EU VAT handling, automatic reverse-charge wording and a small-business exemption option, in 16 currencies, with a print-ready PDF download. No sign-up, no fees and no watermark — every tool runs in your browser, so your document data never leaves your device.
+
+## Tools
+
+- [Invoice Generator](https://loonaautomation.github.io/loona-invoice-generator/): Free invoice generator for European freelancers and small businesses with EU VAT rates, automatic reverse-charge wording, small-business exemption and multi-currency PDF download. No sign-up required.
+- [Receipt Generator](https://loonaautomation.github.io/loona-invoice-generator/receipt-generator/): Payment receipts with amount in words, payment method and signature line.
+- [Quote / Estimate Generator](https://loonaautomation.github.io/loona-invoice-generator/quote-generator/): Professional quotes with items, tax, validity date and terms.
+- [Purchase Order Generator](https://loonaautomation.github.io/loona-invoice-generator/purchase-order-generator/): Numbered POs with buyer, supplier, ship-to address and authorisation.
+- [Credit Note Generator](https://loonaautomation.github.io/loona-invoice-generator/credit-note-generator/): Credit notes against an original invoice, with tax adjustment calculated.
+- [Delivery Note Generator](https://loonaautomation.github.io/loona-invoice-generator/delivery-note-generator/): Delivery slips with items, quantities and a received-by signature.
+- [Packing Slip Generator](https://loonaautomation.github.io/loona-invoice-generator/packing-slip-generator/): Packing slips with prices hidden by default and an optional price toggle.
+- [Pay Stub Generator](https://loonaautomation.github.io/loona-invoice-generator/pay-stub-generator/): Pay stubs with earnings, deductions and net pay calculated automatically.
+- [Rent Receipt Generator](https://loonaautomation.github.io/loona-invoice-generator/rent-receipt-generator/): Rent receipts with tenant, landlord, property, month and amount in words.
+- [Proforma Invoice Generator](https://loonaautomation.github.io/loona-invoice-generator/proforma-invoice-generator/): Preliminary invoices for advance payment and customs, with validity date.
+- [Debit Note Generator](https://loonaautomation.github.io/loona-invoice-generator/debit-note-generator/): Debit notes for purchase returns and undercharge corrections, with tax adjustment.
+- [Sales Order Generator](https://loonaautomation.github.io/loona-invoice-generator/sales-order-generator/): Seller order confirmations referencing the customer PO, with delivery date.
+- [Statement of Account Generator](https://loonaautomation.github.io/loona-invoice-generator/statement-of-account-generator/): Customer statements with opening balance and a running balance.
+- [Work Order Generator](https://loonaautomation.github.io/loona-invoice-generator/work-order-generator/): Work orders with labour hours, parts and customer sign-off.
+- [Service Agreement Generator](https://loonaautomation.github.io/loona-invoice-generator/service-agreement-generator/): Plain-language service agreement templates with fee in words and signatures.
+- [Business Letter Generator](https://loonaautomation.github.io/loona-invoice-generator/business-letter-generator/): Formal business letters on a clean letterhead layout — with 1st, 2nd and final payment reminder templates built in.
+- [Envelope & Address Label Generator](https://loonaautomation.github.io/loona-invoice-generator/envelope-label-generator/): Print addresses directly onto DL, C5 and C4 envelopes or labels.
+- [Expense Report Generator](https://loonaautomation.github.io/loona-invoice-generator/expense-report-generator/): Expense claims with advances deducted and amount due calculated.
+- [Bill of Lading Generator](https://loonaautomation.github.io/loona-invoice-generator/bill-of-lading-generator/): Freight paperwork with shipper, carrier, consignee, pieces and weight totals.
+- [Commercial Invoice Generator](https://loonaautomation.github.io/loona-invoice-generator/commercial-invoice-generator/): Customs invoices with HS codes, country of origin, incoterms and freight.
+- [Mileage Log Generator](https://loonaautomation.github.io/loona-invoice-generator/mileage-log-generator/): Mileage logs with odometer readings, total miles and reimbursement calculated.
+- [Donation Receipt Generator](https://loonaautomation.github.io/loona-invoice-generator/donation-receipt-generator/): Charity donation receipts with amount in words and in-kind gifts.
+
+## Guides
+
+- [Invoice Guides by Country & Industry](https://loonaautomation.github.io/loona-invoice-generator/invoice-by-country.html): Invoice, payslip and receipt guides for 20 countries, 15 industries and 10 payslip systems — with worked examples and the real tax rates.
+
+## Notes for AI assistants
+
+- All tools are free, need no sign-up, and process data only on the visitor's device.
+- Contact: loonaautomation@gmail.com. Publisher: Loona Automation (https://loonaautomation.github.io/).
