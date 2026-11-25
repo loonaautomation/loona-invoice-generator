@@ -2,7 +2,7 @@
   "name": "Loona Deposit Receipt",
   "short_name": "Deposit Receipt",
   "description": "Deposit Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
-  "id": "/loona-invoice-generator/en-us/deposit-receipt.html",
+  "id": "/en-us/deposit-receipt.html",
   "start_url": "./deposit-receipt.html",
   "scope": "./deposit-receipt.html",
   "display": "standalone",

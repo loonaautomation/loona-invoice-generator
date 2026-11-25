@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Switzerland",
   "short_name": "Invoice in Switzerland",
   "description": "Invoicing in Switzerland? The standard VAT rate is 8.1%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-switzerland.html",
+  "id": "/en-us/invoice-switzerland.html",
   "start_url": "./invoice-switzerland.html",
   "scope": "./invoice-switzerland.html",
   "display": "standalone",

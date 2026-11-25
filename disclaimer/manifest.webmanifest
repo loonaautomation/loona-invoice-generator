@@ -2,7 +2,7 @@
   "name": "Loona Disclaimer | Loona Invoice Generator",
   "short_name": "Disclaimer",
   "description": "Disclaimer for the Loona Invoice Generator: generated documents are templates. You are responsible for their accuracy and for the tax and legal compliance of your invoices.",
-  "id": "/loona-invoice-generator/disclaimer/",
+  "id": "/disclaimer/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

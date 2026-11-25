@@ -2,7 +2,7 @@
   "name": "Loona Terms of Use",
   "short_name": "Terms of Use",
   "description": "Terms of use for Loona&#x27;s free invoice and business document generators: free use, no warranty, documents are your responsibility.",
-  "id": "/loona-invoice-generator/terms/",
+  "id": "/terms/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

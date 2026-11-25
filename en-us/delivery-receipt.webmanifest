@@ -2,7 +2,7 @@
   "name": "Loona Delivery Receipt",
   "short_name": "Delivery Receipt",
   "description": "Delivery Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
-  "id": "/loona-invoice-generator/en-us/delivery-receipt.html",
+  "id": "/en-us/delivery-receipt.html",
   "start_url": "./delivery-receipt.html",
   "scope": "./delivery-receipt.html",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Austria",
   "short_name": "Invoice in Austria",
   "description": "Invoicing in Austria? The standard VAT rate is 20%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-austria.html",
+  "id": "/en-us/invoice-austria.html",
   "start_url": "./invoice-austria.html",
   "scope": "./invoice-austria.html",
   "display": "standalone",

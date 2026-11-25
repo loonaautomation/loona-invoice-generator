@@ -2,7 +2,7 @@
   "name": "Loona Invoice for IT Services",
   "short_name": "Invoice for IT Services",
   "description": "Invoicing for it services? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/it-services-invoice.html",
+  "id": "/it-services-invoice.html",
   "start_url": "./it-services-invoice.html",
   "scope": "./it-services-invoice.html",
   "display": "standalone",

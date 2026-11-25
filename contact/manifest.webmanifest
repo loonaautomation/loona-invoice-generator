@@ -2,7 +2,7 @@
   "name": "Loona Contact Loona Automation",
   "short_name": "Contact Loona Automation",
   "description": "Contact Loona Automation about the free invoice and business document generators — email and Fiverr details.",
-  "id": "/loona-invoice-generator/contact/",
+  "id": "/contact/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

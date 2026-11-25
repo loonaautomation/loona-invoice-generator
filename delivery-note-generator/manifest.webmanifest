@@ -2,7 +2,7 @@
   "name": "Loona Free Delivery Note Generator",
   "short_name": "Free Delivery Note Generator",
   "description": "Create a free delivery note online with sender, receiver, items, quantities and a received-by signature line. No sign-up, print-ready PDF.",
-  "id": "/loona-invoice-generator/delivery-note-generator/",
+  "id": "/delivery-note-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

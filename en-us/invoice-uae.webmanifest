@@ -2,7 +2,7 @@
   "name": "Loona Invoice in United Arab Emirates",
   "short_name": "Invoice in United Arab Emirates",
   "description": "Invoicing in United Arab Emirates? The standard VAT rate is 5%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-uae.html",
+  "id": "/en-us/invoice-uae.html",
   "start_url": "./invoice-uae.html",
   "scope": "./invoice-uae.html",
   "display": "standalone",

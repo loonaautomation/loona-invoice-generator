@@ -2,7 +2,7 @@
   "name": "Loona Free Service Agreement Template Generator",
   "short_name": "Free Service Agreement",
   "description": "Create a free service agreement online with parties, services, term, fee in words, payment terms and signature lines. Template only — not legal advice.",
-  "id": "/loona-invoice-generator/service-agreement-generator/",
+  "id": "/service-agreement-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Retail",
   "short_name": "Invoice for Retail",
   "description": "Invoicing for retail? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/retail-invoice.html",
+  "id": "/retail-invoice.html",
   "start_url": "./retail-invoice.html",
   "scope": "./retail-invoice.html",
   "display": "standalone",

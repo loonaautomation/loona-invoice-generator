@@ -2,7 +2,7 @@
   "name": "Loona Free Expense Report Generator",
   "short_name": "Free Expense Report Generator",
   "description": "Create a free expense report / claim online with itemised expenses, advances deducted and amount due calculated automatically. No sign-up.",
-  "id": "/loona-invoice-generator/expense-report-generator/",
+  "id": "/expense-report-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

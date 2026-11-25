@@ -2,7 +2,7 @@
   "name": "Loona Free Work Order Generator",
   "short_name": "Free Work Order Generator",
   "description": "Create a free work order online with job description, assigned technician, labor hours and rate, parts and customer sign-off. No sign-up.",
-  "id": "/loona-invoice-generator/en-us/work-order-generator/",
+  "id": "/en-us/work-order-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

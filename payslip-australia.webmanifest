@@ -2,7 +2,7 @@
   "name": "Loona Payslip in Australia",
   "short_name": "Payslip in Australia",
   "description": "What does a payslip in Australia show? A worked payslip at A$90,000 a year, gross to net, with a free calculator.",
-  "id": "/loona-invoice-generator/payslip-australia.html",
+  "id": "/payslip-australia.html",
   "start_url": "./payslip-australia.html",
   "scope": "./payslip-australia.html",
   "display": "standalone",

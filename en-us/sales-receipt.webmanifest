@@ -2,7 +2,7 @@
   "name": "Loona Sales Receipt",
   "short_name": "Sales Receipt",
   "description": "Sales Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
-  "id": "/loona-invoice-generator/en-us/sales-receipt.html",
+  "id": "/en-us/sales-receipt.html",
   "start_url": "./sales-receipt.html",
   "scope": "./sales-receipt.html",
   "display": "standalone",

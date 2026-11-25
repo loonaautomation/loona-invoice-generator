@@ -2,7 +2,7 @@
   "name": "Loona Free Mileage Log Generator",
   "short_name": "Free Mileage Log Generator",
   "description": "Create a free mileage log online with date, from/to, purpose and odometer readings — miles and reimbursement totals calculated automatically. No sign-up.",
-  "id": "/loona-invoice-generator/en-us/mileage-log-generator/",
+  "id": "/en-us/mileage-log-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Cash Receipt",
   "short_name": "Cash Receipt",
   "description": "Cash Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
-  "id": "/loona-invoice-generator/cash-receipt.html",
+  "id": "/cash-receipt.html",
   "start_url": "./cash-receipt.html",
   "scope": "./cash-receipt.html",
   "display": "standalone",

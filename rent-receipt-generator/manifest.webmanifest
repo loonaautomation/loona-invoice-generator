@@ -2,7 +2,7 @@
   "name": "Loona Free Rent Receipt Generator",
   "short_name": "Free Rent Receipt Generator",
   "description": "Create a free rent receipt online with tenant, landlord, property address, month, rent amount in words and payment method. No sign-up.",
-  "id": "/loona-invoice-generator/rent-receipt-generator/",
+  "id": "/rent-receipt-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

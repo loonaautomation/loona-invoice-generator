@@ -2,7 +2,7 @@
   "name": "Loona Payslip in United Arab Emirates",
   "short_name": "Payslip in United Arab Emirates",
   "description": "What does a payslip in United Arab Emirates show? A worked payslip at AED 240,000 a year, gross to net, with a free calculator.",
-  "id": "/loona-invoice-generator/en-us/payslip-uae.html",
+  "id": "/en-us/payslip-uae.html",
   "start_url": "./payslip-uae.html",
   "scope": "./payslip-uae.html",
   "display": "standalone",

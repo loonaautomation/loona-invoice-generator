@@ -2,7 +2,7 @@
   "name": "Loona Free Sales Order Generator",
   "short_name": "Free Sales Order Generator",
   "description": "Create a free sales order confirmation online with customer, items, tax, customer PO reference and promised delivery date. No sign-up, print-ready PDF.",
-  "id": "/loona-invoice-generator/en-us/sales-order-generator/",
+  "id": "/en-us/sales-order-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

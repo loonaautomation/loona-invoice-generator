@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Legal Services",
   "short_name": "Invoice for Legal Services",
   "description": "Invoicing for legal services? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/legal-invoice.html",
+  "id": "/en-us/legal-invoice.html",
   "start_url": "./legal-invoice.html",
   "scope": "./legal-invoice.html",
   "display": "standalone",

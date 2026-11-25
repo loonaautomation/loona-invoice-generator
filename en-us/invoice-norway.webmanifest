@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Norway",
   "short_name": "Invoice in Norway",
   "description": "Invoicing in Norway? The standard VAT rate is 25%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-norway.html",
+  "id": "/en-us/invoice-norway.html",
   "start_url": "./invoice-norway.html",
   "scope": "./invoice-norway.html",
   "display": "standalone",

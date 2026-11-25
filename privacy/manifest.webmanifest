@@ -2,7 +2,7 @@
   "name": "Loona Privacy Policy",
   "short_name": "Privacy Policy",
   "description": "Privacy policy for Loona&#x27;s business document generators: on-device processing, Google AdSense and DoubleClick, Google Analytics 4 and Microsoft Clarity.",
-  "id": "/loona-invoice-generator/privacy/",
+  "id": "/privacy/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

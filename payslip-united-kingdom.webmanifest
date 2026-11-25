@@ -2,7 +2,7 @@
   "name": "Loona Payslip in United Kingdom",
   "short_name": "Payslip in United Kingdom",
   "description": "What does a payslip in United Kingdom show? A worked payslip at £35,000.00 a year, gross to net, with a free calculator.",
-  "id": "/loona-invoice-generator/payslip-united-kingdom.html",
+  "id": "/payslip-united-kingdom.html",
   "start_url": "./payslip-united-kingdom.html",
   "scope": "./payslip-united-kingdom.html",
   "display": "standalone",

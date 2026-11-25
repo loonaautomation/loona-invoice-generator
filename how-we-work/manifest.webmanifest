@@ -2,7 +2,7 @@
   "name": "Loona How We Work | Loona Invoice Generator",
   "short_name": "How We Work",
   "description": "How the Loona Invoice Generator works: every generator runs in your browser, your business data stays on your device, there is no account, and everything is free.",
-  "id": "/loona-invoice-generator/how-we-work/",
+  "id": "/how-we-work/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

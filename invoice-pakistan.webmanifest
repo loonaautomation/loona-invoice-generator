@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Pakistan",
   "short_name": "Invoice in Pakistan",
   "description": "Invoicing in Pakistan? The standard Sales Tax rate is 18%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/invoice-pakistan.html",
+  "id": "/invoice-pakistan.html",
   "start_url": "./invoice-pakistan.html",
   "scope": "./invoice-pakistan.html",
   "display": "standalone",

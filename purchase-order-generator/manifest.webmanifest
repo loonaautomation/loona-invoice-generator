@@ -2,7 +2,7 @@
   "name": "Loona Free Purchase Order Generator",
   "short_name": "Free Purchase Order Generator",
   "description": "Create a free purchase order online with buyer, supplier, ship-to address, items and authorisation. No sign-up, print-ready PDF.",
-  "id": "/loona-invoice-generator/purchase-order-generator/",
+  "id": "/purchase-order-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

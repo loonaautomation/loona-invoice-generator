@@ -2,7 +2,7 @@
   "name": "Loona About Loona Business Documents",
   "short_name": "About Loona Business Documents",
   "description": "About Loona&#x27;s free invoice and business document generators — who builds them, how they work, and why they are free.",
-  "id": "/loona-invoice-generator/en-us/about/",
+  "id": "/en-us/about/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

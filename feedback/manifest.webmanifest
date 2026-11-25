@@ -2,7 +2,7 @@
   "name": "Loona Feedback & Error Reports | Loona Invoice Generator",
   "short_name": "Feedback & Error Reports",
   "description": "Send feedback or report an error in the Loona Invoice Generator. Tell us the tool name, what happened, and your device and browser, and we will check it.",
-  "id": "/loona-invoice-generator/feedback/",
+  "id": "/feedback/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

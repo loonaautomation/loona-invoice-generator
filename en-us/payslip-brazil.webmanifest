@@ -2,7 +2,7 @@
   "name": "Loona Payslip in Brazil",
   "short_name": "Payslip in Brazil",
   "description": "What does a payslip in Brazil show? A worked payslip at R$120,000 a year, gross to net, with a free calculator.",
-  "id": "/loona-invoice-generator/en-us/payslip-brazil.html",
+  "id": "/en-us/payslip-brazil.html",
   "start_url": "./payslip-brazil.html",
   "scope": "./payslip-brazil.html",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Free Pay Stub Generator",
   "short_name": "Free Pay Stub Generator",
   "description": "Create a free pay stub / payslip online with earnings, deductions and net pay calculated automatically and written in words. No sign-up.",
-  "id": "/loona-invoice-generator/en-us/pay-stub-generator/",
+  "id": "/en-us/pay-stub-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Freelancing & Consulting",
   "short_name": "Invoice for Freelancing & Consulting",
   "description": "Invoicing for freelancing & consulting? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/freelancing-invoice.html",
+  "id": "/en-us/freelancing-invoice.html",
   "start_url": "./freelancing-invoice.html",
   "scope": "./freelancing-invoice.html",
   "display": "standalone",

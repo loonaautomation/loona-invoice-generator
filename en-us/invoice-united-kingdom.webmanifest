@@ -2,7 +2,7 @@
   "name": "Loona Invoice in United Kingdom",
   "short_name": "Invoice in United Kingdom",
   "description": "Invoicing in United Kingdom? The standard VAT rate is 20%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-united-kingdom.html",
+  "id": "/en-us/invoice-united-kingdom.html",
   "start_url": "./invoice-united-kingdom.html",
   "scope": "./invoice-united-kingdom.html",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Free Debit Note Generator",
   "short_name": "Free Debit Note Generator",
   "description": "Create a free debit note online against an original bill, with reason, debited items and tax adjustment calculated automatically. No sign-up.",
-  "id": "/loona-invoice-generator/en-us/debit-note-generator/",
+  "id": "/en-us/debit-note-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

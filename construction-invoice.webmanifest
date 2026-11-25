@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Construction",
   "short_name": "Invoice for Construction",
   "description": "Invoicing for construction? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/construction-invoice.html",
+  "id": "/construction-invoice.html",
   "start_url": "./construction-invoice.html",
   "scope": "./construction-invoice.html",
   "display": "standalone",

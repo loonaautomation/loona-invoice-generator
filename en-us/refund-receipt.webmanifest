@@ -2,7 +2,7 @@
   "name": "Loona Refund Receipt",
   "short_name": "Refund Receipt",
   "description": "Refund Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
-  "id": "/loona-invoice-generator/en-us/refund-receipt.html",
+  "id": "/en-us/refund-receipt.html",
   "start_url": "./refund-receipt.html",
   "scope": "./refund-receipt.html",
   "display": "standalone",

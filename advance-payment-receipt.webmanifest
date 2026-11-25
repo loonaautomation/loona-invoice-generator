@@ -2,7 +2,7 @@
   "name": "Loona Advance Payment Receipt",
   "short_name": "Advance Payment Receipt",
   "description": "Advance Payment Receipt: when to use it, what it must show, and a worked example — plus a free receipt maker with the amount in words.",
-  "id": "/loona-invoice-generator/advance-payment-receipt.html",
+  "id": "/advance-payment-receipt.html",
   "start_url": "./advance-payment-receipt.html",
   "scope": "./advance-payment-receipt.html",
   "display": "standalone",

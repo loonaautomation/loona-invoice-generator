@@ -2,7 +2,7 @@
   "name": "Loona Payslip in Netherlands",
   "short_name": "Payslip in Netherlands",
   "description": "What does a payslip in Netherlands show? A worked payslip at €60,000.00 a year, gross to net, with a free calculator.",
-  "id": "/loona-invoice-generator/en-us/payslip-netherlands.html",
+  "id": "/en-us/payslip-netherlands.html",
   "start_url": "./payslip-netherlands.html",
   "scope": "./payslip-netherlands.html",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Free Donation Receipt Generator",
   "short_name": "Free Donation Receipt Generator",
   "description": "Create a free donation receipt online with charity, donor, amount in words, in-kind description and thank-you line. Receipt template — tax rules vary by country.",
-  "id": "/loona-invoice-generator/en-us/donation-receipt-generator/",
+  "id": "/en-us/donation-receipt-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Payslip in India",
   "short_name": "Payslip in India",
   "description": "What does a payslip in India show? A worked payslip at ₹1,500,000 a year, gross to net, with a free calculator.",
-  "id": "/loona-invoice-generator/payslip-india.html",
+  "id": "/payslip-india.html",
   "start_url": "./payslip-india.html",
   "scope": "./payslip-india.html",
   "display": "standalone",

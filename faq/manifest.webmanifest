@@ -2,7 +2,7 @@
   "name": "Loona Frequently Asked Questions | Loona Invoice Generator",
   "short_name": "Frequently Asked Questions",
   "description": "Frequently asked questions about the Loona Invoice Generator: is it free, do you need an account, where does your business data go, and how to report an error.",
-  "id": "/loona-invoice-generator/faq/",
+  "id": "/faq/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

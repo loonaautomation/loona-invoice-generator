@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Denmark",
   "short_name": "Invoice in Denmark",
   "description": "Invoicing in Denmark? The standard VAT rate is 25%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/invoice-denmark.html",
+  "id": "/invoice-denmark.html",
   "start_url": "./invoice-denmark.html",
   "scope": "./invoice-denmark.html",
   "display": "standalone",

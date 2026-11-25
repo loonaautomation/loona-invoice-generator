@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Marketing Agency",
   "short_name": "Invoice for Marketing Agency",
   "description": "Invoicing for marketing agency? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/marketing-invoice.html",
+  "id": "/en-us/marketing-invoice.html",
   "start_url": "./marketing-invoice.html",
   "scope": "./marketing-invoice.html",
   "display": "standalone",

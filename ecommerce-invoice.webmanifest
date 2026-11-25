@@ -2,7 +2,7 @@
   "name": "Loona Invoice for E-Commerce",
   "short_name": "Invoice for E-Commerce",
   "description": "Invoicing for e-commerce? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/ecommerce-invoice.html",
+  "id": "/ecommerce-invoice.html",
   "start_url": "./ecommerce-invoice.html",
   "scope": "./ecommerce-invoice.html",
   "display": "standalone",

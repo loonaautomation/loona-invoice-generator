@@ -2,7 +2,7 @@
   "name": "Loona Free Bill of Lading Generator",
   "short_name": "Free Bill of Lading Generator",
   "description": "Create a free bill of lading online with shipper, carrier, consignee, pieces and weight totals, signed at pickup and delivery. No sign-up.",
-  "id": "/loona-invoice-generator/en-us/bill-of-lading-generator/",
+  "id": "/en-us/bill-of-lading-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

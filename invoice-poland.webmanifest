@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Poland",
   "short_name": "Invoice in Poland",
   "description": "Invoicing in Poland? The standard VAT rate is 23%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/invoice-poland.html",
+  "id": "/invoice-poland.html",
   "start_url": "./invoice-poland.html",
   "scope": "./invoice-poland.html",
   "display": "standalone",

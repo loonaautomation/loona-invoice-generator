@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Spain",
   "short_name": "Invoice in Spain",
   "description": "Invoicing in Spain? The standard VAT rate is 21%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/invoice-spain.html",
+  "id": "/invoice-spain.html",
   "start_url": "./invoice-spain.html",
   "scope": "./invoice-spain.html",
   "display": "standalone",

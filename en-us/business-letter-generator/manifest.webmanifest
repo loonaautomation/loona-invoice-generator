@@ -2,7 +2,7 @@
   "name": "Loona Free Business Letter Generator",
   "short_name": "Free Business Letter Generator",
   "description": "Create a free formal business letter or payment reminder letter online — gentle 1st reminder, firm 2nd reminder and final notice templates with amount and due date filled in. No sign-up.",
-  "id": "/loona-invoice-generator/en-us/business-letter-generator/",
+  "id": "/en-us/business-letter-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

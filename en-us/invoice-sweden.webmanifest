@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Sweden",
   "short_name": "Invoice in Sweden",
   "description": "Invoicing in Sweden? The standard VAT rate is 25%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-sweden.html",
+  "id": "/en-us/invoice-sweden.html",
   "start_url": "./invoice-sweden.html",
   "scope": "./invoice-sweden.html",
   "display": "standalone",

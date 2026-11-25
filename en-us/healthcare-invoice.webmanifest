@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Healthcare",
   "short_name": "Invoice for Healthcare",
   "description": "Invoicing for healthcare? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/healthcare-invoice.html",
+  "id": "/en-us/healthcare-invoice.html",
   "start_url": "./healthcare-invoice.html",
   "scope": "./healthcare-invoice.html",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Invoice in Canada",
   "short_name": "Invoice in Canada",
   "description": "Invoicing in Canada? The standard GST rate is 5%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-canada.html",
+  "id": "/en-us/invoice-canada.html",
   "start_url": "./invoice-canada.html",
   "scope": "./invoice-canada.html",
   "display": "standalone",

@@ -2,7 +2,7 @@
   "name": "Loona Invoice in France",
   "short_name": "Invoice in France",
   "description": "Invoicing in France? The standard VAT rate is 20%, what your invoice must show, and a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/en-us/invoice-france.html",
+  "id": "/en-us/invoice-france.html",
   "start_url": "./invoice-france.html",
   "scope": "./invoice-france.html",
   "display": "standalone",

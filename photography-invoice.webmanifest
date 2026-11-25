@@ -2,7 +2,7 @@
   "name": "Loona Invoice for Photography",
   "short_name": "Invoice for Photography",
   "description": "Invoicing for photography? The line items, payment terms and tax notes to put on the invoice, with a worked example — plus a free invoice generator.",
-  "id": "/loona-invoice-generator/photography-invoice.html",
+  "id": "/photography-invoice.html",
   "start_url": "./photography-invoice.html",
   "scope": "./photography-invoice.html",
   "display": "standalone",

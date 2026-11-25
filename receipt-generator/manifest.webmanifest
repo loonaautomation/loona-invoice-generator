@@ -2,7 +2,7 @@
   "name": "Loona Free Receipt Generator",
   "short_name": "Free Receipt Generator",
   "description": "Create a free payment receipt online with amount in words, payment method and signature line. No sign-up, print-ready PDF, data stays on your device.",
-  "id": "/loona-invoice-generator/receipt-generator/",
+  "id": "/receipt-generator/",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
